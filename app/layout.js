@@ -1,18 +1,15 @@
-import Link from 'next/link'
+import Header from '@/component/common/header'
 import './globals.css'
 
 
+
 export default function RootLayout({ children }) {
-  return (
-    <html lang="ko">
-      <body>
-        <div className="nav">
-            <Link href="/">Main</Link>
-            <Link href="/list">List</Link>
-            <Link href="/admin">Admin</Link>
-        </div>
-      {children}
-      </body>
-    </html>
-  )
+    return (
+        <html lang="ko">
+            <body>
+                <Header/>
+                {children}
+            </body>
+        </html>
+    )
 }

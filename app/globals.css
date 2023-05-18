@@ -1,9 +1,10 @@
-.nav {
-    background: white;
-    padding: 20px;
+html {
+    min-height: 100vh;
 }
-.nav a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: black;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    margin: 0 auto;
 }

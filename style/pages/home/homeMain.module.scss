@@ -1,0 +1,30 @@
+.home_main {
+    align-items: center;
+    display: flex;
+    position: absolute;
+    width: calc(100% - 32px); /* 부모의 패딩 값을 제외한 너비로 설정 */
+    height: 100%;
+
+    .title_box {
+        flex-basis: 50%;
+    
+        .title {
+            margin-left: 8%;
+            font-size: 100px;
+            .color {
+                color: orangered;
+            }
+            p {
+                margin: 0;
+            }
+        }
+    }
+    
+    .graph_box {
+        flex-basis: 50%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+

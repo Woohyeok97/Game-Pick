@@ -1,8 +1,13 @@
+// 레이아웃 컴포넌트
+import PageLayout from "@/component/layout/PageLayout";
+// 컴포넌트
+import HomeMain from "@/component/home/homeMain";
+
 
 export default function Home() {
-  return (
-    <div>
-      <h1>저는 메인페이지 입니다.</h1>
-    </div>
-  )
+    return (
+        <>
+            <HomeMain/>
+        </>
+    )
 }
