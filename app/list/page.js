@@ -1,7 +1,7 @@
 // 레이아웃 컴포넌트
-import PageLayout from "@/component/layout/PageLayout";
+import PageLayout from "@/component/PageLayout/PageLayout";
 // 컴포넌트
-import ListMain from "@/component/list/listMain";
+import ListMain from "@/app/list/components/listMain";
 
 
 export default function List() {

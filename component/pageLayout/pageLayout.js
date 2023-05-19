@@ -1,4 +1,4 @@
-import styles from '../../style/layout/pageLayout.module.scss'
+import styles from '../pageLayout/pageLayout.module.scss'
 
 export default function PageLayout({ children }) {
     return (

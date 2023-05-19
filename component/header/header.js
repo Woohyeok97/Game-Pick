@@ -1,4 +1,4 @@
-import styles from '../../style/common/header.module.scss'
+import styles from '../header/header.module.scss'
 import Link from 'next/link'
 
 export default function Header() {

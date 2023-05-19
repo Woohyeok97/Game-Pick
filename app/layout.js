@@ -1,4 +1,4 @@
-import Header from '@/component/common/header'
+import Header from '@/component/header/header'
 import './globals.css'
 
 

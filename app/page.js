@@ -1,13 +1,7 @@
-// 레이아웃 컴포넌트
-import PageLayout from "@/component/layout/PageLayout";
 // 컴포넌트
-import HomeMain from "@/component/home/homeMain";
+import HomeMain from "@/app/home/components/homeMain";
 
 
 export default function Home() {
-    return (
-        <>
-            <HomeMain/>
-        </>
-    )
+    return <><HomeMain/></>
 }

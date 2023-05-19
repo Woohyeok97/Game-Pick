@@ -1,4 +1,4 @@
-import styles from '../../style/pages/list/listMain.module.scss'
+import styles from '../styles/listMain.module.scss'
 
 export default function ListMain() {
     return (
