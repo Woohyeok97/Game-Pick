@@ -2,7 +2,7 @@
     align-items: center;
     display: flex;
     position: absolute;
-    width: calc(100% - 32px); /* 부모의 패딩 값을 제외한 너비로 설정 */
+    width: 100%; 
     height: 100%;
 
     .title_box {

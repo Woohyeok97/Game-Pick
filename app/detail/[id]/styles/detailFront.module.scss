@@ -1,0 +1,55 @@
+.detail_front {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+    }
+
+    img { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+
+
+.item_info_box {
+    flex-basis: 50%;
+
+    .item_info {
+        width: 100%;
+        margin-left: 8%;
+        
+        h1 {
+            font-size: 100px;
+            margin: 0;
+        }
+        .like_box, .release_date_box {
+            font-size: 1.5rem;
+            padding-left: 2%;
+        }
+        .like_box {
+            display: flex;
+        }
+
+        p {
+            margin: 0;
+            padding-right: 10px;
+        }
+    }
+}
