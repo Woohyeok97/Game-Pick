@@ -1,7 +1,7 @@
-// 컴포넌트
-import HomeMain from "@/app/home/components/homeMain";
-
+import HomeInfo from "./home/components/homeInfo"
+import HomeMain from "./home/components/homeMain"
 
 export default function Home() {
-    return <><HomeMain/></>
+    // return <><HomeMain/></>
+    return <><HomeInfo/></>
 }
