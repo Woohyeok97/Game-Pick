@@ -11,39 +11,78 @@ body {
     margin: 0;
     padding: 0;
 }
+.aa {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+.일번 {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: blue;
+  font-size: 100px;
+  text-align: center;
+}
+.이번 {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: red;
+  font-size: 100px;
+  text-align: center;
+}
+.삼번 {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: green;
+  font-size: 100px;
+  text-align: center;
+}
+.down-enter {
+  transform: translateY(100%);
+}
 
-.outer {
-    height: 100vh;
-    overflow-y: auto;
-  }
-  
-  /* 화면에서 스크롤바 안보이게 */
-  .outer::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .inner {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-  }
-  
-  .bg-yellow {
-    background-color: #f7f6cf;
-  }
-  
-  .bg-blue {
-    background-color: #b6d8f2;
-  }
-  
-  .bg-pink {
-    background-color: #f4cfdf;
-  }
-  
-  .divider {
-    width: 100%;
-    height: 5px;
-    background-color: gray;
-  }
+.down-enter-active {
+  transform: translateY(0%);
+  transition: transform 1s;
+}
+
+.down-exit {
+  transform: translateY(0%);
+}
+
+.down-exit-active {
+  transform: translateY(-100%);
+  transition: transform 1s;
+}
+
+.up-enter {
+  transform: translateY(-100%);
+}
+
+.up-enter-active {
+  transform: translateY(0%);
+  transition: transform 1s;
+}
+
+.up-exit {
+  transform: translateY(0%);
+}
+
+.up-exit-active {
+  transform: translateY(100%);
+  transition: transform 1s;
+}
+
+
+
+
+
+
+
+
