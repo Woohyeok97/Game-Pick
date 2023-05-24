@@ -1,10 +1,9 @@
-import PageLayout from '@/component/PageLayout/PageLayout'
 import styles from '../styles/homeInfo.module.scss'
 
 export default function HomeInfo() {
 
     return (
-        <PageLayout>
+        <section className={ styles.home_info }>
             <div className={ styles.title }>
                 <h1>This Place</h1>
             </div>
@@ -37,6 +36,6 @@ export default function HomeInfo() {
                     </div>
               </div>
             </div>
-        </PageLayout>
+        </section>
     )
 }

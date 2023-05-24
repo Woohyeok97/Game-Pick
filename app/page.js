@@ -8,7 +8,8 @@ import HomeMain from "./home/components/homeMain"
 
 // 컴포넌트 인스턴스 ex) <HomeMain/> 을 직접적으로 배열에 담으면 렌더링 최적화에 불리하므로
 // 컴포넌트 타입을 배열로 할당
-const home = [ Page1, Page2, Page3, Page4 ]
+// const home = [ Page1, Page2 ]
+const home = [ HomeMain, HomeInfo ]
 
 export default function Home() {
 
