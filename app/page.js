@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useRef, useState } from "react"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 // 컴포넌트
 import HomeInfo from "./home/components/homeInfo"
 import HomeMain from "./home/components/homeMain"
-import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 
 // 컴포넌트 인스턴스 ex) <HomeMain/> 을 직접적으로 배열에 담으면 렌더링 최적화에 불리하므로
@@ -14,6 +14,7 @@ export default function Home() {
 
     // 컴포넌트 인덱스
     const [ componentIndex, setComponentIndex ] = useState(0)
+    // 컴포넌트 이동방향
     const [ direction, setDirection ] = useState('')
     
     // 그래서 '렌더링과 상관없이' handleWheel()함수를 관리하기 위해 useRef로 상태를관리함(사용자의 무분별한 휠조작 방지)
@@ -36,7 +37,7 @@ export default function Home() {
             // 휠 내리기   
             setDirection('down')
         }
-
+        // 1000밀리초 동안 hadleWheel() 동작방지
         timer.current = setTimeout(()=>{ transitioning.current = false }, 1000)
     }
     
@@ -52,12 +53,12 @@ export default function Home() {
     useEffect(()=>{
         if(direction == 'up') {
             setComponentIndex((index) => ( index > 0 ? index - 1 : 0 )) 
-            setDirection('')
         } else if(direction == 'down') {
             setComponentIndex((index) => ( index < home.length - 1 ? index + 1 : home.length - 1))
-            setDirection('')
         }
+        setDirection('')
     }, [direction])
+
 
     // 배열로 저장했던 컴포넌트 타입으로 렌더링때 컴포넌트 인스턴트 생성
     // 조금이라도 렌더링 최적화 Good~~
