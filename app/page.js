@@ -8,7 +8,6 @@ import HomeMain from "./home/components/homeMain"
 
 // 컴포넌트 인스턴스 ex) <HomeMain/> 을 직접적으로 배열에 담으면 렌더링 최적화에 불리하므로
 // 컴포넌트 타입을 배열로 할당
-// const home = [ Page1, Page2 ]
 const home = [ HomeMain, HomeInfo ]
 
 export default function Home() {
@@ -43,21 +42,26 @@ export default function Home() {
     }
     
 
+    // 컴포넌트 마운트, 언마운트시 이벤트리스너(handleWheel()) 등록 & 해제 (타이머도!)
     useEffect(()=>{
         window.addEventListener('wheel', handleWheel)
         return () => { 
             window.removeEventListener('wheel', handleWheel) 
-            clearTimeout(timer.current) // 메모리누수 방지를 위해 타이머제거
+            clearTimeout(timer.current) // 메모리누수 방지를 위해 타이머제
         }
     }, [])
 
+    // direction의 상태에 따라 componentIndex를 변경(컴포넌트 이동)
+    // CSSTransition에 동적으로 ClassNames를 주기위해 컴포넌트 언마운트시, direction 상태 초기화
     useEffect(()=>{
         if(direction == 'up') {
+            // 휠 올릴때
             setComponentIndex((index) => ( index > 0 ? index - 1 : 0 )) 
         } else if(direction == 'down') {
+            // 휠 내릴때
             setComponentIndex((index) => ( index < home.length - 1 ? index + 1 : home.length - 1))
         }
-        setDirection('')
+        return () => setDirection('')
     }, [direction])
 
 
@@ -66,7 +70,7 @@ export default function Home() {
     const CurrentComponent = home[componentIndex]
 
     return (
-        <div className="aa">
+        <div className="page_fixed">
             <TransitionGroup>                
             <CSSTransition key={ componentIndex } timeout={ 1000 } classNames={ direction }>
                 <CurrentComponent/>
@@ -74,17 +78,4 @@ export default function Home() {
         </TransitionGroup>
         </div>
     )
-}
-
-function Page1() {
-    return <div className="일번"><h1>1번</h1></div>
-}
-function Page2() {
-    return <div className="이번"><h1>2번</h1></div>
-}
-function Page3() {
-    return <div className="삼번"><h1>3번</h1></div>
-}
-function Page4() {
-    return <div className="사번"><h1>4번</h1></div>
 }

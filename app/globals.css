@@ -11,46 +11,10 @@ body {
     margin: 0;
     padding: 0;
 }
-.aa {
+.page_fixed {
   width: 100%;
   height: 100%;
   position: fixed;
-}
-.일번 {
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background-color: blue;
-  font-size: 100px;
-  text-align: center;
-}
-.이번 {
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background-color: red;
-  font-size: 100px;
-  text-align: center;
-}
-.삼번 {
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background-color: green;
-  font-size: 100px;
-  text-align: center;
-}
-.사번 {
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background-color: grey;
-  font-size: 100px;
-  text-align: center;
 }
 .down-enter {
   transform: translateY(100%);
