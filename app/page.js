@@ -11,7 +11,7 @@ import HomeMain from "./home/components/homeMain"
 const home = [ HomeMain, HomeInfo ]
 
 export default function Home() {
-
+    
     // 컴포넌트 인덱스
     const [ componentIndex, setComponentIndex ] = useState(0)
     // 컴포넌트 이동방향
@@ -25,6 +25,8 @@ export default function Home() {
 
 
     const handleWheel = (e) => {
+        e.preventDefault();
+
         if(transitioning.current) {
             return
         }

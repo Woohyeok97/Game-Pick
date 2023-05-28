@@ -16,6 +16,7 @@ body {
   height: 100%;
   position: fixed;
 }
+
 .down-enter {
   transform: translateY(100%);
 }

@@ -10,7 +10,7 @@ export default function DetailFront() {
     }
 
     return (
-        <section className={ styles.detail_front }>
+        <div className={ styles.detail_front }>
             <img src={`/${ game.img }`}/>
             <div className={ styles.item_info_box}>
                 <div className={ styles.item_info }>
@@ -27,7 +27,7 @@ export default function DetailFront() {
 
             <div></div>
             
-        </section>
+        </div>
     )
 }
 

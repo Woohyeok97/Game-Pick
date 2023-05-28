@@ -5,7 +5,7 @@ export default function HomeMain() {
         <section className={ styles.home_main }>
             <div className={ styles.title_box }>
                 <h1 className={ styles.title }>
-                    <p>Whath</p>
+                    <p>Whach</p>
                     <p>The</p>
                     <p className={ styles.color }>Game</p>
                 </h1>
