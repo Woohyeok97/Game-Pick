@@ -58,13 +58,17 @@ export default function DetailComment() {
     return (
         <div className={ styles.detail_comment }>
             <div className={ styles.comment_container }>
+
                 <div className={ styles.title }>
                     <h1>User Comment</h1>
                     <div>정렬기준</div>
                 </div>
+
                 <div className={ styles[name] }>
                 { comment.map((a, i)=> <CommentItem title={ a.title } comment={ a.comment } key={i} />) }
                 </div>
+                <div className={ styles.next }>▷</div>
+                <div className={ styles.prev }>◁</div>
             </div>
         </div>
     )

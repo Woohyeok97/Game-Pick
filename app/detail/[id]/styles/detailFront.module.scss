@@ -16,7 +16,7 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 0;
+        z-index: -1;
     }
 
     img { 
@@ -54,4 +54,25 @@
             padding-right: 10px;
         }
     }
+    
+    .trailer_btn {
+        width: 40%;
+        margin-top: 16px;
+        font-size: 1.5rem;
+        color: #ffffff;
+        background-color: #000000;
+    }
+}
+.detail_trailer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5% 10%;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5);
 }

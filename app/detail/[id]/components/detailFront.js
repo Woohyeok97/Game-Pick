@@ -1,7 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import styles from '../styles/detailFront.module.scss'
 import DetailTrailer from './detailtrailer'
 
 export default function DetailFront() {
+    const [ viewTrailer, setViewTrailer ] = useState(false)
     const game = {
         title : '디아블로4',
         like : 172,
@@ -23,8 +27,16 @@ export default function DetailFront() {
                     <div className={ styles.release_date_box }>
                         <p>{ game.releaseDate }</p>
                     </div>
+                    <button className={ styles.trailer_btn } onClick={()=>{ setViewTrailer(true) }}>트레일러</button>
                 </div>
-                {/* <DetailTrailer/> */}
+
+                { viewTrailer 
+                ? 
+                <div className={styles.detail_trailer} onClick={()=>{ setViewTrailer(false) }}>
+                    <DetailTrailer/>
+                </div>
+                : null }
+
             </div>
 
             <div></div>

@@ -5,8 +5,8 @@ import DetailFront from "./components/detailFront";
 export default function Detail() {
   return (
     <section className="page_fixed">
-      {/* <DetailFront/> */}
-      <DetailComment/>
+      <DetailFront/>
+      {/* <DetailComment/> */}
     </section>
   )
 }
