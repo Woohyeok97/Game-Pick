@@ -1,4 +1,5 @@
 import styles from '../styles/detailFront.module.scss'
+import DetailTrailer from './detailtrailer'
 
 export default function DetailFront() {
     const game = {
@@ -23,6 +24,7 @@ export default function DetailFront() {
                         <p>{ game.releaseDate }</p>
                     </div>
                 </div>
+                {/* <DetailTrailer/> */}
             </div>
 
             <div></div>
