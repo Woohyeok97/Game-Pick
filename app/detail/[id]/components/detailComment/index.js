@@ -2,10 +2,13 @@
 import { useEffect, useState } from 'react'
 import styles from '../../styles/detailComment.module.scss'
 import CommentItem from './commentItem'
+import CommentNav from './commentNav'
 
 export default function DetailComment() {
     const [ width, setWidth ] = useState(window.innerWidth)
     const [ name, setName ] = useState('comment_box')
+    const [ sortOption, setSortOption ] = useState('좋아요순')
+    console.log(sortOption)
     const [ comment, setComment ] = useState([{
         title : '제목1번 하이용!',
         comment : '기대가되는 게임이네용~'
@@ -59,14 +62,12 @@ export default function DetailComment() {
         <div className={ styles.detail_comment }>
             <div className={ styles.comment_container }>
 
-                <div className={ styles.title }>
-                    <h1>User Comment</h1>
-                    <div>정렬기준</div>
-                </div>
+                <CommentNav sortOption={ sortOption } setSortOption={ setSortOption }/>
 
                 <div className={ styles[name] }>
                 { comment.map((a, i)=> <CommentItem title={ a.title } comment={ a.comment } key={i} />) }
                 </div>
+
                 <div className={ styles.next }>▷</div>
                 <div className={ styles.prev }>◁</div>
             </div>

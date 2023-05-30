@@ -74,10 +74,10 @@ export default function Home() {
     return (
         <div className="page_fixed">
             <TransitionGroup>                
-            <CSSTransition key={ componentIndex } timeout={ 1000 } classNames={ direction }>
-                <CurrentComponent/>
-            </CSSTransition>
-        </TransitionGroup>
+                <CSSTransition key={ componentIndex } timeout={ 1000 } classNames={ direction }>
+                    <CurrentComponent/>
+                </CSSTransition>
+            </TransitionGroup>
         </div>
     )
 }

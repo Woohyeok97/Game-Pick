@@ -6,6 +6,7 @@
     height: 100vh;
     padding: 5%;
     box-sizing: border-box;
+    background-color: #ffffff;
 }
 .next { right: 24px; }
 .prev { left: 24px; }
@@ -30,16 +31,6 @@
     box-sizing: border-box;
     background-color: salmon;
 
-    .title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        h1 {
-            margin: 0;
-            margin-bottom: 16px;
-            font-size: 2rem;
-        }
-    }
     .comment_box {
         flex-grow: 1;
         display: grid;
@@ -48,12 +39,11 @@
         grid-template-rows: repeat(2, 1fr);
         gap : 16px;
     }
-    @media screen and (max-width: 1060px) {
-        .comment_box {
-            grid-auto-flow: column;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(6, 1fr);
-        }
+    .comment_box_mobile {
+        flex-grow: 1;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 16px;
     }
 
 }
