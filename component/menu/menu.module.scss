@@ -10,8 +10,68 @@
     background-color: rgba(0, 0, 0, 0.5)
 }
 .menu_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
     height: 100%;
+    padding: 5% 10%;
+    box-sizing: border-box;
     background-color: salmon;
+
+    .menu_nav {
+        flex-basis: 10%;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        .login {
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 16px;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+            cursor: pointer;
+            &:hover {
+                color: #333333;
+                border: 1px solid #333333;
+            }
+        }
+    }
+    .link_box {
+        flex-basis: 80%;
+        display: flex;
+        flex-direction: column;
+        font-size: 5rem;
+        width: 100%;
+        padding-top: 10%;
+        font-weight: 800;
+        
+        .link {
+            margin-bottom: 10%;
+            a { 
+                text-decoration: none; 
+                color: #000000;
+                &:hover { color: #333333; }
+            }
+        }
+    }
+    .menu_footer {
+        flex-basis: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        font-size: 1.5rem;
+        .admin {
+            font-weight: 800;
+            color: purple;
+        }
+        a { 
+            color: #444444;
+            margin: 0 16px;
+            text-decoration: none; 
+            &:hover { color: #666666; }
+        }
+    }
 }
 
