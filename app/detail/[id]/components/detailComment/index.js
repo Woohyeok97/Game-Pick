@@ -1,7 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
-import styles from '../../styles/detailComment.module.scss'
+import styles from '../../styles/detailComment/detailComment.module.scss'
+// 컴포넌트
 import CommentItem from './commentItem'
+import CommentMake from './commentMake'
 import CommentNav from './commentNav'
 
 export default function DetailComment() {
@@ -67,6 +69,8 @@ export default function DetailComment() {
                 <div className={ styles[name] }>
                 { comment.map((a, i)=> <CommentItem title={ a.title } comment={ a.comment } key={i} />) }
                 </div>
+                
+                <CommentMake/>
 
                 <div className={ styles.next }>▷</div>
                 <div className={ styles.prev }>◁</div>

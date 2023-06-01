@@ -1,4 +1,4 @@
-import styles from '../../styles/commentItem.module.scss'
+import styles from '../../styles/detailComment/commentItem.module.scss'
 
 export default function CommentItem({ title, comment }) {
     return (

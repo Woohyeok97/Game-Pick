@@ -1,5 +1,5 @@
 'use client'
-import styles from '../../styles/commentNav.module.scss'
+import styles from '../../styles/detailComment/commentNav.module.scss'
 // MUI
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
