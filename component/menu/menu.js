@@ -1,9 +1,11 @@
+'use client'
 import styles from './menu.module.scss'
 import Link from 'next/link'
 
-export default function Menu() {
+export default function Menu({ setViewMenu }) {
     return (
         <div className={ styles.menu }>
+            <div className={ styles.backgrond_box } onClick={()=>{ setViewMenu(false) }}></div>
             <div className={ styles.menu_box }>
                 <div className={ styles.menu_nav }>
                     <div className={ styles.login }>로그인</div>
