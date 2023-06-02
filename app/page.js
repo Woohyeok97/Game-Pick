@@ -7,6 +7,9 @@ import HomeMain from "./home/components/homeMain"
 import useFullPage from "@/hook/usefullPage"
 
 export default function Home() {
+ 
+
+
     // 컴포넌트 인스턴스 ex) <HomeMain/> 을 직접적으로 배열에 담으면 렌더링 최적화에 불리하므로
     // 컴포넌트 타입을 배열로 할당
     const compoent = [ HomeMain, HomeInfo ]

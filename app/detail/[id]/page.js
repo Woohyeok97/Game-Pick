@@ -13,6 +13,7 @@ export default function Detail() {
     const { componentIndex, direction } = useFullPage(compoent)
     // 배열로 저장한 컴포넌트 타입으로 렌더링할때 컴포넌트 인스턴스 생성
     const CurrentComponent = compoent[componentIndex]
+    
 
 
     return (

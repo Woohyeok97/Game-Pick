@@ -10,7 +10,7 @@ export default function DetailComment() {
     const [ width, setWidth ] = useState(window.innerWidth)
     const [ name, setName ] = useState('comment_box')
     const [ sortOption, setSortOption ] = useState('좋아요순')
-    console.log(sortOption)
+
     const [ comment, setComment ] = useState([{
         title : '제목1번 하이용!',
         comment : '기대가되는 게임이네용~'
