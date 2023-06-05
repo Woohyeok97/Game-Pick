@@ -10,7 +10,7 @@ export default function FullPage({ children }) {
         <div className="page_fixed">
             <TransitionGroup>                
                 <CSSTransition key={ componentIndex } timeout={ 1000 } classNames={ direction }>
-                { children[componentIndex] }
+                <>{ children[componentIndex] }</>
                 </CSSTransition>
             </TransitionGroup>
         </div>

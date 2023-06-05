@@ -1,45 +1,26 @@
-'use client'
-import { useState } from 'react'
+import { connectDB } from '@/util/database'
 import styles from '../styles/detailFront.module.scss'
+// 컴포넌트
 import DetailTrailer from './detailtrailer'
 
-export default function DetailFront() {
-    const [ viewTrailer, setViewTrailer ] = useState(false)
-    const game = {
-        title : '디아블로4',
-        like : 172,
-        unlike : 16,
-        releaseDate : '발매 2023/6/2',
-        img : '너굴맨배경.jpeg'
-    }
-
+export default async function DetailFront() {
+    const db = (await connectDB).db('project')
+    const game = await db.collection('game_content').findOne({ title : '젤다의 전설' })
+  
     return (
         <div className={ styles.detail_front }>
-            <img src={`/${ game.img }`}/>
-            <div className={ styles.item_info_box}>
-                <div className={ styles.item_info }>
-                    <h1>{ game.title }</h1>
-                    <div className={ styles.like_box }>
-                        <p>좋아요 { game.like }</p>
-                        <p>싫어요 { game.unlike }</p>
-                    </div>
-                    <div className={ styles.release_date_box }>
-                        <p>{ game.releaseDate }</p>
-                    </div>
-                    <button className={ styles.trailer_btn } onClick={()=>{ setViewTrailer(true) }}>트레일러</button>
+            <img src={`/너굴맨배경.jpeg`}/>
+            <div className={ styles.item_info }>
+                <h1>{ game.title }</h1>
+                <div className={ styles.like_box }>
+                    <p>좋아요 { game.like }</p>
+                    <p>싫어요 { game.unlike }</p>
                 </div>
-
-                { viewTrailer 
-                ? 
-                <div className={styles.detail_trailer} onClick={()=>{ setViewTrailer(false) }}>
-                    <DetailTrailer/>
+                <div className={ styles.release_date_box }>
+                    <p>{ game.releaseDate }</p>
                 </div>
-                : null }
-
-            </div>
-
-            <div></div>
-            
+                <DetailTrailer/>
+            </div>    
         </div>
     )
 }

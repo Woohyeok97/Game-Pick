@@ -6,11 +6,11 @@ import FullPage from "@/component/module/fullPage";
 
 export default function Detail() {
  
-    const compoent = [ <DetailFront/>, <DetailComment/> ]
+    const component = [ <DetailFront/>, <DetailComment/> ]
 
     return (
-        <FullPage>
-        { compoent }
+        <FullPage name="Detail">
+        { component }
         </FullPage>
     )
 }
