@@ -5,7 +5,7 @@ import styles from '../../styles/listItem.module.scss'
 
 export default function ListItem({ content }) {
     return (
-        <Link href={`/detail/${content.title}`}>
+        <Link href={`/detail/${content._id}`}>
             <div className={ styles.list_item }>
                 <div className={ styles.image_box }>
                     <img src="/너굴맨.jpeg"/>

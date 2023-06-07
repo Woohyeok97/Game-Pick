@@ -12,7 +12,5 @@ export default async function List() {
             <ListNav/>
             <ListMain gameContent={ gameContent }/>
         </section>
-
-
     )
 }

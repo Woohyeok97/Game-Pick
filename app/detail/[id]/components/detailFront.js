@@ -1,11 +1,12 @@
 import { connectDB } from '@/util/database'
+import { ObjectId } from 'mongodb'
 import styles from '../styles/detailFront.module.scss'
 // 컴포넌트
 import DetailTrailer from './detailtrailer'
 
-export default async function DetailFront() {
+export default async function DetailFront({ contentId }) {
     const db = (await connectDB).db('project')
-    const game = await db.collection('game_content').findOne({ title : '젤다의 전설' })
+    const game = await db.collection('game_content').findOne({ _id : new ObjectId(contentId) })
   
     return (
         <div className={ styles.detail_front }>
