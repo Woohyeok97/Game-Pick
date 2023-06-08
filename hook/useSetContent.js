@@ -18,7 +18,7 @@ export default function useSetContent() {
                 value = e.target.value
                 break;
             case 'file' : 
-                value = e.target.files[0]
+                value = e.target.files[0].name
                 break;
             case 'date' : 
                 value = parseISO(e.target.value)

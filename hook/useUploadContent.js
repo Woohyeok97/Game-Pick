@@ -4,9 +4,9 @@ import axios from "axios"
 
 export default function useUploadContent() {
     // content 유효성 검사
-    const verifyContent = (object) => {
-        for(let i in object) {
-            if(!object[i]) {
+    const verifyContent = (data) => {
+        for(let i in data) {
+            if(!data[i]) {
                 return false
             }     
         }
@@ -18,8 +18,8 @@ export default function useUploadContent() {
             console.log('공백')
             return
         }
-        axios.get('/api/game_content')
-        .then((result)=>{ console.log(result) })
+        const response = await axios.post('/api/game_content', content)
+        console.log(response)
 
     }
 
