@@ -5,7 +5,7 @@ import styles from '../styles/detailTrailer.module.scss'
 import ReactPlayer from 'react-player';
 
 
-export default function DetailTrailer() {
+export default function DetailTrailer({ trailerUrl }) {
     const [ viewTrailer, setViewTrailer ] = useState(false)
 
     if(!viewTrailer) return (
@@ -15,7 +15,7 @@ export default function DetailTrailer() {
         <div className={styles.detail_trailer} onClick={()=>{ setViewTrailer(false) }}>
             <div className={ styles.trailer_box }>
                 <ReactPlayer
-                    url="https://youtu.be/XrPZSq5YXqc"
+                    url={ trailerUrl }
                     width="100%"
                     height="100%"
                     controls
