@@ -6,13 +6,13 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 
 
-export default function EditBtn() {
+export default function EditBtn({ contentId }) {
     const [ isAdmin, setIsAdmin ] = useState(true)
 
     if(isAdmin) return (
         <div className={ styles.edit_btn }>
             <Button variant="contained" color="secondary" size="medium">
-                <Link href="">EDIT</Link>
+                <Link href={`admin/contentModify/${contentId}`}>EDIT</Link>
             </Button>
         </div>
     )

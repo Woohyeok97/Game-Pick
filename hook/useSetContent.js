@@ -31,5 +31,5 @@ export default function useSetContent() {
     }
     
     
-    return { content, handleInput }
+    return { content, setContent, handleInput }
 }

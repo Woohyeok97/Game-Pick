@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         }
         catch(err) {
             console.error(err)
-            return res.status(500).json({ message : '서버내부 에러발생' })
+            return res.status(500).json({ message : '서버 에러발생' })
         }
 
     }
