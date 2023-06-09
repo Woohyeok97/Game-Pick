@@ -10,7 +10,7 @@ export default function Home() {
     
     // client component의 자식으로 server component를 전달해, server component의 특성을 유지함
     return (
-        <FullPage name="Home">
+        <FullPage>
         { component }
         </FullPage>
     )
