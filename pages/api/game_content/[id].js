@@ -37,5 +37,16 @@ export default async function handler(req, res) {
             return res.status(500).json({ message : '서버에러 발생' })
         }
     }
+    // 컨텐츠 DELETE 요청
+    if(req.method == 'DELETE') {
+        try {
+            const db = (await connectDB).db('project')
+            const result = await db.collection('game_content').deleteOne({ _id : new ObjectId(req.query) })
+            return res.status(200).json({ result : result, message : '컨텐츠 삭제완료' })
+        }catch(err) {
+            console.log(err)
+            return res.status(500).json({ message : '서버에러 발생' })
+        }
+    }
 }
 

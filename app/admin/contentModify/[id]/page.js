@@ -1,18 +1,19 @@
 'use client'
-import axios from 'axios'
 import { useEffect } from 'react'
 import styles from '../../styles/contentModify.module.scss'
 // 커스텀훅
 import useSetContent from '@/hook/useSetContent'
 import useUpDateContent from '@/hook/useUpdateContent'
+import useDeleteContent from '@/hook/useDeleteContent'
 
 
 
 export default function ContentModify(props) {
     const { content, handleInputChange, setPrevContent } = useSetContent()
     const { updateContent } = useUpDateContent()
-    // ContentModify 컴포넌트에서만 setPrevContent()를 실행하기 때문에
-    // 커스텀훅 내부가 아닌, 컴포넌트에서 실행함
+    const { deleteContent } = useDeleteContent()
+    // 현재 컴포넌트에서만 setPrevContent()를 실행하기 때문에 커스텀훅 내부가 아닌, 컴포넌트에서 useEffect()실행
+    // 기존 컨텐츠를 DB에서 가져와, input들의 defaultValue로 설정함
     useEffect(()=>{
         setPrevContent(props.params.id)
     }, [])
@@ -41,7 +42,7 @@ export default function ContentModify(props) {
             </div>
             <div className={ styles.btn_box }>
                 <button onClick={()=>{ updateContent(content, props.params.id) }}>컨텐츠 수정</button>
-                <button>컨텐츠 삭제</button>
+                <button onClick={()=>{ deleteContent(props.params.id) }}>컨텐츠 삭제</button>
             </div>
         </section>
     )
