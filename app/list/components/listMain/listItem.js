@@ -5,8 +5,10 @@ import styles from '../../styles/listItem.module.scss'
 import EditBtn from './editBtn'
 
 
-export default function ListItem({ content }) {
+export default function ListItem({ content, role }) {
+    //content._id를 문자열로 변환
     content._id = content._id.toString()
+    
     return (
             <div className={ styles.list_item }>
                 <Link href={`/detail/${content._id}`}>
@@ -15,7 +17,7 @@ export default function ListItem({ content }) {
                     </div>
                     <p>{content.title}</p>
                 </Link>
-                <EditBtn contentId={ content._id }/>
+                { role == 'admin' ? <EditBtn contentId={ content._id }/> : null }
             </div>
         
     )

@@ -7,7 +7,6 @@ import useUpDateContent from '@/hook/useUpdateContent'
 import useDeleteContent from '@/hook/useDeleteContent'
 
 
-
 export default function ContentModify(props) {
     const { content, handleInputChange, setPrevContent } = useSetContent()
     const { updateContent } = useUpDateContent()

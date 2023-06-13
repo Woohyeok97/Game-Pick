@@ -8,8 +8,7 @@ export default function ContentUpload() {
     const { content, handleInputChange } = useSetContent()
     const { uploadContent } = useUploadContent()
 
-
-
+    // handleInpuutChange(e)함수로 사용자가 입력한 데이터를 content에 저장함
     return (
         <section className={ styles.content_upload }>
             <div className={ styles.upload_box }>
