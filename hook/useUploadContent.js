@@ -5,7 +5,7 @@ import verifyContent from "@/util/verifyData"
 export default function useUploadContent() {
 
     const uploadContent = async (content) => {
-
+        // 컨텐츠 유효성 검사
         if(!verifyContent(content)) {
             console.log('컨텐츠의 내용을 확인해주세요.')
             return

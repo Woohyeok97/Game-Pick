@@ -14,7 +14,7 @@ export default function Menu({ setViewMenu, session }) {
                 <div className={ styles.menu_nav }>
                     { session
                     ? <Button variant="contained" size="large" onClick={()=>{ signOut() }}>로그아웃</Button>
-                    : <Button variant="contained" size="large" onClick={()=>{ signIn() }}>깃헙 로그인</Button> }
+                    : <Button variant="contained" size="large" onClick={()=>{ signIn() }}>소셜 로그인</Button> }
                 </div>
                 <div className={ styles.link_box }>
                     <div className={ styles.link }>

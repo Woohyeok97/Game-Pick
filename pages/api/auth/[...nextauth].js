@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions = {
     // 프로바이더 배열
@@ -8,6 +9,10 @@ export const authOptions = {
         clientId: '908221489c50b65390f5',
         clientSecret: '41321eb27d5b2703ea83a0f3f6c9ac0cfebdccb6',
     }),
+    GoogleProvider({
+        clientId:'228392099530-2be3sp8d2ds8l75kqjt0fmmrvup08t1s.apps.googleusercontent.com',
+        clientSecret: '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'
+    })
   ],
     // 유저 로그인시, 세션을 jwt형식으로 저장
     session: {
