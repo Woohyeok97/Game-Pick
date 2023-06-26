@@ -1,0 +1,39 @@
+.info_comment {
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        flex-basis: 20%;
+        font-size: calc(4px + 1rem);
+    }
+    .comment_container {
+        flex-basis: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px;
+        border: 1px solid transparent;
+        border-radius: 0.5rem;
+        background-color: #003A63;
+
+        .comment_box {
+            flex-basis: 80%;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .comment_more {
+            flex-basis: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            a {
+                text-decoration: none;
+                color: #000000;
+                font-size: calc(4px + 1rem);
+            }
+        }
+    }
+}

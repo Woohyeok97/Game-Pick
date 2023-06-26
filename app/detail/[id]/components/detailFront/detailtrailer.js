@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import styles from '../styles/detailTrailer.module.scss'
+import styles from '../../styles/detailFront/detailTrailer.module.scss'
 // React-youtube
 import ReactPlayer from 'react-player';
 
