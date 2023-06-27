@@ -1,0 +1,21 @@
+.comment_item {
+    display: flex;
+    justify-content: space-between;
+}
+.btn_box {
+    display: flex;
+    button {
+        margin-left: -5px;
+        margin-right: 8px;
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    p {
+        margin: 0;
+        margin-left: 8px;
+    }
+}
+.menu {
+    position: relative;
+}
