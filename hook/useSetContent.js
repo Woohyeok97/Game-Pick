@@ -40,5 +40,5 @@ export default function useSetContent() {
         }
     }
     
-    return { content, handleInputChange, setPrevContent }
+    return { content, setContent, handleInputChange, setPrevContent }
 }

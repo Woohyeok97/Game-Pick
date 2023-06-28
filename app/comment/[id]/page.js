@@ -2,7 +2,6 @@ import { connectDB } from '@/util/database'
 import { ObjectId } from 'mongodb'
 import styles from './styles/comment.module.scss'
 // 컴포넌트
-import CommentWrite from './components/commentWrite'
 import CommentMain from './components/commentMain'
 
 
@@ -15,9 +14,9 @@ export default async function Comment(props) {
         <section className={ styles.comment }>
             <div className={ styles.title }>
                 <h1>{ content.title }</h1>
+                <p>유저 코멘트</p>
             </div>
-            <CommentMain/>
-            <CommentWrite/>
+            <CommentMain _id={ props.params.id }/>
         </section>
     )
 }

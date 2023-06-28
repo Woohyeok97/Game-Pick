@@ -1,5 +1,4 @@
 import axios from "axios"
-import format from "date-fns/format"
 //유효성검사 유틸함수
 import verifyContent from "@/util/verifyData"
 

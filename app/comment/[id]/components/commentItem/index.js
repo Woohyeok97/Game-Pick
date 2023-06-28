@@ -14,7 +14,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentMenu from './commentMenu';
 
 
-export default function CommentItem() {
+export default function CommentItem({ comment }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
     return (
@@ -22,19 +22,19 @@ export default function CommentItem() {
             <div className={ styles.comment }>
                 {/* 사용자 아이콘 */}
                 <ListItemAvatar>
-                    <Avatar/>
+                    <Avatar src={ comment.userImage }/>
                 </ListItemAvatar>
                 {/* 사용자 이름 & 코멘트 내용 */}
-                <ListItemText primary="고나우" secondary="웹사이트 망함?" />
+                <ListItemText primary={ comment.userName } secondary={ comment.comment } />
                 {/* 좋아요 & 싫어요 버튼 */}
                 <div className={ styles.btn_box }>
                     <IconButton aria-label="like" size="small">
                         <ThumbUpIcon fontSize="inherit"/>
-                        <p>0</p>
+                        <p>{ comment.like }</p>
                     </IconButton>
                     <IconButton aria-label="unlike" size="small">
                         <ThumbDownIcon fontSize="inherit"/>
-                        <p>0</p>
+                        <p>{ comment.unlike }</p>
                     </IconButton>
                 </div>
             </div>
@@ -43,8 +43,8 @@ export default function CommentItem() {
             <div className={ styles.menu }>
                 {/* 코멘트 메뉴 */}
                 { menuSwitch ? <CommentMenu/> : null }
-                <IconButton aria-label="menu">
-                    <MoreHorizIcon onClick={()=>{ setMenuSwitch(!menuSwitch) }}/>
+                <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
+                    <MoreHorizIcon/>
                 </IconButton>
             </div>
         </ListItem>
