@@ -7,12 +7,14 @@ import useUploadContent from '@/hook/useUploadContent';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 
 export default function CommentWrite({ contentId, getComment }) {
     const { content, setContent, handleInputChange } = useSetContent()
     const { uploadComment } = useUploadContent()
+    // 클라이언트에서 세션데이터는 오직, 로그인 여부만 확인
+    const session = useSession();
 
     const handleSubmit = async () => {
         await uploadComment(content, contentId)
@@ -22,12 +24,19 @@ export default function CommentWrite({ contentId, getComment }) {
         setContent({...content, comment : ''})
     }
     
-    return (
+    // 로그인
+    if(session.data) return (
         <div className={ styles.comment_write }>
             <TextField onChange={(e)=>{ handleInputChange(e) }} name="comment" multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4} value={content.comment}/>
             <div className={ styles.btn_box }>
                 <Button className={ styles.btn } onClick={()=>{ handleSubmit() }} variant="contained" endIcon={<EmojiEmotionsIcon />} size="large">COMMENT!</Button>
             </div>
+        </div>
+    )
+    // 비로그인
+    if(!session.data) return (
+        <div className={ styles.comment_write }>
+            <TextField name="comment" multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
         </div>
     )
 }

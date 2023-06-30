@@ -13,7 +13,8 @@ export default function CommentMenu({ comment, getComment }) {
     const { deleteComment } = useDeleteContent()
 
     const handleSubmit = async () => {
-        await deleteComment(comment._id)
+        await deleteComment(comment._id, comment.userEmail)
+
         getComment(comment.parent)
     }
 

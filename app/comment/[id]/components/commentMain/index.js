@@ -17,13 +17,13 @@ export default function CommentMain({ contentId }) {
     useEffect(()=>{
         getComment(contentId)
     }, [])
-    
+
     // comment가 있는 전제하에, comment.length > 0일때 코멘트를 렌더링해줌
     if(comment) return (
         <div>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 { !comment.length 
-                ? <div>첫댓글을 달아보세요!</div>
+                ? <div>아직 댓글이 없어요..</div>
                 : comment.map((a, i)=> <CommentItem key={i} comment={a} getComment={ getComment }/> ) }
              </List>
              <CommentWrite contentId={ contentId } getComment={ getComment }/>

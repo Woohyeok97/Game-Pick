@@ -17,11 +17,11 @@ export default function useDeleteContent() {
         }
     }
 
-    const deleteComment = async (id) => {
+    const deleteComment = async (id, userEmail) => {
         if(!reconfirmAction('코멘트를 삭제할까요?')) return
 
         try {
-            const response = await axios.delete(`/api/game_comment/${id}`)
+            const response = await axios.delete(`/api/game_comment/${id}`, { params : { userEmail : userEmail } })
             alert(response.data.message)
             console.log(response)
         } catch(err) {

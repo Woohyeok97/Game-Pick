@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const session = await getServerSession(req, res, authOptions)
     // POST 요청
     if(req.method == 'POST') {
-        // 컨텐츠 유효성검사
+        // 코멘트 유효성검사
         if(!verifyContent(req.body)) return res.status(400).json({ message : '코멘트의 데이터를 확인해주세요.' })
         if(!session) return res.status(400).json({ message : '로그인 이후 이용해 주세요.' })
         
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 
     // GET 요청
     if(req.method == 'GET') {
-        if(!session) return res.status(400).json({ message : '로그인 이후 이용해 주세요.' })
+
         try {
             const db = (await connectDB).db('project')
             const result = await db.collection('game_comment').find({ parent : req.query._id }).toArray()
