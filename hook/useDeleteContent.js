@@ -12,10 +12,22 @@ export default function useDeleteContent() {
             const response = await axios.delete(`/api/game_content/${id}`)
             alert(response.data.message)
             console.log(response)
-        }catch(err) {
+        } catch(err) {
             console.error(err)
         }
     }
 
-    return { deleteContent }
+    const deleteComment = async (id) => {
+        if(!reconfirmAction('코멘트를 삭제할까요?')) return
+
+        try {
+            const response = await axios.delete(`/api/game_comment/${id}`)
+            alert(response.data.message)
+            console.log(response)
+        } catch(err) {
+            console.error(err)
+        }
+    }
+
+    return { deleteContent, deleteComment }
 }

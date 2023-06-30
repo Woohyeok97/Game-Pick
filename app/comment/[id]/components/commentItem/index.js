@@ -1,4 +1,3 @@
-'use client'
 import styles from '../../styles/commentMain/commentItem.module.scss'
 import { useState } from 'react';
 // MUI
@@ -14,18 +13,21 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentMenu from './commentMenu';
 
 
-export default function CommentItem({ comment }) {
+export default function CommentItem({ comment, getComment }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
     return (
         <ListItem className={ styles.comment_item } alignItems="flex-start">
             <div className={ styles.comment }>
+
                 {/* 사용자 아이콘 */}
                 <ListItemAvatar>
                     <Avatar src={ comment.userImage }/>
                 </ListItemAvatar>
+
                 {/* 사용자 이름 & 코멘트 내용 */}
                 <ListItemText primary={ comment.userName } secondary={ comment.comment } />
+
                 {/* 좋아요 & 싫어요 버튼 */}
                 <div className={ styles.btn_box }>
                     <IconButton aria-label="like" size="small">
@@ -37,14 +39,14 @@ export default function CommentItem({ comment }) {
                         <p>{ comment.unlike }</p>
                     </IconButton>
                 </div>
+
             </div>
 
             {/* 코멘트 버튼 */}
             <div className={ styles.menu }>
-                {/* 코멘트 메뉴 */}
-                { menuSwitch ? <CommentMenu/> : null }
+                { menuSwitch ? <CommentMenu comment={ comment } getComment={ getComment }/> : null } {/* 코멘트 메뉴 */}
                 <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
-                    <MoreHorizIcon/>
+                    <MoreHorizIcon/> 
                 </IconButton>
             </div>
         </ListItem>

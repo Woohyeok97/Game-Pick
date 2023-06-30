@@ -16,7 +16,7 @@ export default async function Comment(props) {
                 <h1>{ content.title }</h1>
                 <p>유저 코멘트</p>
             </div>
-            <CommentMain _id={ props.params.id }/>
+            <CommentMain contentId={ props.params.id }/>
         </section>
     )
 }

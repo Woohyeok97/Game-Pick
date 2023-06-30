@@ -10,12 +10,12 @@ import CommentItem from '../commentItem';
 import CommentWrite from './commentWrite';
 
 
-export default function CommentMain({ _id }) {
+export default function CommentMain({ contentId }) {
     const { comment, getComment } = useGetData()
 
     // 최초 컴포넌트 마운트시, getComment()실행
     useEffect(()=>{
-        getComment(_id)
+        getComment(contentId)
     }, [])
     
     // comment가 있는 전제하에, comment.length > 0일때 코멘트를 렌더링해줌
@@ -24,9 +24,9 @@ export default function CommentMain({ _id }) {
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 { !comment.length 
                 ? <div>첫댓글을 달아보세요!</div>
-                : comment.map((a, i)=> <CommentItem key={i} comment={a}/> ) }
+                : comment.map((a, i)=> <CommentItem key={i} comment={a} getComment={ getComment }/> ) }
              </List>
-             <CommentWrite _id={ _id } getComment={ getComment }/>
+             <CommentWrite contentId={ contentId } getComment={ getComment }/>
         </div>
     )
 }
