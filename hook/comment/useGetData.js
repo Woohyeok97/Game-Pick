@@ -12,7 +12,6 @@ export default function useGetData() {
         } catch(err) {
             console.log(err)
         }
-
     }
 
     return { comment, getComment }

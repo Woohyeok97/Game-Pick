@@ -12,11 +12,7 @@ export default async function Comment(props) {
 
     return (
         <section className={ styles.comment }>
-            <div className={ styles.title }>
-                <h1>{ content.title }</h1>
-                <p>유저 코멘트</p>
-            </div>
-            <CommentMain contentId={ props.params.id }/>
+            <CommentMain content={ content }/>
         </section>
     )
 }
