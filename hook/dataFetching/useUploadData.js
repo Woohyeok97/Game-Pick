@@ -3,37 +3,41 @@ import axios from "axios"
 import verifyContent from "@/util/verifyData"
 
 
+// 커스텀훅 역할 : 서버에 데이터 업로드
 export default function useUploadData() {
 
-    const uploadContent = async (content) => {
-        // 컨텐츠 유효성 검사
-        if(!verifyContent(content)) {
-            console.log('컨텐츠의 내용을 확인해주세요.')
+    // postd요청 함수
+    const uploadData = async (uri, data, errorMessage) => {
+        // 데이터 유효성 검사
+        if(!verifyContent(data)) {
+            console.log(errorMessage);
             return
         }
+
         try {
-            const response = await axios.post('/api/game_content', content)
+            const response = await axios.post(uri, data)
             alert(response.data.message)
             console.log(response)
-        }catch(err) {
+        } 
+        catch(err) {
             console.error(err)
         }
     }
 
-    const uploadComment =  async (comment, _id) => {
-        // 코멘트 유효성 검사
-        if(!verifyContent(comment)) {
-            console.log('코멘트를 입력해 주세요.')
-            return
-        }
-        try {
-            const response = await axios.post('/api/game_comment', { ...comment, parent : _id })
-            alert(response.data.message)
-            console.log(response)
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    // 컨텐츠 업로드
+    const uploadContent = async (content) => {
+        const uri = process.env.NEXT_PUBLIC_CONTENT_API
+        const errorMessage = '컨텐츠의 내용을 확인해주세요'
 
+        uploadData(uri, content, errorMessage)
+    }
+    // 코멘트 업로드
+    const uploadComment =  async (comment, _id) => {
+        const uri = process.env.NEXT_PUBLIC_COMMENT_API
+        const errorMessage = '코멘트의 내용을 확인해주세요'
+        
+        uploadData(uri, { ...comment, parent : _id }, errorMessage)
+    }
+    
     return { uploadContent, uploadComment }
 }

@@ -1,6 +1,6 @@
 'use client'
 import styles from '../../styles/commentMain/commentMain.module.scss'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // 커스텀훅
 import useGetData from '@/hook/dataFetching/useGetData';
 
@@ -19,11 +19,13 @@ import CommentWrite from './commentWrite';
 
 export default function CommentMain({ content }) {
     const { comment, getComment } = useGetData()
-
-    // 최초 컴포넌트 마운트시, getComment()실행
+    const [ updateSwitch, setUpdateSwitch ] = useState(false)
+    
+    // updateSwitch 변경때마다 getComment()실행
     useEffect(()=>{
         getComment(content._id)
-    }, [])
+        setUpdateSwitch(false)
+    }, [updateSwitch])
 
     
     if(comment) return (
@@ -53,9 +55,9 @@ export default function CommentMain({ content }) {
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 { !comment.length 
                 ? <div>아직 댓글이 없어요..</div>
-                : comment.map((a, i)=> <CommentItem key={i} comment={a} getComment={ getComment }/> ) }
+                : comment.map((a, i)=> <CommentItem key={i} comment={a} setUpdateSwitch={ setUpdateSwitch }/> ) }
              </List>
-             <CommentWrite contentId={ content._id } getComment={ getComment }/>
+             <CommentWrite contentId={ content._id } setUpdateSwitch={ setUpdateSwitch }/>
         </div>
     )
 }

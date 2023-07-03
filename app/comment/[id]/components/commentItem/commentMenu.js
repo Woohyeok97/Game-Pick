@@ -7,14 +7,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 
-export default function CommentMenu({ comment, getComment }) {
+export default function CommentMenu({ comment, setUpdateSwitch }) {
     
     const { deleteComment } = useDeleteData()
 
     const handleSubmit = async () => {
         await deleteComment(comment._id, comment.userEmail)
         // 코멘트 삭제후, 변경된 코멘트를 다시요청
-        getComment(comment.parent)
+        setUpdateSwitch(true)
     }
 
     return (

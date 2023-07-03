@@ -10,18 +10,18 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import { useSession } from 'next-auth/react';
 
 
-export default function CommentWrite({ contentId, getComment }) {
+export default function CommentWrite({ contentId, setUpdateSwitch }) {
     const { content, setContent, handleInputChange } = useSetData()
     const { uploadComment } = useUploadData()
     // 클라이언트에서 세션데이터는 오직, 로그인 여부만 확인
     const session = useSession();
 
     const handleSubmit = async () => {
-        await uploadComment(content, contentId)
-        // 코멘트 업로드후, prop으로 받아온 getComment(_id) 함수를 실행하여, 새로고침없이 코멘트 추가 
-        getComment(contentId)
+        await uploadComment(content, contentId)      
+        setUpdateSwitch(true)
         // 코멘트 업로드후, TextFiled의 글자가 지워질수 있게 value를 ''로 바꿔줌
         setContent({...content, comment : ''})
+        
     }
     
     // 로그인
