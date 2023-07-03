@@ -3,7 +3,7 @@ import styles from '../../styles/detailInfo/detailInfo.module.scss'
 import InfoComment from './infoComment'
 
 export default function DetailInfo({ content }) {
-
+    
     return (
         <section className={ styles.detail_info }>
             <div className={ styles.title }>
