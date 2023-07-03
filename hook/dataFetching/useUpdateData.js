@@ -2,7 +2,7 @@ import axios from "axios"
 //유효성검사 유틸함수
 import verifyContent from "@/util/verifyData"
 
-export default function useUpDateContent() {
+export default function useUpDateData() {
     
     const updateContent = async (content, id) => {
         // 컨텐츠 유효성 검사

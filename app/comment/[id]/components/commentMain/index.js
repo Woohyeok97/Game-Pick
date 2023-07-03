@@ -2,7 +2,7 @@
 import styles from '../../styles/commentMain/commentMain.module.scss'
 import { useEffect } from 'react';
 // 커스텀훅
-import useGetData from '@/hook/comment/useGetData';
+import useGetData from '@/hook/dataFetching/useGetData';
 
 // MUI
 import List from '@mui/material/List';

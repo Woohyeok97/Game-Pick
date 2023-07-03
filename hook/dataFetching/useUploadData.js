@@ -3,7 +3,7 @@ import axios from "axios"
 import verifyContent from "@/util/verifyData"
 
 
-export default function useUploadContent() {
+export default function useUploadData() {
 
     const uploadContent = async (content) => {
         // 컨텐츠 유효성 검사

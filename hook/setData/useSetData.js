@@ -2,7 +2,7 @@ import { useState } from "react"
 import { parseISO, format } from "date-fns"
 import axios from "axios"
 
-export default function useSetContent() {
+export default function useSetData() {
     const [ content, setContent ] = useState({})
     // 사용자가 input에 입력한 데이터로 setContent()함수 실행
     const handleInputChange = (e) => {

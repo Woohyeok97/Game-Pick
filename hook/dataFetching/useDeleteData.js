@@ -2,7 +2,7 @@ import axios from "axios"
 // 리컨펌 유틸함수
 import reconfirmAction from "@/util/reconfirmAction"
 
-export default function useDeleteContent() {
+export default function useDeleteData() {
 
     const deleteContent = async (id) => {
         // 컨텐츠 삭제전, 다시한번 물어봄

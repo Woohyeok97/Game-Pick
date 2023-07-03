@@ -2,15 +2,15 @@
 import { useEffect } from 'react'
 import styles from '../../styles/contentModify.module.scss'
 // 커스텀훅
-import useSetContent from '@/hook/useSetContent'
-import useUpDateContent from '@/hook/useUpdateContent'
-import useDeleteContent from '@/hook/useDeleteContent'
+import useSetData from '@/hook/setData/useSetData'
+import useUpDateData from '@/hook/dataFetching/useUpdateData'
+import useDeleteData from '@/hook/dataFetching/useDeleteData'
 
 
 export default function ContentModify(props) {
-    const { content, handleInputChange, setPrevContent } = useSetContent()
-    const { updateContent } = useUpDateContent()
-    const { deleteContent } = useDeleteContent()
+    const { content, handleInputChange, setPrevContent } = useSetData()
+    const { updateContent } = useUpDateData()
+    const { deleteContent } = useDeleteData()
     // 현재 컴포넌트에서만 setPrevContent()를 실행하기 때문에 커스텀훅 내부가 아닌, 컴포넌트에서 useEffect()실행
     // 기존 컨텐츠를 DB에서 가져와, input들의 defaultValue로 설정함
     useEffect(()=>{

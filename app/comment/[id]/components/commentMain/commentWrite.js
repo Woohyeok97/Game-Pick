@@ -1,8 +1,8 @@
 'use client'
 import styles from '../../styles/commentWrite.module.scss'
 // 커스텀훅
-import useSetContent from '@/hook/useSetContent';
-import useUploadContent from '@/hook/useUploadContent';
+import useSetData from '@/hook/setData/useSetData';
+import useUploadData from '@/hook/dataFetching/useUploadData';
 // MUI
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,8 +11,8 @@ import { useSession } from 'next-auth/react';
 
 
 export default function CommentWrite({ contentId, getComment }) {
-    const { content, setContent, handleInputChange } = useSetContent()
-    const { uploadComment } = useUploadContent()
+    const { content, setContent, handleInputChange } = useSetData()
+    const { uploadComment } = useUploadData()
     // 클라이언트에서 세션데이터는 오직, 로그인 여부만 확인
     const session = useSession();
 

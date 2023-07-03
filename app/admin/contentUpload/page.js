@@ -1,12 +1,12 @@
 'use client'
 import styles from '../styles/contentUpload.module.scss'
 // 커스텀훅
-import useSetContent from '@/hook/useSetContent'
-import useUploadContent from '@/hook/useUploadContent'
+import useSetData from '@/hook/setData/useSetData'
+import useUploadData from '@/hook/dataFetching/useUploadData'
 
 export default function ContentUpload() {
-    const { content, handleInputChange } = useSetContent()
-    const { uploadContent } = useUploadContent()
+    const { content, handleInputChange } = useSetData()
+    const { uploadContent } = useUploadData()
 
     // handleInpuutChange(e)함수로 사용자가 입력한 데이터를 content에 저장함
     return (

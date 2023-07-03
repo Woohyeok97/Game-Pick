@@ -1,6 +1,6 @@
 import styles from '../../styles/commentMain/commentMenu.module.scss'
 // 커스텀훅
-import useDeleteContent from '@/hook/useDeleteContent';
+import useDeleteData from '@/hook/dataFetching/useDeleteData';
 // MUI
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 export default function CommentMenu({ comment, getComment }) {
     
-    const { deleteComment } = useDeleteContent()
+    const { deleteComment } = useDeleteData()
 
     const handleSubmit = async () => {
         await deleteComment(comment._id, comment.userEmail)
