@@ -23,7 +23,7 @@ export default function CommentItem() {
                             장작값으로는 비싼감이 있네요.
                         </Typography>
                     </CardContent>
-                    <Box sx={{ display : 'flex', flexBasis : '10%', fontSize : 'medium', color : "text.secondary", pl : '16px' }}>
+                    <Box sx={{ display : 'flex', flexBasis : '10%', fontSize : 'medium', color : "text.secondary", pl : '16px', mb : '16px' }}>
                         <ThumbUpIcon fontSize="inherit"/> <Typography mr={2} ml={1}>0</Typography>
                         <ThumbDownIcon fontSize="inherit"/> <Typography mr={2} ml={1}>0</Typography>
                     </Box>

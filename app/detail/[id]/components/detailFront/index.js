@@ -1,6 +1,8 @@
 import styles from '../../styles/detailFront/detailFront.module.scss'
 // 컴포넌트
 import DetailTrailer from './detailtrailer'
+import ContentFeedback from '@/component/feedback/contentFeedback'
+
 
 export default function DetailFront({ content }) {
     
@@ -13,6 +15,7 @@ export default function DetailFront({ content }) {
                     <p>{ content.releaseDate }</p>
                 </div>
                 <DetailTrailer trailerUrl={ content.trailerUrl }/>
+                <ContentFeedback content={ content }/>
             </div>    
         </div>
     )

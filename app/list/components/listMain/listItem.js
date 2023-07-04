@@ -1,11 +1,10 @@
-// scss
 import Link from 'next/link'
 import styles from '../../styles/listItem.module.scss'
 // 컴포넌트
 import EditBtn from './editBtn'
 
 
-export default function ListItem({ content, role }) {
+export default function ListItem({ content, session }) {
     //content._id를 문자열로 변환
     content._id = content._id.toString()
     
@@ -17,7 +16,7 @@ export default function ListItem({ content, role }) {
                     </div>
                     <p>{content.title}</p>
                 </Link>
-                { role == 'admin' ? <EditBtn contentId={ content._id }/> : null }
+                { session && session.user.role == 'admin' ? <EditBtn contentId={ content._id }/> : null }
             </div>
         
     )
