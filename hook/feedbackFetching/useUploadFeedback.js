@@ -14,12 +14,12 @@ export default function useUploadFeedback() {
         }
     }
 
-    const contentFeedback = (feedback, parent) => {
+    const uploadContentFeedback = (feedback, parent) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
         const data = { feedback, parent }
         uploadFeedback(uri, data)
     }
 
 
-    return { contentFeedback }
+    return { uploadContentFeedback }
 }

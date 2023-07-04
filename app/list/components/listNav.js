@@ -10,22 +10,15 @@ import Typography from '@mui/material/Typography';
 
 export default function ListNav() {
     return (
-        <section className={ styles.list_nav }>
-            <Typography variant="h1" mt={10} mb={2} fontSize="2rem" fontWeight="500">골라봐, 오늘 할 게임</Typography>
-            <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">정렬</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="sortOption"
-                        defaultValue="좋아요순"
-                    >
-                        <MenuItem value={"좋아요순"}>좋아요순</MenuItem>
-                        <MenuItem value={"발매순"}>발매순</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-        </section>
+        <Box sx={{ display : 'flex', justifyContent : 'space-between', alignItems : 'center',}} mt={5} mb={5}>
+            <Typography variant="h1" fontSize="2rem" fontWeight="500">골라봐, 오늘 할 게임</Typography>
+            <FormControl sx={{ minWidth : '120px' }}>
+                <InputLabel id="demo-simple-select-label">정렬</InputLabel>
+                <Select label="sortOption" defaultValue="좋아요순">
+                    <MenuItem value={"좋아요순"}>좋아요순</MenuItem>
+                    <MenuItem value={"발매순"}>발매순</MenuItem>
+                </Select>
+            </FormControl>
+        </Box>
     )
 }
