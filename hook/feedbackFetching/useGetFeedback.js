@@ -9,18 +9,19 @@ export default function useGetFeedback() {
     const getFeedback = async (uri, data) => {
         try {
             const response = await axios.get(uri, { params : { data } })
-            console.log(response.data)
-            setLike(response.data.likeCount)
-            setDislike(response.data.dislikeCount)
+            return response.data
         }   
         catch (err) {
             console.log(err)
         }
     }
 
-    const getContentFeedback = (contentId) => {
+    const getContentFeedback = async (contentId) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
-        getFeedback(uri, contentId)
+        const data = await getFeedback(uri, contentId)
+
+        setLike(data.likeCount)
+        setDislike(data.dislikeCount)
     }
 
     return { like, dislike, getContentFeedback }

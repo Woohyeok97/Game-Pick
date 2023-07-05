@@ -14,7 +14,7 @@ export default function useUploadFeedback() {
         }
     }
 
-    const uploadContentFeedback = (feedback, parent) => {
+    const uploadContentFeedback = async (feedback, parent) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
         const data = { feedback, parent }
         uploadFeedback(uri, data)

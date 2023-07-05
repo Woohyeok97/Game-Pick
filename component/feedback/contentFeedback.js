@@ -14,20 +14,25 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 export default function ContentFeedback({ content }) {
-    const [ updateSwitch, setUpdateSwitch ] = useState(false)
+    const [ refreshFeedback, setRefreshFeedback ] = useState(false)
 
     const { like, dislike, getContentFeedback } = useGetFeedback()
     const { uploadContentFeedback } = useUploadFeedback()
 
-
     useEffect(()=>{
         getContentFeedback(content._id)
-    }, [updateSwitch])
+        setRefreshFeedback (false)
+    }, [refreshFeedback])
+
+    const handleSubmit = async () => {
+        await uploadContentFeedback('like', content._id);
+        setRefreshFeedback (true)
+    }
 
     return (
         <Box mt={4}>
             <Button 
-                onClick={()=>{ uploadContentFeedback('like', content._id) }}
+                onClick={()=>{ handleSubmit() }}
                 variant="outlined" 
                 startIcon={ <ThumbUpIcon/> } 
                 color="success" sx={{ mr : '16px' }} 
@@ -38,7 +43,7 @@ export default function ContentFeedback({ content }) {
             </Button>
 
             <Button 
-                onClick={()=>{ uploadContentFeedback('dislike', content._id) }}
+                onClick={()=>{ uploadContentFeedback('dislike', content._id); setUpdateSwitch(true) }}
                 value="dislike" 
                 variant="outlined"
                 startIcon={ <ThumbDownIcon/> } 
