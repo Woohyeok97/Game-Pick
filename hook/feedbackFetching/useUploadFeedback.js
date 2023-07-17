@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 // 커스텀훅 역할 : 유저가 입력한 피드백을 서버에 전송
 export default function useUploadFeedback() {
 
@@ -14,11 +13,12 @@ export default function useUploadFeedback() {
         }
     }
 
+    // 컨텐츠 피드백 업로드
     const uploadContentFeedback = async (feedback, parent) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
         const data = { feedback, parent }
-        uploadFeedback(uri, data)
-    }
+        await uploadFeedback(uri, data)
+    } 
 
 
     return { uploadContentFeedback }
