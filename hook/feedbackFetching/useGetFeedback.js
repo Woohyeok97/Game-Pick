@@ -5,6 +5,7 @@ import { useState } from "react"
 export default function useGetFeedback() {
     const [ like, setLike ] = useState(0)
     const [ dislike, setDislike ] = useState(0)
+    const [ userFeedback, setUserFeedback ] = useState({ isFeedback : false, type : '' })
     
     const getFeedback = async (uri, data) => {
         try {
@@ -19,10 +20,11 @@ export default function useGetFeedback() {
     const getContentFeedback = async (contentId) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
         const data = await getFeedback(uri, contentId)
-
+        
         setLike(data.likeCount)
         setDislike(data.dislikeCount)
+        setUserFeedback({ isFeedback : data.isFeedback, type : data.feedbackType })
     }
 
-    return { like, dislike, getContentFeedback }
+    return { like, dislike, userFeedback, getContentFeedback }
 }
