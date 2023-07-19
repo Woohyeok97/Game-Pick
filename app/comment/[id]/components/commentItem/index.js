@@ -12,6 +12,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // 컴포넌트
 import CommentMenu from './commentMenu';
+import FeedbackIcon from '@/component/feedback/feedbackIcon';
 
 
 
@@ -33,14 +34,7 @@ export default function CommentItem({ comment, setUpdateSwitch }) {
 
                 {/* 좋아요 & 싫어요 버튼 */}
                 <div className={ styles.btn_box }>
-                    <IconButton aria-label="like" size="small">
-                        <ThumbUpIcon fontSize="inherit"/>
-                        <p>{ comment.like }</p>
-                    </IconButton>
-                    <IconButton aria-label="unlike" size="small">
-                        <ThumbDownIcon fontSize="inherit"/>
-                        <p>{ comment.unlike }</p>
-                    </IconButton>
+                    <FeedbackIcon comment={ comment } session={ session }/>
                 </div>
 
             </div>

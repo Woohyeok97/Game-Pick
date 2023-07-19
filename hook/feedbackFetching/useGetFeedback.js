@@ -10,7 +10,10 @@ export default function useGetFeedback() {
     const getFeedback = async (uri, data) => {
         try {
             const response = await axios.get(uri, { params : { data } })
-            return response.data
+            
+            setLike(response.data.likeCount)
+            setDislike(response.data.dislikeCount)
+            setUserFeedback({ isFeedback : response.data.isFeedback, type : response.data.feedbackType })
         }   
         catch (err) {
             console.log(err)
@@ -20,12 +23,14 @@ export default function useGetFeedback() {
     // 컨텐츠 피드백 가져오기
     const getContentFeedback = async (contentId) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_FEEDBACK_API
-        const data = await getFeedback(uri, contentId)
-        
-        setLike(data.likeCount)
-        setDislike(data.dislikeCount)
-        setUserFeedback({ isFeedback : data.isFeedback, type : data.feedbackType })
+        await getFeedback(uri, contentId)
     }
 
-    return { like, dislike, userFeedback, getContentFeedback }
+    // 코멘트 피드백 가져오기
+    const getCommentFeedback = async (commentId) => {
+        const uri = process.env.NEXT_PUBLIC_COMMENT_FEEDBACK_API
+        await getFeedback(uri, commentId)
+    }
+
+    return { like, dislike, userFeedback, getContentFeedback, getCommentFeedback }
 }

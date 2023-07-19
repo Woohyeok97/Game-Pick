@@ -20,6 +20,13 @@ export default function useUploadFeedback() {
         await uploadFeedback(uri, data)
     } 
 
+    // 코멘트 피드백 업로드
+    const uploadCommentFeedback = async (feedback, parent) => {
+        const uri = process.env.NEXT_PUBLIC_COMMENT_FEEDBACK_API
+        const data = { feedback, parent }
+        await uploadFeedback(uri, data)
+    }
 
-    return { uploadContentFeedback }
+
+    return { uploadContentFeedback, uploadCommentFeedback }
 }

@@ -38,7 +38,7 @@ export default function ContentFeedback({ content, session }) {
         <Box mt={4}>
             <Button 
                 onClick={()=>{ handleSubmit('like') }}
-                variant={ userFeedback.isFeedback && userFeedback.type == "like" ? "contained" : "outlined" }
+                variant={ userFeedback.type == "like" ? "contained" : "outlined" }
                 startIcon={ <ThumbUpIcon/> } 
                 color="success" sx={{ mr : '16px' }} 
                 size="large">
@@ -49,7 +49,7 @@ export default function ContentFeedback({ content, session }) {
 
             <Button 
                 onClick={()=>{ handleSubmit('dislike') }}
-                variant={ userFeedback.isFeedback && userFeedback.type == "dislike" ? "contained" : "outlined" }
+                variant={ userFeedback.type == "dislike" ? "contained" : "outlined" }
                 startIcon={ <ThumbDownIcon/> } 
                 size="large">
 
