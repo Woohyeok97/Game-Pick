@@ -29,14 +29,14 @@ export default function useUploadData() {
         const uri = process.env.NEXT_PUBLIC_CONTENT_API
         const errorMessage = '컨텐츠의 내용을 확인해주세요'
 
-        uploadData(uri, content, errorMessage)
+        await uploadData(uri, content, errorMessage)
     }
     // 코멘트 업로드
     const uploadComment =  async (comment, _id) => {
         const uri = process.env.NEXT_PUBLIC_COMMENT_API
         const errorMessage = '코멘트의 내용을 확인해주세요'
         
-        uploadData(uri, { ...comment, parent : _id }, errorMessage)
+        await uploadData(uri, { ...comment, parent : _id }, errorMessage)
     }
     
     return { uploadContent, uploadComment }

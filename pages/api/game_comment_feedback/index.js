@@ -9,24 +9,18 @@ export default async function handler(req, res) {
     if(req.method == "GET") {
         try {
             const db = (await connectDB).db('project')
-            // DB 콜렉션을 탐색하여 각각의 좋아요/싫어요 갯수를 찾아냄
-            const likeCount = await db.collection('game_comment_feedback').countDocuments({ parent : req.query.data, feedback : 'like' })
-            const dislikeCount = await db.collection('game_comment_feedback').countDocuments({ parent: req.query.data, feedback: 'dislike' })
-    
             // 기존에 유저가 피드백 했는지 확인
-            let isFeedback = false
-            let feedbackType = ''
+            let feedbackType = null
             // 로그인된 경우에만 확인함
             if(session) {
                 const userFeedback = await db.collection('game_comment_feedback').findOne({ parent : req.query.data, userEmail : session.user.email })
                 // 기존에 피드백을 이미 한 유저일때, isFeedback과 feedbackType을 수정
                 if(userFeedback) {
-                    isFeedback = true
                     feedbackType = userFeedback.feedback
                 }
             }
             // 피드백 갯수 & 피드백 유무를 클라이언트한테 전달
-            return res.status(200).json({ message : '피드백 조회완료', likeCount, dislikeCount, isFeedback : isFeedback, feedbackType : feedbackType})
+            return res.status(200).json({ message : '피드백 조회완료', feedbackType : feedbackType})
 
         } catch(err) {
             console.log(err)

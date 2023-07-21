@@ -23,12 +23,12 @@ export default function useDeleteData() {
     // 컨텐츠 삭제
     const deleteContent = async (id) => {
         const uri = process.env.NEXT_PUBLIC_CONTENT_API + `/${id}`
-        deleteData(uri)
+        await deleteData(uri)
     }
     // 코멘트 삭제
     const deleteComment = async (id, userEmail) => {
         const uri = process.env.NEXT_PUBLIC_COMMENT_API + `/${id}`
-        deleteData(uri, { params : { userEmail : userEmail } })
+        await deleteData(uri, { params : { userEmail : userEmail } })
     }
 
     return { deleteContent, deleteComment }

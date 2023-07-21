@@ -8,15 +8,13 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // 컴포넌트
 import CommentMenu from './commentMenu';
 import FeedbackIcon from '@/component/feedback/feedbackIcon';
 
 
 
-export default function CommentItem({ comment, setUpdateSwitch }) {
+export default function CommentItem({ comment, setRefreshFeedback }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
     const session = useSession()
 
@@ -34,16 +32,16 @@ export default function CommentItem({ comment, setUpdateSwitch }) {
 
                 {/* 좋아요 & 싫어요 버튼 */}
                 <div className={ styles.btn_box }>
-                    <FeedbackIcon comment={ comment } session={ session }/>
+                    <FeedbackIcon comment={ comment } session={ session } setRefreshFeedback={ setRefreshFeedback }/>
                 </div>
 
             </div>
 
-            {/* 코멘트 버튼 */}
+            {/* 메뉴버튼 */}
             {/* 본인이 작성한 코멘트, 혹은 세션데이터의 role이 'damin'일 경우, 메뉴 아이콘을 보여줌 */}
             { session.data.user.email == comment.userEmail || session.data.user.role == 'admin'
             ? <div className={ styles.menu }>
-                { menuSwitch ? <CommentMenu comment={ comment } setUpdateSwitch={ setUpdateSwitch }/> : null } {/* 코멘트 메뉴 */}
+                { menuSwitch ? <CommentMenu comment={ comment } setRefreshFeedback={ setRefreshFeedback }/> : null } {/* 코멘트 메뉴 */}
                 <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
                     <MoreHorizIcon/> 
                 </IconButton>

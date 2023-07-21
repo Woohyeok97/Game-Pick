@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 // 커스텀훅
-import useGetFeedback from "@/hook/feedbackFetching/useGetFeedback";
+import useGetFeedbackType from "@/hook/feedbackFetching/useGetFeedbackType";
 import useUploadFeedback from "@/hook/feedbackFetching/useUploadFeedback";
 // MUI
 import Box from "@mui/material/Box"
@@ -14,31 +14,30 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 export default function ContentFeedback({ content, session }) {
-    const [ refreshFeedback, setRefreshFeedback ] = useState(false)
-
-    const { like, dislike, userFeedback, getContentFeedback } = useGetFeedback()
+    const [refreshFeedback, setRefreshFeedback] = useState(false)
+    const { feedbackType, getContentFeedbackType } = useGetFeedbackType()
     const { uploadContentFeedback } = useUploadFeedback()
 
     useEffect(()=>{
-        getContentFeedback(content._id)
+        getContentFeedbackType(content._id)
         setRefreshFeedback (false)
     }, [refreshFeedback])
 
-    const handleSubmit = async (action) => {
+    // 피드백 버튼 핸들러
+    const handleFeedbackSubmit = async (action) => {
         if(session) {
             await uploadContentFeedback(action, content._id);
             setRefreshFeedback (true)
         } else {
             console.log('로그인후, 이용해주세요!')
         }
-
     }
 
     return (
         <Box mt={4}>
             <Button 
-                onClick={()=>{ handleSubmit('like') }}
-                variant={ userFeedback.type == "like" ? "contained" : "outlined" }
+                onClick={()=>{ handleFeedbackSubmit('like') }}
+                variant={ feedbackType == "like" ? "contained" : "outlined" }
                 startIcon={ <ThumbUpIcon/> } 
                 color="success" sx={{ mr : '16px' }} 
                 size="large">
@@ -48,8 +47,8 @@ export default function ContentFeedback({ content, session }) {
             </Button>
 
             <Button 
-                onClick={()=>{ handleSubmit('dislike') }}
-                variant={ userFeedback.type == "dislike" ? "contained" : "outlined" }
+                onClick={()=>{ handleFeedbackSubmit('dislike') }}
+                variant={ feedbackType == "dislike" ? "contained" : "outlined" }
                 startIcon={ <ThumbDownIcon/> } 
                 size="large">
 
