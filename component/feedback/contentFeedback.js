@@ -13,10 +13,10 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 
-export default function ContentFeedback({ content, session }) {
-    const [ refreshFeedback, setRefreshFeedback ] = useState(false)
 
-    const { like, dislike, userFeedback, getContentFeedback } = useGetFeedback()
+export default function ContentFeedback({ content, session }) {
+
+    const { like, dislike, userFeedback, getContentFeedback, refreshFeedback, setRefreshFeedback } = useGetFeedback()
     const { uploadContentFeedback } = useUploadFeedback()
 
     useEffect(()=>{
@@ -24,21 +24,21 @@ export default function ContentFeedback({ content, session }) {
         setRefreshFeedback (false)
     }, [refreshFeedback])
 
-    const handleSubmit = async (action) => {
+    // 피드백 버튼 핸들러
+    const handleFeedbackSubmit = async (action) => {
         if(session) {
             await uploadContentFeedback(action, content._id);
             setRefreshFeedback (true)
         } else {
             console.log('로그인후, 이용해주세요!')
         }
-
     }
 
     return (
         <Box mt={4}>
             <Button 
-                onClick={()=>{ handleSubmit('like') }}
-                variant={ userFeedback.type == "like" ? "contained" : "outlined" }
+                onClick={()=>{ handleFeedbackSubmit('like') }}
+                variant={ userFeedback == "like" ? "contained" : "outlined" }
                 startIcon={ <ThumbUpIcon/> } 
                 color="success" sx={{ mr : '16px' }} 
                 size="large">
@@ -48,8 +48,8 @@ export default function ContentFeedback({ content, session }) {
             </Button>
 
             <Button 
-                onClick={()=>{ handleSubmit('dislike') }}
-                variant={ userFeedback.type == "dislike" ? "contained" : "outlined" }
+                onClick={()=>{ handleFeedbackSubmit('dislike') }}
+                variant={ userFeedback == "dislike" ? "contained" : "outlined" }
                 startIcon={ <ThumbDownIcon/> } 
                 size="large">
 

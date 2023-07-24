@@ -9,10 +9,7 @@ export default async function handler(req, res) {
         try {
             const db = (await connectDB).db('project')
             const result = await db.collection('game_content').findOne({ _id : new ObjectId(req.query) })
-            // 요청데이터 유효성 검사
-            if(!result) {
-                return res.status(400).json({ message : '요청하신 데이터가 존재하지 않습니다.' })
-            }
+
             return res.status(200).json({ result : result, message : '데이터 요청성공' })
         } catch(err) {
             console.log(err)

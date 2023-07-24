@@ -7,14 +7,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 
-export default function CommentMenu({ comment, setUpdateSwitch }) {
+export default function CommentMenu({ comment, setRefreshFeedback }) {
     
     const { deleteComment } = useDeleteData()
 
-    const handleSubmit = async () => {
+    const handleDeleteSubmit = async () => {
         await deleteComment(comment._id, comment.userEmail)
         // 코멘트 삭제후, 변경된 코멘트를 다시요청
-        setUpdateSwitch(true)
+        setRefreshFeedback(true)
     }
 
     return (
@@ -22,7 +22,7 @@ export default function CommentMenu({ comment, setUpdateSwitch }) {
             {/* 코멘트 삭제 */}
             <ListItem button sx={{ padding : '6px' }}>
                 <ListItemText 
-                    onClick={()=>{ handleSubmit() }}
+                    onClick={()=>{ handleDeleteSubmit() }}
                     primary="삭제" 
                     sx={{ display : 'flex', justifyContent : 'center' }}/>
             </ListItem>

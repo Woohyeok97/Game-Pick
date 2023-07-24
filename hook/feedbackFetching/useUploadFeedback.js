@@ -25,7 +25,7 @@ export default function useUploadFeedback() {
         const uri = process.env.NEXT_PUBLIC_COMMENT_FEEDBACK_API
         const data = { feedback, parent }
         await uploadFeedback(uri, data)
-    }
+    } 
 
 
     return { uploadContentFeedback, uploadCommentFeedback }
