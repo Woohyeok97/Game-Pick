@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             const db = (await connectDB).db('project')
             const comment = await db.collection('game_comment').find({ parent : req.query._id }).toArray()
 
-            // 피드백 갯수 가져오기
+            // 피드백 갯수 & 피드백 여부 가져오기
             // map함수는 콜백함수의 프로미스가 완료되기를 기다리지않고 바로 반환하기 때문에, Promise.all()을 사용해서 각 요소의 프로미스가 완료되기를 기다림
             // Promise.all()앞에 await을 붙이는 이유는, Promise.all()의 반환값의 프로미스완료를 기다리기 위함
             const result = await Promise.all(comment.map( async (item, i) => {
@@ -29,7 +29,6 @@ export default async function handler(req, res) {
                 // 가져온 피드백 갯수를 comment 요소에 추가
                 return { ...item, like : likeFeedbackCount, dislike : dislikeFeedbackCount, feedbackType : feedbackType }
             }))
-
 
             return res.status(200).json({ result : result, message : '코멘트 요청성공' })
             

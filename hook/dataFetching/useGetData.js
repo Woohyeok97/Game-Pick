@@ -7,7 +7,6 @@ export default function useGetData() {
 
     // 응답받은 데이터로 setComment 함수실행
     const getData = async (uri, data) => {
-
         try {
             const response = await axios.get(uri, data)
             setComment(response.data.result)
@@ -15,6 +14,7 @@ export default function useGetData() {
             console.log(err)
         }
     }
+    
     // 코멘트 가져오기
     const getComment = async (_id) => {
         const uri = process.env.NEXT_PUBLIC_COMMENT_API
