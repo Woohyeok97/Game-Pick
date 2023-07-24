@@ -42,7 +42,7 @@ export default function ContentFeedback({ content, session }) {
                 color="success" sx={{ mr : '16px' }} 
                 size="large">
 
-                <Typography fontWeight="600">{ like }</Typography>
+                <Typography fontWeight="600"></Typography>
                 <Typography fontWeight="600">좋아요!</Typography>
             </Button>
 
@@ -52,7 +52,7 @@ export default function ContentFeedback({ content, session }) {
                 startIcon={ <ThumbDownIcon/> } 
                 size="large">
 
-                <Typography fontWeight="600">{ dislike }</Typography>   
+                <Typography fontWeight="600"></Typography>   
                 <Typography fontWeight="600">별로에요..</Typography> 
             </Button>
         </Box>
