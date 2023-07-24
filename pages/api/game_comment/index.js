@@ -20,7 +20,6 @@ export default async function handler(req, res) {
             const result = await Promise.all(comment.map( async (item, i) => {
                 const likeFeedbackCount = await db.collection('game_comment_feedback').countDocuments({ parent : item._id.toString(), feedback : 'like' })
                 const dislikeFeedbackCount = await db.collection('game_comment_feedback').countDocuments({ parent : item._id.toString(), feedback : 'dislike' })
-<<<<<<< HEAD
                 
                 let feedbackType = ''
                 if(session) {
@@ -29,11 +28,6 @@ export default async function handler(req, res) {
                 }
                 // 가져온 피드백 갯수를 comment 요소에 추가
                 return { ...item, like : likeFeedbackCount, dislike : dislikeFeedbackCount, feedbackType : feedbackType }
-=======
-               
-                // 가져온 피드백 갯수를 comment 요소에 추가
-                return { ...item, like : likeFeedbackCount, dislike : dislikeFeedbackCount}
->>>>>>> c6ae09a2ab397e1034f3cb830ed0b938a1449c53
             }))
 
 
