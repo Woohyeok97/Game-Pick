@@ -30,6 +30,8 @@ export default async function handler(req, res) {
                 return { ...item, like : likeFeedbackCount, dislike : dislikeFeedbackCount, feedbackType : feedbackType }
             }))
 
+            result.sort((a, b)=> b.like - a.like )
+
             return res.status(200).json({ result : result, message : '코멘트 요청성공' })
             
         } catch(err) {

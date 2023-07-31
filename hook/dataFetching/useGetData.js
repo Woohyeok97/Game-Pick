@@ -21,5 +21,5 @@ export default function useGetData() {
         await getData(uri, { params : { _id }})
     }
 
-    return { comment, getComment, refreshFeedback, setRefreshFeedback }
+    return { comment, setComment, getComment, refreshFeedback, setRefreshFeedback }
 }

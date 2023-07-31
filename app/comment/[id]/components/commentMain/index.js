@@ -11,8 +11,9 @@ import CommentNav from './commentNav';
 
 
 export default function CommentMain({ content }) {
-    const { comment, getComment, refreshFeedback, setRefreshFeedback } = useGetData()
-    
+    const { comment, setComment, getComment, refreshFeedback, setRefreshFeedback } = useGetData()
+
+    // getComment()로 서버로 부터 코멘트를 가져옴
     useEffect(()=>{
         getComment(content._id)
         setRefreshFeedback(false)
@@ -21,9 +22,8 @@ export default function CommentMain({ content }) {
     
     if(comment) return (
         <div>
-
             {/* 코멘트 nav */}
-            <CommentNav content={ content } />
+            <CommentNav content={ content } setComment={ setComment }/>
 
             {/* 코멘트 아이템 */}
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -32,6 +32,7 @@ export default function CommentMain({ content }) {
                 ? <div>아직 댓글이 없어요..</div>
                 : comment.map((item, i)=> <CommentItem key={i} comment={ item } setRefreshFeedback={ setRefreshFeedback }/> ) }
              </List>
+
              <CommentWrite contentId={ content._id } setRefreshFeedback={ setRefreshFeedback }/>
         </div>
     )
