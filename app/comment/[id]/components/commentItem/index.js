@@ -31,7 +31,7 @@ export default function CommentItem({ comment, setRefreshFeedback }) {
 
                 {/* 좋아요 & 싫어요 버튼 */}
                 <div className={ styles.btn_box }>
-                    <FeedbackIcon comment={ comment } session={ session } setRefreshFeedback={ setRefreshFeedback }/>
+                    <FeedbackIcon data={ comment } session={ session } setRefreshFeedback={ setRefreshFeedback } interaction={true}/>
                 </div>
             </div>
 
