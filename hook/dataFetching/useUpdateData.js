@@ -14,7 +14,6 @@ export default function useUpDateData() {
         }
         try {
             const response = await axios.put(uri, data)
-            alert(response.data.message)
             console.log(response)
         }
         catch(err) {

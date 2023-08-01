@@ -5,12 +5,16 @@ import styles from '../../styles/contentModify.module.scss'
 import useSetData from '@/hook/setData/useSetData'
 import useUpDateData from '@/hook/dataFetching/useUpdateData'
 import useDeleteData from '@/hook/dataFetching/useDeleteData'
+import useSnackbar from '@/hook/UI/useSnackbar'
+// 컴포넌트
+import AlertSnackbar from '@/component/alertSnackbar/alertSnackbar'
 
 
 export default function ContentModify(props) {
     const { content, handleInputChange, setPrevContent } = useSetData()
     const { updateContent } = useUpDateData()
     const { deleteContent } = useDeleteData()
+    const { open, snackbarKey, handleSnackbarOpne, handleSnackbarClose } = useSnackbar()
     // 현재 컴포넌트에서만 setPrevContent()를 실행하기 때문에 커스텀훅 내부가 아닌, 컴포넌트에서 useEffect()실행
     // 기존 컨텐츠를 DB에서 가져와, input들의 defaultValue로 설정함
     useEffect(()=>{
@@ -40,9 +44,14 @@ export default function ContentModify(props) {
                 </div>
             </div>
             <div className={ styles.btn_box }>
-                <button onClick={()=>{ updateContent(content, props.params.id) }}>컨텐츠 수정</button>
-                <button onClick={()=>{ deleteContent(props.params.id) }}>컨텐츠 삭제</button>
+                <button onClick={()=>{ updateContent(content, props.params.id); handleSnackbarOpne() }}>컨텐츠 수정</button>
+                <button onClick={()=>{ deleteContent(props.params.id); handleSnackbarOpne() }}>컨텐츠 삭제</button>
             </div>
+
+            <AlertSnackbar open={open} snackbarKey={snackbarKey} handleSnackbarClose={handleSnackbarClose}>
+                컨텐츠 반영완료!
+            </AlertSnackbar>
+
         </section>
     )
 }

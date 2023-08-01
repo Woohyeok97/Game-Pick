@@ -16,7 +16,6 @@ export default function useUploadData() {
 
         try {
             const response = await axios.post(uri, data)
-            alert(response.data.message)
             console.log(response)
         } 
         catch(err) {

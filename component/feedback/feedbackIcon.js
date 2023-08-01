@@ -1,6 +1,7 @@
 'use client'
 // 커스텀 훅
 import useUploadFeedback from "@/hook/feedbackFetching/useUploadFeedback";
+import useSnackbar from "@/hook/UI/useSnackbar";
 // MUI
 import Box from "@mui/material/Box"
 import IconButton from '@mui/material/IconButton';
@@ -8,10 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Typography from "@mui/material/Typography";
+// 컴포넌트
+import AlertSnackbar from "../alertSnackbar/alertSnackbar";
 
 
 export default function FeedbackIcon({ data, session, setRefreshFeedback, interaction }) {
     const { uploadCommentFeedback } = useUploadFeedback()
+    const { open, snackbarKey, handleSnackbarOpne, handleSnackbarClose } = useSnackbar()
     
     const handleFeedbackSubmit = async (action)=> {
         if(!interaction) return
@@ -19,6 +23,7 @@ export default function FeedbackIcon({ data, session, setRefreshFeedback, intera
 
         await uploadCommentFeedback(action, data._id)
         setRefreshFeedback(true)
+        handleSnackbarOpne()
     }
 
 
@@ -35,6 +40,10 @@ export default function FeedbackIcon({ data, session, setRefreshFeedback, intera
                 <ThumbDownIcon fontSize="inherit" sx={{ mr : '4px' }}/>
                 <Typography>{ data.dislike }</Typography>
             </IconButton>
+
+            <AlertSnackbar open={open} snackbarKey={snackbarKey} handleSnackbarClose={handleSnackbarClose}>
+                피드백 완료!
+            </AlertSnackbar>
         </Box>
     )
 }
