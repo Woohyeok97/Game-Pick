@@ -12,7 +12,6 @@ export default async function handler(req, res) {
     // 코멘트 가져오기
     if(req.method == 'GET') {
         try {
-            
             // DB탐색 필터
             const filter = { parent : req.query.contentId }
             // 만약 클라이언트에 임시 코멘트가 존재한다면 필터에 해당 id를 추가함
@@ -37,7 +36,7 @@ export default async function handler(req, res) {
             .toArray()
 
 
-            return res.status(200).json({ result : result })
+            return res.status(200).json({ result : result, next : next})
         } catch(err) {
             console.error(err)
             return res.status(500).json({ message : '서버 에러발생' })

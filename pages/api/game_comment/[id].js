@@ -5,6 +5,7 @@ import { authOptions } from "../auth/[...nextauth]"
 
 export default async function handler(req, res) {
     const session = await getServerSession(req, res, authOptions)
+    const db = (await connectDB).db('project')
     
     // 코멘트 DELETE 요청
     if(req.method == 'DELETE') {
@@ -13,7 +14,6 @@ export default async function handler(req, res) {
         if(!(session.user.email == req.query.userEmail)) return res.status(400).json({ message : '본인이 작성한 코멘트만 삭제할수 있습니다.' })
 
         try { 
-            const db = (await connectDB).db('project')
             const result = await db.collection('game_comment').deleteOne({ _id : new ObjectId(req.query.id) })
             return res.status(200).json({ result : result, message : '코멘트 삭제완료' })
 

@@ -13,7 +13,7 @@ import FeedbackIcon from '@/component/feedback/feedbackIcon';
 
 
 
-export default function CommentItem({ comment, session }) {
+export default function CommentItem({ comment, session, setComment, setTempCommentId }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
     return (
@@ -36,13 +36,12 @@ export default function CommentItem({ comment, session }) {
             {/* 메뉴버튼 */}
             {/* 본인이 작성한 코멘트, 혹은 세션데이터의 role이 'admin'일 경우, 메뉴 아이콘을 보여줌 */}
             { session.data && (session.data.user.email == comment.userEmail || session.data.user.role == 'admin')
-            ? <div className={ styles.menu }>
-                { menuSwitch ? <CommentMenu comment={ comment } /> : null } {/* 코멘트 메뉴 */}
+            && <div className={ styles.menu }>
+                { menuSwitch && <CommentMenu comment={ comment } setComment={ setComment } setTempCommentId={ setTempCommentId }/> } {/* 코멘트 메뉴 */}
                 <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
                     <MoreHorizIcon/> 
                 </IconButton>
-            </div>
-            : null }
+            </div> }
         </ListItem>
         )
 }

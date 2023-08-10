@@ -9,40 +9,37 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 // 컴포넌트
 
 
-
-export default function CommentWrite({ contentId, setComment, setTempCommentId  }) {
+export default function CommentWrite({ comment, setComment, setTempCommentId }) {
     const { commentText, setCommentText, handleCommentChange, createComment } = useCreateComment()
     const session = useSession()
+
     
  
-    const handleCommentSubmit = async () => {
+    const handleCreateSubmit = async () => {
 
         if(!commentText) {
             console.log('코멘트 내용을 확인해 주세요!')
             return
         }
+        if(!session) {
+            console.log('로그인후, 이용해주세요!')
+            return
+        }
+
+        const tempCommentId = await createComment(contentId)
         
-        
-        const data = {
-            _id : 'tempId',
+        const tempComment = {
+            _id : tempCommentId,
             userName : session.data.user.name,
             userImage : session.data.user.image,
+            userEmail : session.data.user.email,
             text : commentText,
             like : 0,
             dislike : 0,
             createComment : new Date(),
         }
-        setComment((prev) => [ data, ...prev])
-
-        const id = await createComment(contentId)
-
-        setComment((prev) => prev.map((item) => {
-            if(item._id == 'tempId') {
-                return { ...item, _id : id , isTemp : true } 
-            }
-            return item
-        }))
-        setTempCommentId ((prev) => [...prev, id])
+        setComment((prev) => [ tempComment, ...prev])
+        setTempCommentId ((prev) => [...prev, tempCommentId])
         setCommentText('')
     }
 
@@ -57,7 +54,7 @@ export default function CommentWrite({ contentId, setComment, setTempCommentId  
             <TextField name="comment" multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4}
              onChange={(e)=>{ handleCommentChange(e) }} value={ commentText }/>
             <Box>
-               <Button onClick={ handleCommentSubmit } variant="contained" endIcon={<EmojiEmotionsIcon />} size="large">COMMENT!</Button>
+               <Button onClick={ handleCreateSubmit } variant="contained" endIcon={<EmojiEmotionsIcon />} size="large">COMMENT!</Button>
             </Box>
        </Box>
     )

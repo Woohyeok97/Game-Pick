@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 export default function useFetchComment() {
     const [ comment, setComment ] = useState([])
     const [ tempCommentId, setTempCommentId ] = useState([])
+    const [ nextComment, setNextComment ] = useState(true)
     
     // 코멘트 가져오기
     const fetchComment = async (contentId) => {
@@ -13,10 +14,11 @@ export default function useFetchComment() {
         try {
             const response = await axios.get(uri, { params : submitData })
             setComment((prev) => [ ...prev, ...response.data.result ])
+            if(!response.data.next.length) setNextComment(false)
         } catch(err) {
             console.log(err)
         }
     }
 
-    return { comment, setComment, fetchComment, tempCommentId, setTempCommentId  }
+    return { comment, setComment, fetchComment, tempCommentId, setTempCommentId, nextComment  }
 }

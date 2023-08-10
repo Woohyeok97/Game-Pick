@@ -9,7 +9,11 @@ import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
 
-export default function CommentNav({ contentTitle }) {
+export default function CommentNav({ contentTitle, setComment }) {
+
+    const handleSortComment = () => {
+        
+    }
 
     return (
         <Box sx={{ display : 'flex', justifyContent : 'space-between', alignItems : 'center', borderBottom : '1px solid #000000', mt : '32px', pb : "16px" }}>

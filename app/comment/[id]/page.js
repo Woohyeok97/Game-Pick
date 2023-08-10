@@ -14,13 +14,12 @@ import Button from '@mui/material/Button'
 
 
 export default function Comment({ params, searchParams }) {
-    const [ overComment, setOverComment ] = useState(true)
-    const { comment, setComment, fetchComment, setTempCommentId } = useFetchComment()
+    const { comment, setComment, fetchComment, setTempCommentId, nextComment } = useFetchComment()
     const session = useSession()
 
     const contentId = params.id
     const contentTitle = searchParams.title
-    console.log(comment)
+    
     useEffect(()=>{
         fetchComment(contentId)
         console.log('useEffect 실행됨!')     
@@ -28,10 +27,11 @@ export default function Comment({ params, searchParams }) {
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
-            <CommentNav contentTitle={ contentTitle }/>
+            <CommentNav contentTitle={ contentTitle } setComment={ setComment } /> 
             <CommentWrite contentId={ contentId } setComment={ setComment } setTempCommentId ={ setTempCommentId  }/>
-            { comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session }/> ) }
-            <Button onClick={()=>{ fetchComment(contentId) }}>더보기</Button>
+
+            { comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session } setComment={ setComment } setTempCommentId={ setTempCommentId }/> ) }
+            { nextComment && <Button onClick={()=>{ fetchComment(contentId) }}>더보기</Button> }
         </Box>
     )
 }
