@@ -1,12 +1,12 @@
-import styles from '../../styles/commentMain/commentMenu.module.scss'
+import { useContext } from 'react';
+// context
+import { CommentContext } from '../../layout';
 // 커스텀훅
 import useDeleteComment from '@/hook임시/comment/useDeleteComment';
 // MUI
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { useContext } from 'react';
-import { CommentContext } from '../../layout';
 
 
 export default function CommentMenu({ comment }) {
@@ -20,8 +20,7 @@ export default function CommentMenu({ comment }) {
     }
 
     return (
-        <List className={ styles.comment_menu } sx={{ bgcolor : 'background.paper' }}>
-            {/* 코멘트 삭제 */}
+        <List sx={{ bgcolor : '#999999', position : 'absolute', right : '0', top : '0', minWidth : '80px', mr : '50px', mt : '12px', padding : '0' }}>
             <ListItem button sx={{ padding : '6px' }}>
                 <ListItemText sx={{ display : 'flex', justifyContent : 'center' }} primary="삭제" 
                 onClick={ handleDeleteSubmit }/>

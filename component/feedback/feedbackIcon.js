@@ -1,7 +1,6 @@
 'use client'
 // 커스텀 훅
-import useUploadFeedback from "@/hook/feedbackFetching/useUploadFeedback";
-import useSnackbar from "@/hook/UI/useSnackbar";
+import useFeedback from "@/hook임시/feedback/useFeedback";
 // MUI
 import Box from "@mui/material/Box"
 import IconButton from '@mui/material/IconButton';
@@ -9,41 +8,32 @@ import IconButton from '@mui/material/IconButton';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Typography from "@mui/material/Typography";
-// 컴포넌트
-import AlertSnackbar from "../alertSnackbar/alertSnackbar";
+import { useEffect } from "react";
 
 
-export default function FeedbackIcon({ data, session, setRefreshFeedback, interaction }) {
-    const { uploadCommentFeedback } = useUploadFeedback()
-    const { open, snackbarKey, handleSnackbarOpne, handleSnackbarClose } = useSnackbar()
-    
-    const handleFeedbackSubmit = async (action)=> {
-        if(!interaction) return
-        if(!session) return console.log('로그인후 이용해주세요.')
+export default function FeedbackIcon({ data }) {
+    const { feedback, setFeedback, fetchPrevFeedback, createFeedback, deleteFeedback } = useFeedback(data)
 
-        await uploadCommentFeedback(action, data._id)
-        setRefreshFeedback(true)
-        handleSnackbarOpne()
+    useEffect(()=>{
+        fetchPrevFeedback()
+    }, [])
+
+    const handleChangeFeedback = async (e) => {
+        
     }
-
-
+    
+    
     return (
         <Box sx={{ display : 'flex' }}>
-            <IconButton size="small" onClick={() => { interaction ? handleFeedbackSubmit('like') : null }}
-                color={ data.feedbackType == "like" ? "primary" : "default" } disabled={ interaction ? false : true }>
+            <IconButton size="small" name="like" onClick={ handleChangeFeedback }>
                 <ThumbUpIcon fontSize="inherit" sx={{ mr : '4px' }}/>
-                <Typography>{ data.like }</Typography>
+                <Typography>{ feedback.like }</Typography>
             </IconButton>
             
-            <IconButton size="small" onClick={() => { interaction ? handleFeedbackSubmit('dislike') : null }} 
-            color={ data.feedbackType == "dislike" ? "primary" : "default" } disabled={ interaction ? false : true }>
+            <IconButton size="small" name="dislike" onClick={ handleChangeFeedback }>
                 <ThumbDownIcon fontSize="inherit" sx={{ mr : '4px' }}/>
-                <Typography>{ data.dislike }</Typography>
+                <Typography>{ feedback.dislike }</Typography>
             </IconButton>
-
-            <AlertSnackbar open={open} snackbarKey={snackbarKey} handleSnackbarClose={handleSnackbarClose}>
-                피드백 완료!
-            </AlertSnackbar>
         </Box>
     )
 }
