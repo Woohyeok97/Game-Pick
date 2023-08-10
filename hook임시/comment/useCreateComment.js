@@ -2,7 +2,6 @@ import axios from "axios"
 import { useState } from "react";
 
 
-
 export default function useCreateComment() {
     const [ commentText, setCommentText ] = useState('')
 

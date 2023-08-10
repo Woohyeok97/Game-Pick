@@ -1,6 +1,7 @@
 import styles from '../../styles/commentMain/commentItem.module.scss'
 import { useState } from 'react';
 // MUI
+import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -13,31 +14,24 @@ import FeedbackIcon from '@/component/feedback/feedbackIcon';
 
 
 
-export default function CommentItem({ comment, session, setComment, setTempCommentId }) {
+export default function CommentItem({ comment, session }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
     return (
-        <ListItem className={ styles.comment_item } alignItems="flex-start">
-            <div className={ styles.comment }>
-                {/* 사용자 아이콘 */}
+        <ListItem sx={{ display : 'flex', justifyContent : 'space-between' }} alignItems="flex-start">
+            <Box>
                 <ListItemAvatar>
                     <Avatar src={ comment.userImage }/>
                 </ListItemAvatar>
-
-                {/* 사용자 이름 & 코멘트 내용 */}
                 <ListItemText primary={ comment.userName } secondary={ comment.text } />
-
-                {/* 좋아요 & 싫어요 버튼 */}
-                <div className={ styles.btn_box }>
-                    <FeedbackIcon data={ comment } interaction={true}/>
-                </div>
-            </div>
+                <FeedbackIcon data={ comment } interaction={true}/>
+            </Box>
 
             {/* 메뉴버튼 */}
             {/* 본인이 작성한 코멘트, 혹은 세션데이터의 role이 'admin'일 경우, 메뉴 아이콘을 보여줌 */}
             { session.data && (session.data.user.email == comment.userEmail || session.data.user.role == 'admin')
             && <div className={ styles.menu }>
-                { menuSwitch && <CommentMenu comment={ comment } setComment={ setComment } setTempCommentId={ setTempCommentId }/> } {/* 코멘트 메뉴 */}
+                { menuSwitch && <CommentMenu comment={ comment }/> } {/* 코멘트 메뉴 */}
                 <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
                     <MoreHorizIcon/> 
                 </IconButton>

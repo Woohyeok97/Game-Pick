@@ -16,23 +16,23 @@ export default async function handler(req, res) {
             const filter = { parent : req.query.contentId }
             // 만약 클라이언트에 임시 코멘트가 존재한다면 필터에 해당 id를 추가함
             const skipComment = JSON.parse(req.query.skipComment)
+
             if(skipComment.length > 0) {
                 filter._id = { $nin : skipComment.map((item) => new ObjectId(item)) }
             }
-            const limit = 2
-            
+             
             const result = await db.collection('game_comment')
             .find(filter)
-            .sort({ like : -1 })
+            .sort(req.query.fetchOption == 'like' ? { like : -1 } : { createDate : -1 })
             .skip(+req.query.skipCount)
-            .limit(limit)
+            .limit(2)
             .toArray()
-            
+
             const next = await db.collection('game_comment')
             .find(filter)
-            .sort({ like : -1 })
-            .skip(+req.query.skipCount + limit)
-            .limit(limit)
+            .sort(req.query.fetchOption == 'like' ? { like : -1 } : { createDate : -1 })
+            .skip(+req.query.skipCount + 2)
+            .limit(2)
             .toArray()
 
 

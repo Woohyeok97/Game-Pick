@@ -1,36 +1,32 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
-// 커스텀 훅
-import useFetchComment from '@/hook임시/comment/useFetchComment'
+import { CommentContext } from './layout'
 // 컴포넌트
-import CommentNav from './components/commentMain/commentNav'
-import CommentWrite from './components/commentMain/commentWrite'
+import CommentNav from './components/commentNav'
+import CommentWrite from './components/commentWrite'
 import CommentItem from './components/commentItem'
 // MUI
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
 
-
 export default function Comment({ params, searchParams }) {
-    const { comment, setComment, fetchComment, setTempCommentId, nextComment } = useFetchComment()
+    const { comment, fetchComment, nextComment, fetchOption } = useContext(CommentContext)
     const session = useSession()
 
     const contentId = params.id
     const contentTitle = searchParams.title
-    
+
     useEffect(()=>{
         fetchComment(contentId)
-        console.log('useEffect 실행됨!')     
-    }, [])
+    }, [fetchOption])
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
-            <CommentNav contentTitle={ contentTitle } setComment={ setComment } /> 
-            <CommentWrite contentId={ contentId } setComment={ setComment } setTempCommentId ={ setTempCommentId  }/>
-
-            { comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session } setComment={ setComment } setTempCommentId={ setTempCommentId }/> ) }
+            <CommentNav contentTitle={ contentTitle } /> 
+            <CommentWrite contentId={ contentId } />
+            { comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session } />) }
             { nextComment && <Button onClick={()=>{ fetchComment(contentId) }}>더보기</Button> }
         </Box>
     )

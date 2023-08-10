@@ -6,15 +6,16 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import { useContext } from 'react';
+import { CommentContext } from '../layout';
 // 컴포넌트
 
 
-export default function CommentWrite({ comment, setComment, setTempCommentId }) {
+export default function CommentWrite({ contentId }) {
+    const { setComment, setTempCommentId } = useContext(CommentContext)
     const { commentText, setCommentText, handleCommentChange, createComment } = useCreateComment()
     const session = useSession()
-
     
- 
     const handleCreateSubmit = async () => {
 
         if(!commentText) {

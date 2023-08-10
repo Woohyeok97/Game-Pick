@@ -1,5 +1,6 @@
-// 커스텀 훅
-import useSortData from '@/hook/setData/useSortData';
+import { useContext } from 'react';
+// context
+import { CommentContext } from '../layout';
 // MUI
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,10 +10,14 @@ import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
 
-export default function CommentNav({ contentTitle, setComment }) {
 
-    const handleSortComment = () => {
-        
+export default function CommentNav({ contentTitle }) {
+    const { setFetchOption, setComment, setTempCommentId } = useContext(CommentContext)
+
+    const handleChangeSort = (e) => {
+        setTempCommentId([])
+        setComment([])
+        setFetchOption(e.target.value)
     }
 
     return (
@@ -22,9 +27,9 @@ export default function CommentNav({ contentTitle, setComment }) {
             <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
                     <InputLabel>코멘트 정렬</InputLabel>
-                    <Select label="sortOption" defaultValue="좋아요">
-                        <MenuItem value={"좋아요"}>좋아요</MenuItem>
-                        <MenuItem value={"최근 코멘트"}>최근 코멘트</MenuItem>
+                    <Select label="sortOption" defaultValue="like" onChange={ handleChangeSort }>
+                        <MenuItem value='like'>좋아요</MenuItem>
+                        <MenuItem value='createDate'>최근 코멘트</MenuItem>
                     </Select>
                 </FormControl>
             </Box>

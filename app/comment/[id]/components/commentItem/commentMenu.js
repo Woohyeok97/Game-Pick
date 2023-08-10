@@ -5,9 +5,12 @@ import useDeleteComment from '@/hook임시/comment/useDeleteComment';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { useContext } from 'react';
+import { CommentContext } from '../../layout';
 
 
-export default function CommentMenu({ comment, setComment, setTempCommentId }) {
+export default function CommentMenu({ comment }) {
+    const { setComment, setTempCommentId } = useContext(CommentContext)
     const { deleteComment } = useDeleteComment()
 
     const handleDeleteSubmit = async () => {
