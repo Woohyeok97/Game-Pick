@@ -22,7 +22,7 @@ export default function CommentWrite({ contentId }) {
             console.log('코멘트 내용을 확인해 주세요!')
             return
         }
-        if(!session) {
+        if(!session.data) {
             console.log('로그인후, 이용해주세요!')
             return
         }

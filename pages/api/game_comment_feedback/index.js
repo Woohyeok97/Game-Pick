@@ -1,4 +1,5 @@
 import { connectDB } from "@/util/database"
+import { ObjectId } from "mongodb"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]"
 
@@ -20,6 +21,7 @@ export default async function handler(req, res) {
     // 피드백 업로드
     if(req.method == "POST") {
         if(!session) return res.status(400).json({ message : '로그인 이후 이용해 주세요.' })
+
         try {
             const insertData = {
                 parent : req.body.parent,
@@ -27,8 +29,14 @@ export default async function handler(req, res) {
                 type : req.body.type
             }
 
-            const result = await db.collection('game_comment_feedback').insertOne(insertData)
-            return res.status(200).json({ resut : result })
+            const feedbackResult = await db.collection('game_comment_feedback').insertOne(insertData)
+            const parentResult = await db.collection(req.body.collection).updateOne({ _id : new ObjectId(req.body.parent) }, { $inc : { [req.body.type]: 1 }  })
+
+            if(parentResult.modifiedCount == 0) {
+                await db.collection('game_comment_feedback').deleteOne({ _id: feedbackResult.insertedId });
+                throw new Error('피드백 개수 업데이트 실패');
+            }
+            return res.status(200).json({ message : '피드백 생성완료' })
         } catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })
@@ -48,7 +56,6 @@ export default async function handler(req, res) {
     //             parent : req.body.parent,
     //             feedback : req.body.feedback,
     //         }
-
     //         if(userFeedback) {
     //             // 기존에 피드백 했다면 기존 피드백을 콜렉션에서 삭제
     //             const deleteFeedback = await db.collection('game_comment_feedback').deleteOne({ parent : req.body.parent, userEmail : session.user.email })
@@ -71,4 +78,5 @@ export default async function handler(req, res) {
     //         return res.status(500).json({ message : '서버에러 발생' })
     //     }
     // }
+
 }
