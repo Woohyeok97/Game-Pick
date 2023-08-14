@@ -1,57 +1,52 @@
 'use client'
-import { useEffect } from 'react'
-import styles from '../../styles/contentModify.module.scss'
 // 커스텀훅
-import useSetData from '@/hook/setData/useSetData'
-import useUpDateData from '@/hook/dataFetching/useUpdateData'
-import useDeleteData from '@/hook/dataFetching/useDeleteData'
-import useSnackbar from '@/hook/UI/useSnackbar'
-// 컴포넌트
-import AlertSnackbar from '@/component/alertSnackbar/alertSnackbar'
+import useEditContent from '@/hook임시/content/useEditContent';
+import useDeleteContent from '@/hook임시/content/useDeleteContent';
+// MUI
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'
 
 
-export default function ContentModify(props) {
-    const { content, handleInputChange, setPrevContent } = useSetData()
-    const { updateContent } = useUpDateData()
-    const { deleteContent } = useDeleteData()
-    const { open, snackbarKey, handleSnackbarOpne, handleSnackbarClose } = useSnackbar()
-    // 현재 컴포넌트에서만 setPrevContent()를 실행하기 때문에 커스텀훅 내부가 아닌, 컴포넌트에서 useEffect()실행
-    // 기존 컨텐츠를 DB에서 가져와, input들의 defaultValue로 설정함
-    useEffect(()=>{
-        setPrevContent(props.params.id)
-    }, [])
+export default function ContentModify({ params }) {
+    const { prevContent, handleChangeContent, editContent } = useEditContent(params.id)
+    const { deleteContent } = useDeleteContent()
+
+    // 컨텐츠 수정 핸들러 함수
+    const handleEditSubmit = async () => {
+        await editContent()
+    }
+
+    // 컨텐츠 삭제 핸들러 함수
+    const handleDeleteSubmit = async () => {
+        if(confirm('컨텐츠를 삭제하겠습니까?')) {
+            await deleteContent(params.id)
+            alert('컨텐츠 삭제완료!')
+        }
+    }
 
     return (
-        <section className={ styles.content_modify }>
-            <h1>EDIT CONTENT</h1>
-            <div className={ styles.modify_box }>
-                <div className={ styles.modify_item }>
-                    <h3>게임타이틀</h3>
-                    <input type="text" name="title" defaultValue={ content.title } onChange={(e)=>{ handleInputChange(e) }}/>
-                </div>
-                <div className={ styles.modify_item }>
-                    <h3>정식 출시일</h3>
-                    <input type="date" name="releaseDate" defaultValue={ content.releaseDate } onChange={(e)=>{ handleInputChange(e) }}/>
-                </div>
-                <div className={ styles.modify_item }>
-                    <h3>이미지</h3>
-                    <p>이미지를 다시 선택해주세요.</p>
-                    <input type="file" name="image" defaultValue={ content.image } onChange={(e)=>{ handleInputChange(e) }}/>
-                </div>
-                <div className={ styles.modify_item }>
-                    <h3>트레일러 URL</h3>
-                    <input type="text" name="trailerUrl" defaultValue={ content.trailerUrl } onChange={(e)=>{ handleInputChange(e) }}/>
-                </div>
-            </div>
-            <div className={ styles.btn_box }>
-                <button onClick={()=>{ updateContent(content, props.params.id); handleSnackbarOpne() }}>컨텐츠 수정</button>
-                <button onClick={()=>{ deleteContent(props.params.id); handleSnackbarOpne() }}>컨텐츠 삭제</button>
-            </div>
+        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
+            <TextField label="타이틀" variant="standard" name="title" defaultValue={ prevContent.title }
+            onChange={ handleChangeContent } />
 
-            <AlertSnackbar open={open} snackbarKey={snackbarKey} handleSnackbarClose={handleSnackbarClose}>
-                컨텐츠 반영완료!
-            </AlertSnackbar>
+            <TextField label="출시일" variant="standard" type="date" name="createDate" defaultValue={ prevContent.createDate }
+            onChange={ handleChangeContent } />
 
-        </section>
+            <TextField label="이미지" variant="standard" type="file" name="image" defaultValue={ prevContent.image }
+            onChange={ handleChangeContent } />
+
+            <TextField label="트레일러 url" variant="standard" name="trailerURL" defaultValue={ prevContent.trailerURL }
+            onChange={ handleChangeContent } />
+
+
+            <Button onClick={ handleEditSubmit }>
+                컨텐츠 수정
+            </Button>
+
+            <Button onClick={ handleDeleteSubmit }>
+                컨텐츠 삭제
+            </Button>
+        </Box>
     )
 }

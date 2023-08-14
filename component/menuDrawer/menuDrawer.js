@@ -25,7 +25,7 @@ export default function MenuDrawer({ session, toggleDrawer }) {
             sx={{ display : 'flex', flexDirection : 'column', justifyContent : 'space-between', bgcolor : '#555555', height : '100%', color : '#FFFFFF', width : '20vw'}}>
             
             {/* 메뉴 리스트 */}
-            <Box sx={{  }}>
+            <Box>
                 <List sx={{ padding : '0' }}>
 
                     {/* 로그인 & 로그아웃 */}
@@ -67,12 +67,12 @@ export default function MenuDrawer({ session, toggleDrawer }) {
                 </List>
 
                 {/* admin 메뉴 */}
-                { session && session.user.role == 'admin' 
-                ? <List sx={{ padding : '0' }}>
+                { session && session.user.role == 'admin' &&
+                <List sx={{ padding : '0' }}>
                     <Typography textAlign="center" color="#2e7d32" fontWeight="400" fontSize="1.2rem" mb={2}>Admin Menu</Typography>
                     <Divider/>
                     <ListItem disablePadding>
-                        <Link href="/admin/contentUpload" className={ styles.drawer_link }>
+                        <Link href="/admin" className={ styles.drawer_link }>
                             <ListItemButton sx={{ padding : '16px' }}>
                                 <ListItemIcon>
                                     <LocalPoliceIcon color="success"/>
@@ -81,7 +81,7 @@ export default function MenuDrawer({ session, toggleDrawer }) {
                             </ListItemButton>
                         </Link>
                     </ListItem>
-                </List> : null }
+                </List> }
             </Box>
 
             {/* Github 링크 */}

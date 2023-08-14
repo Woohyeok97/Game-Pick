@@ -19,7 +19,7 @@ export default function ListItem({ content, session }) {
                     </div>
                     <p>{ content.title }</p>
                 </Link>
-                { session && session.user.role == 'admin' ? <EditBtn contentId={ content._id }/> : null }
+                { session && session.user.role == 'admin' && <EditBtn contentId={ content._id }/> }
             </div>
         
     )
