@@ -9,11 +9,8 @@ import FullPage from "@/component/module/fullPage";
 
 export default async function Detail(props) {
     const db = (await connectDB).db('project')
-    const content = await db.collection('game_content').findOne({ _id : new ObjectId(props.params.id) })
-    // content._id = content._id.toString()
-    // content.like = await db.collection('game_content_feedback').countDocuments({ parent : content._id, feedback : 'like' })
-    // content.dislike = await db.collection('game_content_feedback').countDocuments({ parent : content._id, feedback : 'dislike' })
-   
+    const content = await db.collection('contents').findOne({ _id : new ObjectId(props.params.id) })
+    content._id = content._id.toString()
     
     const component = [ 
         <DetailFront content={ content }/>,

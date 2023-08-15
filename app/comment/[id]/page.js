@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { CommentContext } from './layout'
 // 컴포넌트

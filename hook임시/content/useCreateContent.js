@@ -30,7 +30,7 @@ export default function useCreateContent() {
 
     const createContent = async () => {
         try {
-            const uri = process.env.NEXT_PUBLIC_CONTENT_API
+            const uri = process.env.NEXT_PUBLIC_CONTENTS_API
             const submission = { content }
 
             const response = await axios.post(uri, submission)

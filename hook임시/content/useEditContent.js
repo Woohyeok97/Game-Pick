@@ -8,7 +8,7 @@ export default function useEditContent(contentId) {
     // 수정할 컨텐츠 요청 함수
     const fetchContent = async () => {
         try {
-            const uri = process.env.NEXT_PUBLIC_CONTENT_API + `/${contentId}`
+            const uri = process.env.NEXT_PUBLIC_CONTENTS_API + `/${contentId}`
 
             const response = await axios.get(uri)
             // type="date" input이 인식할수 있도록 createDate를 yyyy-MM-dd 형식으로 변환
@@ -53,7 +53,7 @@ export default function useEditContent(contentId) {
     // 컨텐츠 수정 요청 함수
     const editContent = async () => {
         try {
-            const uri = process.env.NEXT_PUBLIC_CONTENT_API + `/${contentId}`
+            const uri = process.env.NEXT_PUBLIC_CONTENTS_API + `/${contentId}`
             const submission = { prevContent }
 
             const response = await axios.put(uri, submission)

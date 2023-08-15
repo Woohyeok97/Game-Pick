@@ -9,7 +9,7 @@ export default function useFetchComment() {
 
     // 코멘트 가져오기
     const fetchComment = async (contentId) => {
-        const uri = process.env.NEXT_PUBLIC_COMMENT_API
+        const uri = process.env.NEXT_PUBLIC_COMMENTS_API
         const submitData = { contentId, skipComment : JSON.stringify(tempCommentId), skipCount : comment.length - tempCommentId.length, fetchOption }
 
         try {

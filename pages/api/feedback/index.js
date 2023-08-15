@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if(req.method == "GET") {
         if(!session) return res.status(400).json({ message : '유저정보를 찾을수 없습니다.' })
         try {
-            const result = await db.collection('game_comment_feedback').findOne({ parent : req.query.parent, userEmail : session.user.email })
+            const result = await db.collection('feedback').findOne({ parent : req.query.parent, userEmail : session.user.email })
             return res.status(200).json({ result : result })
         } catch(err) {
             console.log(err)
@@ -31,12 +31,12 @@ export default async function handler(req, res) {
             }
 
             // 피드백 생성후, 부모 도큐먼트 피드백 개수 업데이트
-            const feedbackResult = await db.collection('game_comment_feedback').insertOne(insertData)
+            const feedbackResult = await db.collection('feedback').insertOne(insertData)
             const parentResult = await db.collection(req.body.collection).updateOne({ _id : new ObjectId(req.body.parent) }, { $inc : { [req.body.type]: 1 }  })
 
             // 부모 도큐먼트 업데이트 실패시 롤백
             if(parentResult.modifiedCount == 0) {
-                await db.collection('game_comment_feedback').deleteOne({ _id: feedbackResult.insertedId });
+                await db.collection('feedback').deleteOne({ _id: feedbackResult.insertedId });
                 throw new Error('피드백 개수 업데이트 실패');
             }
             return res.status(200).json({ message : '피드백 생성완료' })

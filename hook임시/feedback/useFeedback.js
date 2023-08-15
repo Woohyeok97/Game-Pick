@@ -8,7 +8,6 @@ export default function useFeedback(data, collection) {
 
     const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
     const session = useSession()
-
     // 컴포넌트 마운트시, 기존 유저피드백 정보 가져오기
     useEffect(()=>{
         const getUserFeedback = async () => {
@@ -17,8 +16,9 @@ export default function useFeedback(data, collection) {
                 setUserFeedback(result)
             }
         }
+        console.log('useEffect실행됨!')
         getUserFeedback()
-    }, [])
+    }, [session])
 
     // 피드백 옵티미스틱 업데이트
     const updateFeedback = async (name) => {

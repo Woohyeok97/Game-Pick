@@ -11,7 +11,7 @@ export default function useCreateComment() {
     }
     // 코멘트 업로드 요청 함수
     const createComment = async (contentId) => {
-        const uri = process.env.NEXT_PUBLIC_COMMENT_API
+        const uri = process.env.NEXT_PUBLIC_COMMENTS_API
         const submission = { commentText, contentId }
         
         try {

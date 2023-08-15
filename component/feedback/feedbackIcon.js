@@ -5,14 +5,14 @@ import useFeedback from "@/hook임시/feedback/useFeedback";
 // MUI
 import Box from "@mui/material/Box"
 import IconButton from '@mui/material/IconButton';
-// MUI icons=
+// MUI icons
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Typography from "@mui/material/Typography";
 
 
 export default function FeedbackIcon({ data }) {
-    const { feedbackCuont, userFeedback, updateFeedback, rollbackedFeedback} = useFeedback(data, 'game_comment')
+    const { feedbackCuont, userFeedback, updateFeedback, rollbackedFeedback } = useFeedback(data, 'comments')
     const session = useSession()
 
     // 피드백 핸들러

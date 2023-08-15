@@ -4,7 +4,7 @@ export default function useDeleteComment() {
 
     const deleteComment = async (comment)=> {
         try {
-            const uri = process.env.NEXT_PUBLIC_COMMENT_API + `/${comment._id}`
+            const uri = process.env.NEXT_PUBLIC_COMMENTS_API + `/${comment._id}`
             const submission = { userEmail : comment.userEmail }
 
             const response = await axios.delete(uri, { params : submission })

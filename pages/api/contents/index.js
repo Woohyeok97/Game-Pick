@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
         try {
             const insertData = { ...req.body.content, like : 0, dislike : 0 }
-            const result = await db.collection('game_content').insertOne(insertData)
+            const result = await db.collection('contents').insertOne(insertData)
             
             return res.status(200).json({ result : result, message : '컨텐츠 업로드 완료' })
         }
