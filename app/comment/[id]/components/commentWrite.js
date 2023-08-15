@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 // 커스텀훅
-import useCreateComment from '@/hook임시/comment/useCreateComment';
+import useCreateComment from '@/hook/comment/useCreateComment';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';

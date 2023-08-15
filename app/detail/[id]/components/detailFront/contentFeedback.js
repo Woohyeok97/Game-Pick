@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from "next-auth/react";
 // 커스텀 훅
-import useFeedback from "@/hook임시/feedback/useFeedback";
+import useFeedback from "@/hook/feedback/useFeedback";
 // MUI
 import Box from "@mui/material/Box"
 import Button from '@mui/material/Button';

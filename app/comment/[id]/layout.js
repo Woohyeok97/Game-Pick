@@ -1,5 +1,5 @@
 'use client'
-import useFetchComment from "@/hook임시/comment/useFetchComment"
+import useFetchComment from "@/hook/comment/useFetchComment"
 import { SessionProvider } from "next-auth/react"
 import { createContext } from "react"
 

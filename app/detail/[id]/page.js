@@ -3,8 +3,7 @@ import { ObjectId } from 'mongodb'
 // 컴포넌트
 import DetailFront from "./components/detailFront";
 import DetailInfo from './components/detailInfo';
-// 모듈컴포넌트
-import FullPage from "@/component/module/fullPage";
+import FullPage from "@/component/fullPage/fullPage";
 
 
 export default async function Detail(props) {

@@ -2,7 +2,7 @@
 import HomeInfo from "./home/components/homeInfo"
 import HomeMain from "./home/components/homeMain"
 // 모듈컴포넌트
-import FullPage from "../component/module/fullPage"
+import FullPage from "../component/fullPage/fullPage"
 
 export default function Home() {
 

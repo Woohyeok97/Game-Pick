@@ -1,7 +1,7 @@
 'use client'
 // 커스텀훅
-import useEditContent from '@/hook임시/content/useEditContent';
-import useDeleteContent from '@/hook임시/content/useDeleteContent';
+import useEditContent from '@/hook/content/useEditContent';
+import useDeleteContent from '@/hook/content/useDeleteContent';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';

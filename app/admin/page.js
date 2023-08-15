@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from 'next-auth/react';
 // 커스텀 훅
-import useCreateContent from '@/hook임시/content/useCreateContent';
+import useCreateContent from '@/hook/content/useCreateContent';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';

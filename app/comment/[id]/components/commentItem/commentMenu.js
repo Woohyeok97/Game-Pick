@@ -2,7 +2,7 @@ import { useContext } from 'react';
 // context
 import { CommentContext } from '../../layout';
 // 커스텀훅
-import useDeleteComment from '@/hook임시/comment/useDeleteComment';
+import useDeleteComment from '@/hook/comment/useDeleteComment';
 // MUI
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
