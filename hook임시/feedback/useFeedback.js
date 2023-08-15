@@ -5,9 +5,11 @@ import useSubmitFeedback from "./useSubmitFeedback"
 export default function useFeedback(data, collection) {
     const [ feedbackCuont, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
     const [ userFeedback, setUserFeedback ] = useState('')
+    const [ isFeed, setIsFeed ] = useState(false)
+    const session = useSession()
 
     const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
-    const session = useSession()
+    
     // 컴포넌트 마운트시, 기존 유저피드백 정보 가져오기
     useEffect(()=>{
         const getUserFeedback = async () => {
@@ -20,8 +22,11 @@ export default function useFeedback(data, collection) {
         getUserFeedback()
     }, [session])
 
+
     // 피드백 옵티미스틱 업데이트
     const updateFeedback = async (name) => {
+        if(isFeed) return
+        setIsFeed(true)
         // 1. 기존 피드백 없을때(피드백 생성)
         if(!userFeedback) {
             setFeedbackCount((prev) => {
@@ -32,6 +37,7 @@ export default function useFeedback(data, collection) {
 
             const result = await fetchUserFeedback() 
             setUserFeedback(result)
+            setIsFeed(false)
             return
             // 2. 기존 피드백과 같은 피드백일때(삭제)
         } else if(userFeedback.type == name){
@@ -59,6 +65,8 @@ export default function useFeedback(data, collection) {
             const result = await fetchUserFeedback() 
             setUserFeedback(result)
         }
+
+        setIsFeed(false)
     }
 
     // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수

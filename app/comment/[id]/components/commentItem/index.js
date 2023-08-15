@@ -18,7 +18,6 @@ export default function CommentItem({ comment, session }) {
 
     return (
         <ListItem sx={{ display : 'flex', justifyContent : 'space-between' }} alignItems="flex-start">
-            {/* 코멘트 */}
             <Box>
                 <ListItemAvatar>
                     <Avatar src={ comment.userImage }/>
