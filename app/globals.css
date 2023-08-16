@@ -63,6 +63,15 @@ body {
   transform: translateY(100%);
   transition: transform 1s;
 }
+.bar-animation-enter {
+  height: 0%;
+}
+
+.bar-animation-enter-active {
+  height: 60%;
+  transition: height 500ms ease-in;
+}
+
 
 
 
