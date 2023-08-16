@@ -16,7 +16,7 @@ export default function HomeMain() {
             </div>
 
             {/* 컨텐츠 그래프 */}
-            {/* <ContentGraph/> */}
+            <ContentGraph/>
 
         </section>
     )

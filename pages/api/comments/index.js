@@ -20,18 +20,22 @@ export default async function handler(req, res) {
             if(skipComment.length > 0) {
                 filter._id = { $nin : skipComment.map((item) => new ObjectId(item)) }
             }
+            // 코멘트 정렬 기준
+            const sortOption = req.query.fetchOption
+            // 제외 코멘트 개수 (현재 클라이언트에 존재하는 코멘트 개수)
+            const skipCount = +req.query.skipCount
              
             const result = await db.collection('comments')
             .find(filter)
-            .sort(req.query.fetchOption == 'like' ? { like : -1 } : { createDate : -1 })
-            .skip(+req.query.skipCount)
+            .sort({[sortOption] : -1})
+            .skip(skipCount)
             .limit(2)
             .toArray()
 
             const next = await db.collection('comments')
             .find(filter)
-            .sort(req.query.fetchOption == 'like' ? { like : -1 } : { createDate : -1 })
-            .skip(+req.query.skipCount + 2)
+            .sort({[sortOption] : -1})
+            .skip(skipCount + 2)
             .limit(2)
             .toArray()
 

@@ -7,6 +7,29 @@ import { authOptions } from "../auth/[...nextauth]";
 export default async function handler(req, res) {
     const session = await getServerSession(req, res, authOptions)
     const db = (await connectDB).db('project')
+
+    // 컨텐츠 가져오기
+    if(req.method == 'GET') {
+        try {
+            // 컨텐츠 정렬 기준
+            const sortOption = req.query.sortOption
+            // 요청 컨텐츠 개수
+            const limit = +req.query.limit
+
+            const result = await db.collection('contents')
+            .find()
+            .sort({ [sortOption] : -1 })
+            .limit(limit)
+            .toArray()
+
+            return res.status(200).json({ result : result, message : '컨텐츠 요청 성공' })
+
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json({ message : '서버에러 발생' })
+        }
+    }
+
     // 컨텐츠 업로드
     if(req.method == 'POST') {
         if(!session || session.user.role != 'admin') return res.status(400).json({ message : '관리자 권한이 없습니다.' }) 
@@ -21,7 +44,7 @@ export default async function handler(req, res) {
         }
         catch(err) {
             console.error(err)
-            return res.status(500).json({ message : '서버 에러발생' })
+            return res.status(500).json({ message : '서버에러 발생' })
         }
     }
 
