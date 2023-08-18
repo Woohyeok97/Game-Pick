@@ -25,5 +25,12 @@
         }
         
     }
+
+    .graph_container {
+        flex-basis: 50%;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
 }
 

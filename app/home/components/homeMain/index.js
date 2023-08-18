@@ -1,6 +1,6 @@
 import styles from '../../styles/homeMain.module.scss'
 // 컴포넌트
-import ContentGraph from './contentGraph'
+import ContentCarousel from './contentCarousel'
 
 
 export default function HomeMain() {
@@ -17,7 +17,10 @@ export default function HomeMain() {
                 </div>
             </div>
 
-            <ContentGraph/>
+            <div className={ styles.graph_container }>
+                <ContentCarousel/>
+            </div>
+            
 
         </section>
     )
