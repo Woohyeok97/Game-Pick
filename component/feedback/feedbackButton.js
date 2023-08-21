@@ -11,7 +11,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Typography from "@mui/material/Typography";
 
 
-export default function FeedbackIcon({ data }) {
+export default function FeedbackButton({ data }) {
     const { feedbackCuont, userFeedback, updateFeedback, rollbackedFeedback } = useFeedback(data, 'comments')
     const session = useSession()
 

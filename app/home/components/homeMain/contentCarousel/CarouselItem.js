@@ -5,11 +5,14 @@ import styles from '../../../styles/carouselItem.module.scss'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 export default function CarouselItem({ content }) {
+    // 마우스 호버 상태
     const [ isHovering, setIsHovering ] = useState(false)
 
+    // 마우스 호버 핸들러
     const handleHover = () => {
         setIsHovering((prev) => !prev)
     }
+
     return (
         <div className={ styles.carousel_item } onMouseOver={ handleHover } onMouseOut={ handleHover }>
             <img src='/너굴맨.jpeg'/>

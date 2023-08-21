@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 // 컴포넌트
 import CommentMenu from './commentMenu';
-import FeedbackIcon from '@/component/feedback/feedbackIcon';
+import FeedbackButton from '@/component/feedback/feedbackButton';
 
 
 
@@ -23,7 +23,7 @@ export default function CommentItem({ comment, session }) {
                     <Avatar src={ comment.userImage }/>
                 </ListItemAvatar>
                 <ListItemText primary={ comment.userName } secondary={ comment.text } />
-                <FeedbackIcon data={ comment }/>
+                <FeedbackButton data={ comment }/>
             </Box>
 
             {/* 메뉴버튼 */}
