@@ -5,6 +5,8 @@ import { CSSTransition } from 'react-transition-group';
 import useFetchContent from '@/hook/content/useFetchContent'
 // MUI
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+// 컴포넌트
 import CarouselItem from './CarouselItem'
 
 
@@ -15,6 +17,10 @@ export default function ContentCarousel() {
     const [ currentIndex, setCurrentIndex ] = useState(0)
     // carousel 동작여부
     const [ pause, setPause ] = useState(false);
+
+    // 월요일의 우혁이이게
+    // 3. 그 다음에 useCarousel() 훅 만들어서 로직이랑 분리하자!
+    // 4. 마지막으로 어떤식으로 구현했는지 userRef 중점으로 이해해보자!
 
     useEffect(()=> {
         const getContentList = async () => {
@@ -49,27 +55,32 @@ export default function ContentCarousel() {
     
 
     
+    return (
+        <Box sx={{ flexBasis : '50%', display : 'flex', flexDirection : 'column' }}>
 
-    if(contentList.length > 0) return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', width : '100%', height : '50%' }}
-        onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
-            <Box sx={{ flexBasis : '95%', position : 'relative', overflow : 'hidden' }}>  
-            {contentList.map((content, index) => (
-                <CSSTransition in={currentIndex === index} timeout={300} classNames="slide" key={index} unmountOnExit>
-                    <CarouselItem content={content} />
-                </CSSTransition>
-            ))}
-            </Box> 
+            <Box sx={{ flexBasis : '90%', position : 'relative', overflow : 'hidden' }}
+            onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
 
-            <Box sx={{ flexBasis : '5%', display : 'flex', justifyContent : 'space-between', alignItems : 'center' }}>
-                <button onClick={handlePrev}>Prev</button>
+                { contentList.map((content, index) => (
+                    <CSSTransition in={currentIndex === index} timeout={300} classNames="slide" key={index} unmountOnExit>
+                        <Box sx={{ width: '100%', height: '450px' }}>
+                            <CarouselItem content={content} />
+                        </Box>
+                    </CSSTransition>
+                ))}
+
+            </Box>
+
+            <Box sx={{ flexBasis : '10%', display : 'flex', justifyContent : 'center', alignItems : 'center' }}>
+                <Button onClick={ handlePrev }>Prev</Button>
                 <Box>
-                    {contentList.map((_, index) => (
-                        <span key={index} className={index === currentIndex ? 'dot active' : 'dot'}></span>
+                    { contentList.map((_, index) => (
+                            <span key={index} className={index === currentIndex ? 'dot active' : 'dot'}></span>
                     ))}
                 </Box>
-                <button onClick={handleNext}>Next</button>
-            </Box>         
+                <Button onClick={ handleNext }>Next</Button>
+            </Box>
+
         </Box>
     )
 }

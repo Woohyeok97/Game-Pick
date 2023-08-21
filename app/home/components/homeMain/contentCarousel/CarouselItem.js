@@ -1,13 +1,17 @@
-// MUI
-import Box from '@mui/material/Box'
-import Typograph from '@mui/material/Typography'
+import { useState } from 'react'
+import styles from '../../../styles/carouselItem.module.scss'
+
 
 export default function CarouselItem({ content }) {
-    
+    const [ isHovering, setIsHovering ] = useState(false)
+
+    const handleHover = () => {
+        setIsHovering((prev) => !prev)
+    }
     return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', height : '100%', bgcolor : 'orange' }}>
-            <Typograph>{ content.title }</Typograph>
-            <Typograph>유저추천 {content.like}</Typograph>
-        </Box>
+        <div className={ styles.carousel_item } onMouseOver={ handleHover } onMouseOut={ handleHover }>
+            <img src='/너굴맨.jpeg'/>
+            { isHovering && <div className={ styles.item_info }>{ content.title }</div> }
+        </div>
     )
 }
