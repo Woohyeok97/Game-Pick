@@ -74,7 +74,7 @@ body {
 
 .slide-enter-active {
   transform: translateX(0);
-  transition: transform 300ms;
+  transition: transform 600ms;
 }
 .slide-exit {
   transform: translateX(0);
@@ -82,7 +82,7 @@ body {
 
 .slide-exit-active {
   transform: translateX(-100%);
-  transition: transform 300ms;
+  transition: transform 600ms;
 }
 
 .slide-enter, .slide-enter-active, .slide-exit, .slide-exit-active {
