@@ -45,13 +45,13 @@ export default function CommentWrite({ contentId }) {
     }
 
     if(!session.data) return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end' }}>
+        <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end', mb : '24px' }}>
             <TextField name="comment" multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
         </Box>
     )
 
     return (
-       <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end' }}>
+       <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end', mb : '24px' }}>
             <TextField name="comment" multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4}
              onChange={(e)=>{ handleCommentChange(e) }} value={ commentText }/>
             <Box>

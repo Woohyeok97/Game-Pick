@@ -5,8 +5,8 @@ import useCreateContent from '@/hook/content/useCreateContent';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
-import  Button  from '@mui/material/Button'
-
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 export default function Admin() {
     const { content, handleChangeContent, createContent } = useCreateContent()
@@ -32,16 +32,24 @@ export default function Admin() {
     
 
     return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
-            <TextField label="타이틀" variant="standard" name="title" 
-            onChange={ handleChangeContent }/>
-            <TextField label="출시일" variant="standard" type="date" name="createDate" 
-            onChange={ handleChangeContent }/>
-            <TextField label="이미지" variant="standard" type="file" name="image" 
-            onChange={ handleChangeContent }/>
-            <TextField label="트레일러 url" variant="standard" name="trailerURL" 
-            onChange={ handleChangeContent }/>
-            <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
+        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
+            <Typography fontSize="2rem" sx={{ mb : '12px' }}>게임 컨텐츠 업로드</Typography>
+
+            <Box sx={{ display : 'flex', flexDirection : 'column' }}>
+                <TextField label="타이틀" variant="standard" name="title" sx={{ mb: '36px' }}
+                onChange={ handleChangeContent }/>
+                <TextField label="출시일" variant="standard" type="date" name="createDate" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
+                onChange={ handleChangeContent }/>
+                <TextField label="이미지" variant="standard" type="file" name="image" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
+                onChange={ handleChangeContent }/>
+                <TextField label="트레일러 url" variant="standard" name="trailerURL" sx={{ mb: '36px' }}
+                onChange={ handleChangeContent }/>
+            </Box>
+
+            <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
+                <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
+            </Box>
+            
         </Box>
     )
 }

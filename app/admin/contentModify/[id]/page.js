@@ -5,6 +5,7 @@ import useDeleteContent from '@/hook/content/useDeleteContent';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 
@@ -26,27 +27,35 @@ export default function ContentModify({ params }) {
     }
 
     return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
-            <TextField label="타이틀" variant="standard" name="title" defaultValue={ prevContent.title }
-            onChange={ handleChangeContent } />
+        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
+            <Typography fontSize="2rem" sx={{ mb : '36px' }}>게임 컨텐츠 수정</Typography>
 
-            <TextField label="출시일" variant="standard" type="date" name="createDate" defaultValue={ prevContent.createDate }
-            onChange={ handleChangeContent } />
+            <Box sx={{ display : 'flex', flexDirection : 'column' }}>
+                <TextField label="타이틀" variant="outlined" name="title" defaultValue={ prevContent.title } sx={{ mb: '36px' }}
+                InputLabelProps={{ shrink : true }}
+                onChange={ handleChangeContent } />
 
-            <TextField label="이미지" variant="standard" type="file" name="image" defaultValue={ prevContent.image }
-            onChange={ handleChangeContent } />
+                <TextField label="출시일" variant="outlined" type="date" name="createDate" defaultValue={ prevContent.createDate }  sx={{ mb: '36px' }}
+                InputLabelProps={{ shrink : true }}
+                onChange={ handleChangeContent } />
 
-            <TextField label="트레일러 url" variant="standard" name="trailerURL" defaultValue={ prevContent.trailerURL }
-            onChange={ handleChangeContent } />
+                <TextField label="이미지" variant="outlined" type="file" name="image" defaultValue={ prevContent.image } sx={{ mb: '36px' }}
+                InputLabelProps={{ shrink : true }}
+                onChange={ handleChangeContent } />
 
+                <TextField label="트레일러 url" variant="outlined" name="trailerURL" defaultValue={ prevContent.trailerURL } sx={{ mb: '36px' }}
+                InputLabelProps={{ shrink : true }}
+                onChange={ handleChangeContent } />
+            </Box>
 
-            <Button onClick={ handleEditSubmit }>
+            <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
+                <Button onClick={ handleEditSubmit }>
                 컨텐츠 수정
-            </Button>
-
-            <Button onClick={ handleDeleteSubmit }>
-                컨텐츠 삭제
-            </Button>
+                </Button>
+                <Button  onClick={ handleDeleteSubmit } color="error" sx={{ ml : '12px' }}>
+                    컨텐츠 삭제
+                </Button>
+            </Box>
         </Box>
     )
 }

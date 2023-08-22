@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// 유틸 함수
+import formatDate from '@/util/formatDate';
 // MUI
 import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem';
@@ -6,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 // 컴포넌트
 import CommentMenu from './commentMenu';
@@ -17,12 +20,14 @@ export default function CommentItem({ comment, session }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
     return (
-        <ListItem sx={{ display : 'flex', justifyContent : 'space-between' }} alignItems="flex-start">
+        <ListItem sx={{ display : 'flex', justifyContent : 'space-between', mb : '16px' }} alignItems="flex-start">
+            {/* 코멘트 아이템 */}
             <Box>
-                <ListItemAvatar>
+                <ListItemAvatar sx={{ display : 'flex', alignItems : 'center' }}>
                     <Avatar src={ comment.userImage }/>
+                    <Typography ml="12px" fontSize="1.2rem">{ comment.userName }</Typography>
                 </ListItemAvatar>
-                <ListItemText primary={ comment.userName } secondary={ comment.text } />
+                <ListItemText primary={ comment.text } secondary={ formatDate(comment.createDate) } />
                 <FeedbackButton data={ comment }/>
             </Box>
 
