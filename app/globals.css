@@ -11,11 +11,16 @@ body {
     margin: 0;
     padding: 0;
 }
+a {
+  text-decoration: none;
+}
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
   display: none;
 }
 .page_static {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   box-sizing: border-box;

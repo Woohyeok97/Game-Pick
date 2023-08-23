@@ -27,6 +27,11 @@
     justify-content: flex-end;
     align-items: flex-end;
     opacity: 0;
+    transition: opacity 0.5s ease; 
+
+    &:hover {
+        opacity: 1;
+    }
 
     .item_title {
         margin: 0;

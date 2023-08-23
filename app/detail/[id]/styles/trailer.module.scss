@@ -1,0 +1,15 @@
+.trailer_box {
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top : 56.25%;
+
+    .trailer {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
