@@ -1,6 +1,35 @@
-.drawer_link {
-    width: 100%;
-    font-size: inherit;
-    color: inherit;
-    text-decoration: none;
+.menu_drawer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #FFFFFF;
+    background-color: #555555;
+    height: 100%;
+    width: 400px;
+
+    .drawer_link {
+        width: 100%;
+        font-size: inherit;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .admin {
+        text-align: center;
+        color: #2e7d32;
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+    .github {
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin: 0;
+        margin-bottom: 16px
+    }
 }
+
+

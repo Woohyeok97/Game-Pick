@@ -6,10 +6,10 @@ import Trailer from './trailer'
 
 
 export default function ContentImage({ content }) {
-    const [ viewTrailer, setViewTrailer ] = useState(false)
+    const [ openTrailer, setOpenTrailer ] = useState(false)
 
     const handleClick = () => {
-        setViewTrailer((prev) => !prev)
+        setOpenTrailer((prev) => !prev)
     }
 
     return (
@@ -19,7 +19,7 @@ export default function ContentImage({ content }) {
                 <p className={ styles.trailer_click }>트레일러?</p>
             </div>
 
-            { viewTrailer &&
+            { openTrailer &&
             <div className={ styles.trailer } onClick={ handleClick }>
                 <Trailer content={ content }/>
             </div> }
