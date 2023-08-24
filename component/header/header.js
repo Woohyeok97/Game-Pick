@@ -20,8 +20,10 @@ export default function Header({ session }) {
     return (
         <header className={ styles.header }>
             <Link href="/" className={ styles.header_icon }>
+                <>
                 <SportsEsportsIcon sx={{ mr : '6px', fontSize : '2rem' }}/>
                 <h1>PROJECT</h1>
+                </>
             </Link>
 
             <div className={ styles.header_menu }>

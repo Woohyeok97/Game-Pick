@@ -61,7 +61,7 @@ export default function MenuDrawer({ session }) {
                                     <VideogameAssetIcon sx={{ color : '#FFFFFF' }}/>
                                 </ListItemIcon>
                                 <ListItemText primary="List" primaryTypographyProps={{ fontSize : '1.2rem' }}/>
-                        </ListItemButton>
+                            </ListItemButton>
                         </Link>
                     </ListItem>
                 </List>

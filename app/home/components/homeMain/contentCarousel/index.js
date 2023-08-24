@@ -13,7 +13,7 @@ import CarouselItem from './CarouselItem'
 export default function ContentCarousel() {
     const { contentList } = useFetchContent('like', 3)
     const { caroselIndex, handleNextIndex, handlePrevIndex, handleChangePause } = useCarousel(contentList, 3000)
-    
+  
     return (
         <Box sx={{ flexBasis : '50%', display : 'flex', flexDirection : 'column' }}>
 

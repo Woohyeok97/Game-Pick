@@ -1,4 +1,3 @@
-
 import Link from 'next/link'
 import styles from '../../styles/listItem.module.scss'
 // 컴포넌트
@@ -18,7 +17,7 @@ export default function ListItem({ content, session }) {
                     <div className={ styles.image_box }>
                         <img src="/너굴맨.jpeg"/>
                     </div>
-                    <p>{ content.title }</p>
+                    <p>{ content.title }</p>        
                 </Link>
 
                 { session && session.user.role == 'admin' && <EditBtn contentId={ content._id }/> }

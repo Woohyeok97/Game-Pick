@@ -7,7 +7,8 @@ export default function CarouselItem({ content }) {
 
     return (
         <div className={ styles.carousel_item }>
-            <img src='/너굴맨.jpeg'/>
+           {/* <Image src='/너굴맨.jpeg' width="400" height="400"/> */}
+           <img src='/너굴맨.jpeg'/>
 
             <Link href={`/detail/${content._id}`}>
             <div className={ styles.item_info }>

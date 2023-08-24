@@ -4,6 +4,7 @@ import ContentCarousel from './contentCarousel'
 
 
 export default function HomeMain() {
+    
     return (
         <section className={ styles.home_main }>
             <div className={ styles.content_box }>
