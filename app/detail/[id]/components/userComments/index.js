@@ -1,4 +1,5 @@
 'use client'
+import { useEffect } from 'react';
 import Link from 'next/link';
 // 커스텀 훅
 import useFetchComment from '@/hook/comment/useFetchComment';
@@ -9,10 +10,9 @@ import List from '@mui/material/List';
 import Button from '@mui/material/Button'
 // 컴포넌트
 import CommentCard from './commentCard';
-import { useEffect } from 'react';
 
 
-export default function ContentComments({ content }) {
+export default function UserComments({ content }) {
     const { comment, fetchComment } = useFetchComment()
 
     useEffect(()=>{
@@ -21,14 +21,14 @@ export default function ContentComments({ content }) {
 
     return (
         <Box sx={{ flexBasis : '40%' }}>
-            <Box sx={{ display : 'flex', justifyContent : 'space-between', alignItems : 'flex-end' }}>
+            <Box sx={{ display : 'flex', justifyContent : 'space-between', alignItems : 'flex-end', mb : '6px' }}>
                 <Typography fontSize="2rem">유저들 코멘트</Typography>
                 <Link href={`/comment/${content._id}/?title=${content.title}`}>
                     <Button>View more!</Button>
                 </Link>
             </Box>
             
-            <List sx={{ display: 'flex', justifyContent : 'space-between', width : `${comment.length * 25}%`}}>
+            <List sx={{ display: 'flex', justifyContent : 'space-between', width : `${comment.length * 25}%`, gap : '32px' }} >
                 { comment.map((item, i) => <CommentCard key={item._id} comment={ item }/> ) }
             </List>
         </Box>

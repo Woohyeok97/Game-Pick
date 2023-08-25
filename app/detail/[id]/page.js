@@ -2,7 +2,7 @@ import { connectDB } from '@/util/database'
 import { ObjectId } from 'mongodb'
 // 컴포넌트
 import Profile from './components/profile';
-import ContentComments from './components/contentComment';
+import UserComments from './components/userComments';
 
 
 export default async function Detail(props) {
@@ -12,7 +12,7 @@ export default async function Detail(props) {
     return (
         <section className="page_static">
             <Profile content={ content }/>
-            <ContentComments content={ content }/>
+            <UserComments content={ content }/>
         </section>
     )
 }
