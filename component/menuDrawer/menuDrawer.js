@@ -69,7 +69,6 @@ export default function MenuDrawer({ session }) {
                 {/* admin 메뉴 */}
                 { session && session.user.role == 'admin' &&
                 <List sx={{ padding : '0' }}>
-                    <p className={ styles.admin }>관리자 메뉴</p>
                     <Divider/>
                     <ListItem disablePadding>
                         <Link href="/admin" className={ styles.drawer_link }>

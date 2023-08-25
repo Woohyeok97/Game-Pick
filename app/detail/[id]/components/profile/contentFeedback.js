@@ -40,22 +40,20 @@ export default function ContentFeedback({ content }) {
                 startIcon={ <ThumbUpIcon/> }
                 onClick={ handleChangeFeedback } 
                 variant={ userFeedback && userFeedback.type == "like" ? "contained" : "outlined" }
-                color="success" sx={{ mr : '16px' }} 
-                size="large">
+                color="success" sx={{ mr : '16px' }} size="large">
                 
-                <Typography fontWeight="600">좋아요!</Typography>
-                <Typography fontWeight="600">{ feedbackCuont.like }</Typography>
+                <Typography mr={1}>재밌어요!</Typography>
+                <Typography>{ feedbackCuont.like }</Typography>
             </Button>
 
             <Button 
                 name="dislike"
                 startIcon={ <ThumbDownIcon/> } 
-                onClick={ handleChangeFeedback } 
-                variant={ userFeedback && userFeedback.type == "dislike" ? "contained" : "outlined" }
-                size="large">
+                onClick={ handleChangeFeedback }
+                variant={ userFeedback && userFeedback.type == "dislike" ? "contained" : "outlined" } size="large" >
                   
-                <Typography fontWeight="600">별로에요..</Typography>
-                <Typography fontWeight="600">{ feedbackCuont.dislike }</Typography>  
+                <Typography mr={1}>별로에요..</Typography>
+                <Typography>{ feedbackCuont.dislike }</Typography>  
             </Button>
         </Box>
     )
