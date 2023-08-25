@@ -1,3 +1,5 @@
+// 유틸함수
+import formatDate from '@/util/formatDate';
 // MUI
 import ListItem from '@mui/material/ListItem';
 import Avatar from '@mui/material/Avatar';
@@ -9,18 +11,19 @@ import Paper from '@mui/material/Paper';
 // 컴포넌트
 import FeedbackViewer from '@/component/feedback/feedbackViewer';
 
-export default function CommentCard() {
+
+export default function CommentCard({ comment }) {
     return (
-        <ListItem sx={{ flexBasis : '23%', padding : '0' }}>
+        <ListItem sx={{  }}>
             <Paper elevation={5} sx={{ width : '100%', height : '100%' }}>
             <Card sx={{ display : 'flex', flexDirection : 'column', width : '100%', height : '100%', padding : '16px', boxSizing : 'border-box' }}>
-                <CardHeader avatar={ <Avatar/> } title="고나우" subheader="September 14, 2016" sx={{ flexBasis : '20%', padding : '0' }}/>
+                <CardHeader avatar={ <Avatar src={ comment.userImage }/> } title={ comment.userName } subheader={ formatDate(comment.createDate) } sx={{ flexBasis : '20%', padding : '0' }}/>
                 <CardContent sx={{ flexBasis : '60%', padding : '24px 0' }}>
                     <Typography variant="body2" color="text.secondary" fontSize="large">
-                        장작값으로는 비싼감이 있네요.
+                        { comment.text }
                     </Typography>
                 </CardContent>
-                <FeedbackViewer />
+                <FeedbackViewer data={ comment }/>
             </Card>
             </Paper>
         </ListItem>

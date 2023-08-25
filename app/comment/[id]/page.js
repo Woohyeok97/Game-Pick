@@ -19,7 +19,7 @@ export default function Comment({ params, searchParams }) {
     const contentTitle = searchParams.title
 
     useEffect(()=>{
-        fetchComment(contentId)
+        fetchComment(contentId, 2)
     }, [fetchOption])
 
     return (
@@ -27,7 +27,7 @@ export default function Comment({ params, searchParams }) {
             <CommentNav contentTitle={ contentTitle } /> 
             <CommentWrite contentId={ contentId } />
             { comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session } />) }
-            { nextComment && <Button onClick={()=>{ fetchComment(contentId) }}>더보기</Button> }
+            { nextComment && <Button onClick={()=>{ fetchComment(contentId, 2) }}>더보기</Button> }
         </Box>
     )
 }

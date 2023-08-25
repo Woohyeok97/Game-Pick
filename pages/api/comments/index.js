@@ -24,19 +24,21 @@ export default async function handler(req, res) {
             const sortOption = req.query.fetchOption
             // 제외 코멘트 개수 (현재 클라이언트에 존재하는 코멘트 개수)
             const skipCount = +req.query.skipCount
+            // 가져올 코멘트 개수
+            const limit = +req.query.limit
              
             const result = await db.collection('comments')
             .find(filter)
-            .sort({[sortOption] : -1})
+            .sort({[sortOption] : -1, _id : 1}) // 추천수가 같으면 먼저 생성된 코멘트를 기준으로 함
             .skip(skipCount)
-            .limit(2)
+            .limit(limit)
             .toArray()
 
             const next = await db.collection('comments')
             .find(filter)
-            .sort({[sortOption] : -1})
-            .skip(skipCount + 2)
-            .limit(2)
+            .sort({[sortOption] : -1, _id : 1})
+            .skip(skipCount + limit)
+            .limit(limit)
             .toArray()
 
 
@@ -45,7 +47,6 @@ export default async function handler(req, res) {
             console.error(err)
             return res.status(500).json({ message : '서버 에러발생' })
         }
-
     }
 
     // 코멘트 업로드

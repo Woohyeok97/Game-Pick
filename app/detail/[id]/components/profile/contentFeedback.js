@@ -14,7 +14,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 export default function ContentFeedback({ content }) {
     const { feedbackCuont, userFeedback, updateFeedback, rollbackedFeedback  } = useFeedback(content, 'contents')
     const session = useSession()
-
+    
     const handleChangeFeedback = async (e) => {
         let name = e.currentTarget.name
 

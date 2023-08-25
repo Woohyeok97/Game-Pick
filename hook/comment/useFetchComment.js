@@ -8,9 +8,9 @@ export default function useFetchComment() {
     const [ fetchOption, setFetchOption ] = useState('like')
 
     // 코멘트 가져오기
-    const fetchComment = async (contentId) => {
+    const fetchComment = async (contentId, limit) => {
         const uri = process.env.NEXT_PUBLIC_COMMENTS_API
-        const submitData = { contentId, skipComment : JSON.stringify(tempCommentId), skipCount : comment.length - tempCommentId.length, fetchOption }
+        const submitData = { contentId, skipComment : JSON.stringify(tempCommentId), skipCount : comment.length - tempCommentId.length, fetchOption, limit : limit }
 
         try {
             const response = await axios.get(uri, { params : submitData })

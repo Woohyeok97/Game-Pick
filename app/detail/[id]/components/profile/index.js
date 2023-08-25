@@ -1,10 +1,10 @@
 import formatDate from '@/util/formatDate'
-import styles from '../../styles/contentProfile.module.scss'
+import styles from '../../styles/profile.module.scss'
 // 컴포넌트
 import ContentFeedback from './contentFeedback'
 import ContentImage from './contentImage'
 
-export default function ContentProfile({ content }) {
+export default function Profile({ content }) {
     content._id = content._id.toString()
     
     return (
