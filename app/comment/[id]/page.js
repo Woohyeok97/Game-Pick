@@ -37,10 +37,10 @@ export default function Comment({ params, searchParams }) {
             { !isLoading &&
             <List>
                 { comment.length
-                ? comment.map((item, i)=> <CommentItem key={item._id} comment={ item } session={ session } />)
+                ? comment.map((item)=> <CommentItem key={item._id} comment={ item } session={ session } />)
                 : <div>아직 코멘트가 없어요~</div> }
             </List> }
-            
+
             { nextComment && <Button onClick={()=>{ fetchComment(contentId, 2) }}>더보기</Button> }
         </Box>
     )

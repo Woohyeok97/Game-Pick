@@ -1,6 +1,6 @@
-import styles from '../styles/homeInfo.module.scss'
+import styles from '../styles/homeFeature.module.scss'
 
-export default function HomeInfo() {
+export default function HomeFeature() {
 
     return (
         <section className={ styles.home_info }>
