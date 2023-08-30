@@ -18,6 +18,7 @@ export default async function List() {
     // // 좋아요 순으로 정렬하기
     // gameContent.sort((a, b) => b.like - a.like)
 
+
     return (
         <section className="page_static">
             <ListNav/>
