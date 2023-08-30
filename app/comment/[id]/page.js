@@ -29,6 +29,7 @@ export default function Comment({ params, searchParams }) {
         setComments()
     }, [fetchOption])
 
+
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
             <CommentNav contentTitle={ contentTitle } /> 
