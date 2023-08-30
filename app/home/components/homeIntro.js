@@ -1,4 +1,4 @@
-import styles from '../../styles/homeIntro.module.scss'
+import styles from '../styles/homeIntro.module.scss'
 
 export default function HomeIntro() {
 

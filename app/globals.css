@@ -16,7 +16,7 @@ a {
 }
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
 .page_static {
   display: flex;
