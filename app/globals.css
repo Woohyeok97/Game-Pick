@@ -98,21 +98,6 @@ a {
 }
 
 
-/* 닷 애니메이션 */
-.dot {
-  height: 10px;
-  width: 10px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 5px;
-}
-
-.dot.active {
-  background-color: #717171;
-}
-
-
 
 
 

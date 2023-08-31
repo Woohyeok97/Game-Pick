@@ -4,21 +4,12 @@ export default function CarouselItem({ content }) {
 
     return (
         <div className={ styles.carousel_item }>
-
-            <div className={ styles.carousel_box }>
-                <img src='/너굴맨.jpeg'/>
-                <div className={ styles.blur }></div>
-                <div className={ styles.carousel_info }>
-                    <h1 className={ styles.item_title }>유저 추천</h1>
-                    <p >{ content.like }</p>
-                </div>
-            </div>
-
-            
-
-            <div className={ styles.item_info }>
-                ㅎㅇ
-            </div>          
+            <img src='/너굴맨.jpeg'/>
+            <div className={ styles.blur }></div>
+            <div className={ styles.carousel_info }>
+                <h1 className={ styles.item_title }>유저 추천</h1>
+                <p >{ content.like }</p>
+            </div>      
         </div>
     )
     // return (

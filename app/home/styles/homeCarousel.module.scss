@@ -5,10 +5,39 @@
     width: 100%;
     height: 100%;
     background-color: #FFFFFF;
+    display: flex;
 
     .carousel {
-        width: 100%;
-        height: 100%;
+        position: relative;
+        width: 56.25vh;
+        min-width: 56.25vh;
+        overflow: hidden;
+    }
+    
+    .info {
+        flex-grow: 1;
+        padding: 0 2%;
+        margin: auto 0;
+        text-align: center;
+
+        p { margin: 0; }
+
+        .text_main {
+            display: flex;
+            justify-content: center;
+            font-size: calc(3vw + 4px);
+            margin: 0;
+            margin-bottom: 36px;
+
+            .game_pick { 
+                color: orangered;
+                margin-left: 16px;
+            }
+        }
+        
+        .text_sub { 
+            font-size: calc(1rem + 4px);
+        }
     }
 
     .start_box {
