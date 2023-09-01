@@ -19,6 +19,10 @@ import FeedbackButton from '@/component/feedback/feedbackButton';
 export default function CommentItem({ comment, session }) {
     const [ menuSwitch, setMenuSwitch ] = useState(false)
 
+    const handleMenuSwitchChange = () => {
+        setMenuSwitch((prev) => !prev)
+    }
+
     return (
         <ListItem sx={{ display : 'flex', justifyContent : 'space-between', mb : '16px' }} alignItems="flex-start">
             {/* 코멘트 아이템 */}
@@ -36,7 +40,7 @@ export default function CommentItem({ comment, session }) {
             { session.data && (session.data.user.email == comment.userEmail || session.data.user.role == 'admin')
             && <Box sx={{ position : 'relative' }}>
                 { menuSwitch && <CommentMenu comment={ comment }/> } {/* 코멘트 메뉴 */}
-                <IconButton aria-label="menu" onClick={()=>{ setMenuSwitch(!menuSwitch) }}>
+                <IconButton aria-label="menu" onClick={ handleMenuSwitchChange }>
                     <MoreHorizIcon/> 
                 </IconButton>
             </Box> }

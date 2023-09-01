@@ -1,17 +1,17 @@
-import { setComment } from "@/redux/features/commentSlice";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+// reducer
+import { setComment } from "@/redux/features/commentSlice";
 
 export default function useFetchComment(contentId, limit) {
     const comment = useSelector(state => state.comment)
-    const dispatch = useDispatch()
     const [ hasNext, setHasNext ] = useState(false)
     const [ sortOption, setSortOption ] = useState('like')
-    
-    console.log(sortOption, ': hook!~')
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        // handleSetComment()
+        loadComment()
     }, [sortOption])
 
 
@@ -29,12 +29,12 @@ export default function useFetchComment(contentId, limit) {
         }
     }   
 
-    async function handleSetComment() {
+    async function loadComment() {
         const result = await fetchComment()
         dispatch(setComment([...comment, ...result]))
     }
 
-    return { handleSetComment, hasNext, setSortOption }
+    return { loadComment, hasNext, setSortOption }
 }
 
 // import axios from "axios";

@@ -1,6 +1,3 @@
-import { useContext } from 'react';
-// context
-import { CommentContext } from '../../layout';
 // 커스텀훅
 import useDeleteComment from '@/hook/comment/useDeleteComment';
 // MUI
@@ -10,13 +7,12 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 export default function CommentMenu({ comment }) {
-    const { setComment, setTempCommentId } = useContext(CommentContext)
     const { deleteComment } = useDeleteComment()
 
     const handleDeleteSubmit = async () => {
-        await deleteComment(comment)
-        setComment((prev) => prev.filter((item) => item._id != comment._id))
-        setTempCommentId((prev) => prev.filter((item) => item != comment._id))
+        // await deleteComment(comment)
+        // setComment((prev) => prev.filter((item) => item._id != comment._id))
+        // setTempCommentId((prev) => prev.filter((item) => item != comment._id))
     }
 
     return (

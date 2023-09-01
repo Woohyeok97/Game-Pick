@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         try {
             const insertData = {
                 parent : req.body.contentId,
-                text : req.body.commentText,
+                text : req.body.textValue,
                 userName : session.user.name,
                 userEmail : session.user.email,
                 userImage : session.user.image,
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
             }
 
             const result = await db.collection('comments').insertOne(insertData)
-            return res.status(200).json({ result : result, message : '코멘트 업로드 성공!' })
+            return res.status(200).json({ result, message : '코멘트 업로드 성공!' })
 
         } catch(err) {
             console.error(err)

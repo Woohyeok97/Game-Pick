@@ -15,7 +15,7 @@ export default function Selector({ menuItems, onChange }) {
             <FormControl fullWidth>
                 <InputLabel>정렬</InputLabel>
                 <Select label="sortOption" defaultValue={ defaultValue } onChange={ onChange }>
-                { menuItems.map((item, i) => <MenuItem value={ item.value }>{ item.name }</MenuItem>) }
+                { menuItems.map((item, i) => <MenuItem key={item.value} value={ item.value }>{ item.name }</MenuItem>) }
                 </Select>
             </FormControl>
         </Box>

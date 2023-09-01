@@ -1,18 +1,18 @@
 import axios from "axios"
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// reducer
+import { setComment } from "@/redux/features/commentSlice";
 
+export default function useCreateComment(contentId) {
+    const [ textValue, setTextValue ] = useState('')
+    const comment = useSelector((state) => state.comment)
+    const dispatch = useDispatch()
 
-export default function useCreateComment() {
-    const [ commentText, setCommentText ] = useState('')
-
-    // comment입력 핸들러 함수
-    const handleCommentChange = (e) => {
-        setCommentText(e.target.value)
-    }
     // 코멘트 업로드 요청 함수
-    const createComment = async (contentId) => {
+    async function createComment() {
         const uri = process.env.NEXT_PUBLIC_COMMENTS_API
-        const submission = { commentText, contentId }
+        const submission = { contentId, textValue }
         
         try {
             const response = await axios.post(uri, submission)
@@ -22,5 +22,23 @@ export default function useCreateComment() {
         }
     }
 
-    return { commentText, setCommentText, handleCommentChange, createComment }
+    async function addComment(session) {
+        const addCommentId = await createComment()
+
+        const addComment = {
+            _id : addCommentId,
+            userName : session.data.user.name,
+            userImage : session.data.user.image,
+            userEmail : session.data.user.email,
+            text : textValue,
+            like : 0,
+            dislike : 0,
+            createDate : new Date(),
+        }
+
+        dispatch(setComment([ addComment, ...comment ]))
+        setTextValue('')
+    } 
+
+    return { textValue, setTextValue, addComment }
 }
