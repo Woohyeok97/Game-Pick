@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = 'ㅎㅇ'
+const initialState = []
 
 const comment = createSlice({
     name : 'comment',
