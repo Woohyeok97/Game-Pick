@@ -2,11 +2,11 @@ import axios from "axios"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // reducer
-import { setComment } from "@/redux/features/commentSlice";
+import { setCommentList } from "@/redux/features/commentListSlice";
 
 export default function useCreateComment(contentId) {
     const [ textValue, setTextValue ] = useState('')
-    const comment = useSelector((state) => state.comment)
+    const commentList = useSelector((state) => state.commentList)
     const dispatch = useDispatch()
 
     // 코멘트 업로드 요청 함수
@@ -36,7 +36,7 @@ export default function useCreateComment(contentId) {
             createDate : new Date(),
         }
 
-        dispatch(setComment([ addComment, ...comment ]))
+        dispatch(setCommentList([ addComment, ...commentList ]))
         setTextValue('')
     } 
 

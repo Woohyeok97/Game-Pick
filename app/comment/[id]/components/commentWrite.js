@@ -6,7 +6,6 @@ import useCreateComment from '@/hook/comment/useCreateComment';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-// 컴포넌트
 
 
 export default function CommentWrite({ contentId }) {

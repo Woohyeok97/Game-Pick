@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // slices
-import commentSlice from './features/commentSlice'
-import tempComment from './features/tempCommentSlice'
+import commentListSlice from './features/commentListSlice'
 
 
 const store = configureStore({
     reducer : {
-        comment : commentSlice.reducer,
-        tempComment : tempComment.reducer,
+        commentList : commentListSlice.reducer,
     }
 })
 

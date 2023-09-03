@@ -2,13 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // reducer
-import { setComment } from "@/redux/features/commentSlice";
+import { setCommentList } from "@/redux/features/commentListSlice";
 
 export default function useFetchComment(contentId, limit) {
-    const comment = useSelector(state => state.comment)
+    const commentList = useSelector(state => state.commentList)
+    const dispatch = useDispatch()
+
     const [ hasNext, setHasNext ] = useState(false)
     const [ sortOption, setSortOption ] = useState('like')
-    const dispatch = useDispatch()
 
     useEffect(() => {
         loadComment()
@@ -17,8 +18,8 @@ export default function useFetchComment(contentId, limit) {
 
     async function fetchComment() {
         const uri = process.env.NEXT_PUBLIC_COMMENTS_API
-        const submission = { contentId, limit, skipComment : JSON.stringify(comment), sortOption }
-       
+        const submission = { contentId, limit, skipComment : JSON.stringify(commentList), sortOption }
+
         try {
             const response = await axios.get(uri, { params : submission })
             response.data.hasNext ? setHasNext(true) : setHasNext(false)
@@ -31,8 +32,9 @@ export default function useFetchComment(contentId, limit) {
 
     async function loadComment() {
         const result = await fetchComment()
-        dispatch(setComment([...comment, ...result]))
+        dispatch(setCommentList([...commentList, ...result]))
     }
+
 
     return { loadComment, hasNext, setSortOption }
 }
