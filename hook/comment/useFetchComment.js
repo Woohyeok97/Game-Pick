@@ -1,42 +1,33 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // reducer
 import { setCommentList } from "@/redux/features/commentListSlice";
 
-export default function useFetchComment(contentId, limit) {
+export default function useFetchComment() {
     const commentList = useSelector(state => state.commentList)
     const dispatch = useDispatch()
-
-    const [ hasNext, setHasNext ] = useState(false)
     const [ sortOption, setSortOption ] = useState('like')
 
-    useEffect(() => {
-        loadComment()
-    }, [sortOption])
 
-
-    async function fetchComment() {
+    const requestfetchComment = async (contentId, limit) => {
         const uri = process.env.NEXT_PUBLIC_COMMENTS_API
         const submission = { contentId, limit, skipComment : JSON.stringify(commentList), sortOption }
 
         try {
             const response = await axios.get(uri, { params : submission })
-            response.data.hasNext ? setHasNext(true) : setHasNext(false)
-
-            return response.data.result
+            return response.data
         } catch(err) {
             console.error(err)
         }
     }   
 
-    async function loadComment() {
-        const result = await fetchComment()
-        dispatch(setCommentList([...commentList, ...result]))
+    const setToCommentList = (fetchedCommentList) => {
+        dispatch(setCommentList(fetchedCommentList))
     }
 
 
-    return { loadComment, hasNext, setSortOption }
+    return { requestfetchComment, setToCommentList, sortOption, setSortOption }
 }
 
 // import axios from "axios";

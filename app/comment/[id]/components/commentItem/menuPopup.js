@@ -4,11 +4,16 @@ import useDeleteComment from '@/hook/comment/useDeleteComment';
 
 
 export default function MenuPopup({ comment }) {
-    const { deleteComment } = useDeleteComment(comment)
+    const { requestDeleteComment, deleteToCommentList } = useDeleteComment()
 
     const handleDeleteComment= async () => {
         if(!confirm('코멘트를 삭제할까요?')) return
-        await deleteComment()
+        
+        const deletedCommentId = await requestDeleteComment(comment)
+        
+        if(deletedCommentId) {
+            deleteToCommentList(deletedCommentId)
+        }
     }
 
     return (

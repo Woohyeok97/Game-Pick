@@ -4,7 +4,7 @@ export default function verifyContent(data) {
     if(Object.keys(data).length == 0) return false
 
     for(let i in data) {
-        if(i == 'like' || i == 'unlike') continue
+        if(i == 'like' || i == 'dislike') continue
         if(!data[i]) return false
     }
     return true

@@ -10,20 +10,30 @@ import List from '@mui/material/List'
 import CommentNav from './components/commentNav'
 import CommentWrite from './components/commentWrite'
 import CommentItem from './components/commentItem'
+import { useEffect, useState } from 'react'
 
 
 export default function Comment({ params, searchParams }) {
     const contentId = params.id
     const contentTitle = searchParams.title
     const commentList = useSelector((state) => state.commentList)
-    const { loadComment, hasNext, setSortOption } = useFetchComment(contentId, 2)
 
-    console.log('렌더링!')
-    // 1. 컴포넌트끼리의 의존성
-    // 2. 한가지의 역할에 집중하는지
-    // 3. 한가지의 책임을 맡는지
-    // 4. 핸들러는 주체에서 정의하기
-    // 4-1. 핸들러는 ui를 조작할수도있고, 비지니스 로직 조각을 모아 실행할수도있다.
+    const { requestfetchComment, setToCommentList, sortOption, setSortOption } = useFetchComment()
+    const [ hasNext, setHasNext ] = useState(false)
+
+    useEffect(()=>{
+        loadComment()
+    }, [sortOption])
+
+        
+    async function loadComment() {
+        const fetched = await requestfetchComment(contentId, 2)
+
+        if(fetched.result.length) {
+            setToCommentList(fetched.result)
+            setHasNext(fetched.hasNext)
+        }
+    }
 
     return (
         <div className={ styles.comment }>

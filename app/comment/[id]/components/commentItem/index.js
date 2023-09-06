@@ -10,8 +10,6 @@ import CommentCard from '@/component/commentCard/commentCard';
 import MenuPopup from './menuPopup';
 
 
-// 컴포넌트에 비지니스 로직이 있어도됨 => 단, 전체가 아닌 비지니스 로직의 추상화
-// 비지니스 로직이 ui상태를 직접 관리하지 말자
 export default function CommentItem({ comment }) {
     const [ showMenu, setShowMenu ] = useState(false)
     const session = useSession()

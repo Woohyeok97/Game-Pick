@@ -47,7 +47,6 @@ export default async function handler(req, res) {
     // 코멘트 업로드
     if(req.method =='POST') {
         if(!session) return res.status(400).json({ message : '로그인 이후 이용해 주세요.' })
-        if(!verifyContent(req.body)) return res.status(400).json({ message : '코멘트의 데이터를 확인해주세요.' })
 
         try {
             const insertData = {
@@ -61,7 +60,11 @@ export default async function handler(req, res) {
                 createDate : new Date(),
             }
 
+            if(!verifyContent(insertData)) return res.status(400).json({ message : '코멘트의 데이터를 확인해주세요.' })
+            
             const result = await db.collection('comments').insertOne(insertData)
+            result.insertedData = insertData
+
             return res.status(200).json({ result, message : '코멘트 업로드 성공!' })
 
         } catch(err) {

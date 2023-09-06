@@ -8,13 +8,20 @@ const commentList = createSlice({
 
     reducers : {
         setCommentList : (state, action) => {
-            return state = action.payload
+            state.push(...action.payload)
         },
         clearCommentList : (state) => {
             return state = []
         },
+        addComment : (state, action) => {
+            state.unshift(action.payload)
+        },
+        deleteComment : (state, action) => {
+            const filtered = state.filter((item) => item._id != action.payload)
+            return state = filtered
+        }
     },
 })
 
 export default commentList
-export const { setCommentList, clearCommentList } = commentList.actions
+export const { setCommentList, clearCommentList, addComment, deleteComment } = commentList.actions
