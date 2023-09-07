@@ -1,19 +1,27 @@
 import axios from "axios"
+import { useDispatch } from "react-redux"
+// reducer
+import { deleteComment } from "@/redux/features/commentListSlice"
+
 
 export default function useDeleteComment() {
+    const dispatch = useDispatch()
 
-    const deleteComment = async (comment)=> {
+    const requestDeleteComment = async (comment) => {
         try {
             const uri = process.env.NEXT_PUBLIC_COMMENTS_API + `/${comment._id}`
             const submission = { userEmail : comment.userEmail }
 
             const response = await axios.delete(uri, { params : submission })
-            console.log(response.data)
-            
+            return response.data.result
         } catch(err) {
             console.log(err)
         }
     }
 
-    return { deleteComment }
+    const deleteToCommentList = (deletedCommentId) => {
+        dispatch(deleteComment(deletedCommentId))
+    }
+
+    return { requestDeleteComment, deleteToCommentList }
 }

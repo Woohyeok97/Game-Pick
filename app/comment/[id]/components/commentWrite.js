@@ -1,24 +1,71 @@
+// import styles from '../styles/commentWrite.module.scss'
+// import { useSession } from 'next-auth/react';
+// // 커스텀훅
+// import useCreateComment from '@/hook/comment/useCreateComment';
+// // MUI
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+// import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setCommentList } from '@/redux/features/commentListSlice';
+
+
+// export default function CommentWrite({ contentId }) {
+//     const { textValue, setTextValue, createComment, addComment } = useCreateComment()
+//     const commentList = useSelector((state) => state.commentList)
+//     const dispatch = useDispatch()
+//     const session = useSession()
+    
+//     const handleTextValueChange = (e) => {
+//         setTextValue(e.target.value)
+//     }
+//     const handleClick = async () => {
+//         const insertedId = await createComment(contentId, textValue)
+//         if(insertedId) {
+//             const result = addComment(insertedId, session, textValue)
+//             dispatch(setCommentList([ result, ...commentList ]))
+//             setTextValue('')
+//         }
+//     }
+//     console.log('gd')
+
+
+//     if(!session.data) return (
+//         <div className={ styles.comment_write }>
+//             <TextField multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
+//         </div>
+//     )
+
+//     return (
+//        <div className={ styles.comment_write }>
+//             <TextField value={ textValue } multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4}
+//             onChange={ handleTextValueChange }/>
+
+//             <Button variant="contained" endIcon={<EmojiEmotionsIcon/>} size="large"
+//             onClick={ handleClick }>COMMENT!</Button>
+//        </div>
+//     )
+// }
+import styles from '../styles/commentWrite.module.scss'
 import { useSession } from 'next-auth/react';
 // 커스텀훅
 import useCreateComment from '@/hook/comment/useCreateComment';
 // MUI
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import { useContext } from 'react';
-import { CommentContext } from '../layout';
-// 컴포넌트
 
 
 export default function CommentWrite({ contentId }) {
-    const { setComment, setTempCommentId } = useContext(CommentContext)
-    const { commentText, setCommentText, handleCommentChange, createComment } = useCreateComment()
+    const { textValue, setTextValue, requestCreateComment, addToCommentList } = useCreateComment()
     const session = useSession()
     
-    const handleCreateSubmit = async () => {
+    const handleTextValueChange = (e) => {
+        setTextValue(e.target.value)
+    }
 
-        if(!commentText) {
+    const handleCreateComment = async () => {
+        if(!textValue) {
             console.log('코멘트 내용을 확인해 주세요!')
             return
         }
@@ -27,72 +74,30 @@ export default function CommentWrite({ contentId }) {
             return
         }
 
-        const tempCommentId = await createComment(contentId)
-        
-        const tempComment = {
-            _id : tempCommentId,
-            userName : session.data.user.name,
-            userImage : session.data.user.image,
-            userEmail : session.data.user.email,
-            text : commentText,
-            like : 0,
-            dislike : 0,
-            createComment : new Date(),
+        const insertedData = await requestCreateComment(contentId)
+
+        if(insertedData) {
+            addToCommentList(insertedData)
         }
-        setComment((prev) => [ tempComment, ...prev])
-        setTempCommentId ((prev) => [...prev, tempCommentId])
-        setCommentText('')
     }
+ 
 
     if(!session.data) return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end', mb : '24px' }}>
-            <TextField name="comment" multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
-        </Box>
+        <div className={ styles.comment_write }>
+            <TextField multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
+        </div>
     )
 
     return (
-       <Box sx={{ display : 'flex', flexDirection : 'column', alignItems : 'flex-end', mb : '24px' }}>
-            <TextField name="comment" multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4}
-             onChange={(e)=>{ handleCommentChange(e) }} value={ commentText }/>
-            <Box>
-               <Button onClick={ handleCreateSubmit } variant="contained" endIcon={<EmojiEmotionsIcon />} size="large">COMMENT!</Button>
-            </Box>
-       </Box>
+       <div className={ styles.comment_write }>
+            <TextField value={ textValue } multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4}
+            onChange={ handleTextValueChange }/>
+
+            <Button variant="contained" endIcon={<EmojiEmotionsIcon/>} size="large"
+            onClick={ handleCreateComment }>COMMENT!</Button>
+       </div>
     )
 }
 
-// export default function CommentWrite({ contentId, setRefreshFeedback }) {
-//     const { content, setContent, handleInputChange } = useSetData()
-//     const { uploadComment } = useUploadData()
-//     const { open, snackbarKey, handleSnackbarOpne, handleSnackbarClose } = useSnackbar()
-//     // 클라이언트에서 세션데이터는 오직, 로그인 여부만 확인
-//     const session = useSession();
 
-//     const handleWriteSubmit = async () => {
-//         await uploadComment(content, contentId)      
-//         setRefreshFeedback(true)
-//         // 코멘트 업로드후, TextFiled의 글자가 지워질수 있게 value를 ''로 바꿔줌
-//         setContent({...content, comment : ''})
-//         handleSnackbarOpne()
-//     }
-    
-//     // 로그인
-//     if(session.data) return (
-//         <div className={ styles.comment_write }>
-//             <TextField onChange={(e)=>{ handleInputChange(e) }} name="comment" multiline fullWidth placeholder="코멘트를 남겨주세요!" margin="normal" minRows={4} value={content.comment}/>
-//             <div className={ styles.btn_box }>
-//                 <Button className={ styles.btn } onClick={()=>{ handleWriteSubmit() }} variant="contained" endIcon={<EmojiEmotionsIcon />} size="large">COMMENT!</Button>
-//             </div>
-//             <AlertSnackbar open={open} snackbarKey={snackbarKey} handleSnackbarClose={handleSnackbarClose}>
-//                 코멘트 작성완료!
-//             </AlertSnackbar>
-            
-//         </div>
-//     )
-//     // 비로그인
-//     if(!session.data) return (
-//         <div className={ styles.comment_write }>
-//             <TextField name="comment" multiline fullWidth placeholder="로그인후, 이용해주세요!" margin="normal" minRows={4} disabled/>
-//         </div>
-//     )
-// }
+

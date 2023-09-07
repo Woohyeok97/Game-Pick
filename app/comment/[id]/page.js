@@ -1,47 +1,51 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
-import { CommentContext } from './layout'
+import styles from './comment.module.scss'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+// 커스텀 훅
+import useFetchComment from '@/hook/comment/useFetchComment'
+// MUI
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
 // 컴포넌트
 import CommentNav from './components/commentNav'
 import CommentWrite from './components/commentWrite'
 import CommentItem from './components/commentItem'
-// MUI
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import List from '@mui/material/List'
 
 
 export default function Comment({ params, searchParams }) {
-    const { comment, fetchComment, nextComment, fetchOption } = useContext(CommentContext)
-    const [ isLoading, setIsLoading ] = useState(true)
-    const session = useSession()
-
     const contentId = params.id
     const contentTitle = searchParams.title
+    const commentList = useSelector((state) => state.commentList)
 
-    const setComments = async () => {
-        await fetchComment(contentId, 2)
-        setIsLoading(false)
-    }
+    const { requestfetchComment, setToCommentList, sortOption, setSortOption } = useFetchComment()
+    const [ hasNext, setHasNext ] = useState(false)
 
     useEffect(()=>{
-        setComments()
-    }, [fetchOption])
+        loadComment()
+    }, [sortOption])
+
+
+    async function loadComment() {
+        const fetched = await requestfetchComment(contentId, 2)
+    
+        if(fetched.result.length) {
+            setToCommentList(fetched.result)
+            setHasNext(fetched.hasNext)
+        }
+    }
 
     return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '5% 20%' }}>
-            <CommentNav contentTitle={ contentTitle } /> 
+        <div className={ styles.comment }>
+            <CommentNav contentTitle={ contentTitle } setSortOption={ setSortOption }/> 
             <CommentWrite contentId={ contentId } />
-
-            { !isLoading &&
             <List>
-                { comment.length
-                ? comment.map((item)=> <CommentItem key={item._id} comment={ item } session={ session } />)
+                { commentList.length
+                ? commentList.map((item)=> <CommentItem key={item._id} comment={ item } />)
                 : <div>아직 코멘트가 없어요~</div> }
-            </List> }
+            </List> 
 
-            { nextComment && <Button onClick={()=>{ fetchComment(contentId, 2) }}>더보기</Button> }
-        </Box>
+            { hasNext && <Button onClick={ loadComment }>더보기</Button> }
+        </div>
     )
 }

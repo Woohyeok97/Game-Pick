@@ -13,17 +13,17 @@ import CommentCard from './commentCard';
 
 
 export default function UserComments({ content }) {
-    const { comment, fetchComment } = useFetchComment()
+    // const { comment, fetchComment } = useFetchComment()
     const [ isLoading, setIsLoading ] = useState(true)
     
-    const setComments = async () => {
-        await fetchComment(content._id, 4)
-        setIsLoading(false)
-    }
+    // const setComments = async () => {
+    //     await fetchComment(content._id, 4)
+    //     setIsLoading(false)
+    // }
 
-    useEffect(()=>{
-        setComments()
-    }, [])
+    // useEffect(()=>{
+    //     setComments()
+    // }, [])
 
 
     return (
@@ -35,12 +35,7 @@ export default function UserComments({ content }) {
                 </Link>
             </Box>
 
-            { !isLoading &&
-            <List sx={{ display: 'flex', justifyContent : 'space-between', width : comment.length ? `${comment.length * 25}%` : '100%', gap : '32px' }} > {/* 코멘트 개수에 따른 width 설정 */}
-                { comment.length 
-                ? comment.map((item) => <CommentCard key={item._id} comment={ item }/> ) 
-                : <div>아직 코멘트가 없어요~</div> }
-            </List> }
+
         </Box>
     )
 }
