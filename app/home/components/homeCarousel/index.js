@@ -18,7 +18,7 @@ export default function HomeCarosel() {
             <div className={ styles.carousel }>
             { contentList.map((content, i) => (
                     <CSSTransition in={ caroselIndex == i } timeout={3000} classNames="slide" key={content._id} unmountOnExit>
-                            <CarouselItem content={ content } />
+                        <CarouselItem content={ content } />
                     </CSSTransition>
             ))}
             </div>
