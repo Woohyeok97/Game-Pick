@@ -18,7 +18,7 @@ export default function useFeedback(data, collection) {
                 setUserFeedback(result)
             }
         }
-        console.log('useEffect실행됨!')
+
         getUserFeedback()
     }, [session])
 

@@ -17,7 +17,7 @@ export default function CommentNav({ contentTitle, setSortOption }) {
         dispatch(clearCommentList())
         setSortOption(e.target.value)
     }
-
+ 
     return (
         <Box sx={{ display : 'flex', justifyContent : 'space-between', alignItems : 'center', borderBottom : '1px solid #000000', pb : '16px'}}>
             <Typography>{ contentTitle }</Typography>

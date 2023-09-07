@@ -1,5 +1,6 @@
 'use client'
 import styles from './comment.module.scss'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 // 커스텀 훅
 import useFetchComment from '@/hook/comment/useFetchComment'
@@ -10,7 +11,6 @@ import List from '@mui/material/List'
 import CommentNav from './components/commentNav'
 import CommentWrite from './components/commentWrite'
 import CommentItem from './components/commentItem'
-import { useEffect, useState } from 'react'
 
 
 export default function Comment({ params, searchParams }) {
@@ -25,10 +25,10 @@ export default function Comment({ params, searchParams }) {
         loadComment()
     }, [sortOption])
 
-        
+
     async function loadComment() {
         const fetched = await requestfetchComment(contentId, 2)
-
+    
         if(fetched.result.length) {
             setToCommentList(fetched.result)
             setHasNext(fetched.hasNext)
