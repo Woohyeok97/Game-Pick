@@ -5,7 +5,13 @@ import axios from "axios"
 import usePresignedURL from "../S3/usePresignedURL"
 
 export default function useCreateContent() {
-    const [ content, setContent ] = useState({})
+    const [ content, setContent ] = useState({
+        title : '',
+        createDate : '',
+        image : '',
+        trailerURL : '',
+    })
+    
     const { fetchPresignedURL, uploadS3 } = usePresignedURL()
 
     const handleContentChange = async (e) => {
@@ -37,7 +43,8 @@ export default function useCreateContent() {
             const submission = { content }
 
             const response = await axios.post(uri, submission)
-            console.log(response.data)
+            console.log(response)
+            return response.data
 
         } catch(err) {
             console.error(err)

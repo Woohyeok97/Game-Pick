@@ -18,7 +18,7 @@ export default function usePresignedURL() {
 
         } catch(err) {
             console.error(err)
-            return
+            throw err
         }
     }
 
@@ -30,13 +30,13 @@ export default function usePresignedURL() {
             Object.entries({ ...imageData.presignedURL.fields, file }).forEach(([key, value]) => {
                 formData.append(key, value)
             })
-
+ 
             const response = await axios.post(imageData.presignedURL.url, formData)
-            return response
+            console.log(response.data)
 
         } catch(err) {
             console.error(err)
-            return err
+            throw err
         }
         
     }

@@ -1,5 +1,8 @@
 'use client'
+import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+// 유틸함수
+import verifyContent from '@/util/verifyData';
 // 커스텀 훅
 import useCreateContent from '@/hook/content/useCreateContent';
 // MUI
@@ -8,33 +11,31 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
+
 export default function Admin() {
     const { content, handleContentChange, createContent, uploadS3 } = useCreateContent()
     const session = useSession()
 
-    const handleCreateSubmit = async () => {
-        const { title, createDate, image, trailerURL } = content;
-
+    useEffect(()=>{
         if(!session.data || session.data.user.role != 'admin') {
-            console.log('관리자 권한이 없습니다.')
-            return
+            alert('관리자 권한이 없습니다.', window.location.href = "/")
         }
-        
-        if(!title || !createDate || !image || !trailerURL) {
-            console.log('컨텐츠 내용을 확인해주세요.')
+    }, [session])
+
+    const handleCreateSubmit = async () => {        
+        if(!verifyContent(content)) {
+            alert('컨텐츠 내용을 확인해주세요.')
             return
         }
 
         if(confirm('컨텐츠를 업로드 할까요?')) {
-            const result = await uploadS3()
-            if(result) {
-                await createContent()
-            }
+            await uploadS3()
+            const result = await createContent()
         }
     }
 
+    if(session.data && session.data.user.role == 'admin') return (
 
-    return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
             <Typography fontSize="2rem" sx={{ mb : '12px' }}>게임 컨텐츠 업로드</Typography>
             <Box sx={{ display : 'flex', flexDirection : 'column' }}>
@@ -52,5 +53,6 @@ export default function Admin() {
                 <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
             </Box>
         </Box>
+        
     )
 }
