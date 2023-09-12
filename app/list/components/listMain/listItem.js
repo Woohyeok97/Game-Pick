@@ -15,7 +15,7 @@ export default function ListItem({ content, session }) {
                         <FeedbackViewer data={ content }/>
                     </div>
                     <div className={ styles.image_box }>
-                        <img src="/너굴맨.jpeg"/>
+                        <img src={ content.image }/>
                     </div>
                     <p>{ content.title }</p>        
                 </Link>

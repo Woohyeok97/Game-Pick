@@ -15,9 +15,10 @@ import Button from '@mui/material/Button'
 export default function Admin() {
     const { content, handleContentChange, createContent, uploadS3 } = useCreateContent()
     const session = useSession()
+    const isAdmin = session.data && session.data.user.role == 'admin'
 
     useEffect(()=>{
-        if(!session.data || session.data.user.role != 'admin') {
+        if(session.status != 'loading' && !isAdmin) {
             alert('관리자 권한이 없습니다.', window.location.href = "/")
         }
     }, [session])

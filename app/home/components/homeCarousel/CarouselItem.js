@@ -4,7 +4,7 @@ export default function CarouselItem({ content }) {
 
     return (
         <div className={ styles.carousel_item }>
-            <img src='/너굴맨.jpeg'/>
+            <img src={ content.image }/>
             <div className={ styles.blur }></div>
             <div className={ styles.carousel_info }>
                 <h1 className={ styles.item_title }>유저 추천</h1>
