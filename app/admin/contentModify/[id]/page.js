@@ -10,12 +10,15 @@ import Button from '@mui/material/Button'
 
 
 export default function ContentModify({ params }) {
-    const { prevContent, handleChangeContent, editContent } = useEditContent(params.id)
+    const { prevContent, handleChangeContent, editContent, uploadS3 } = useEditContent(params.id)
     const { deleteContent } = useDeleteContent()
 
     // 컨텐츠 수정 핸들러 함수
     const handleEditSubmit = async () => {
-        await editContent()
+        const result = await uploadS3()
+        if(result) {
+            await editContent()
+        }
     }
 
     // 컨텐츠 삭제 핸들러 함수

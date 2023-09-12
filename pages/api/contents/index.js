@@ -47,37 +47,4 @@ export default async function handler(req, res) {
             return res.status(500).json({ message : '서버에러 발생' })
         }
     }
-
-    // // GET 요청
-    // if(req.method == 'GET') {
-
-    //     try {
-    //         const db = (await connectDB).db('project')
-    //         let result = []
-    //         const most = await db.collection('game_content_feedback').aggregate([
-    //             {
-    //               $match: { feedback: 'like' } // 'like' 값을 가진 도큐먼트만 선택
-    //             },
-    //             {
-    //               $group: {
-    //                 _id: '$parent', // parent 값에 따라 그룹화
-    //                 count: { $sum: 1 } // 같은 parent 값을 가진 도큐먼트의 수 카운트
-    //               }
-    //             },
-    //             {
-    //               $sort: { count: -1 } // 카운트 값에 따라 내림차순 정렬
-    //             },
-    //             {
-    //               $limit: 3 // 가장 많이 중복되는 parent 값 하나만 선택
-    //             }
-    //             ]).toArray();
-            
-            
-    //         return res.status(200).json({ result : most })
-
-    //     } catch(err) {
-    //         console.error(err)
-    //         return res.status(500).json({ message : '서버 에러발생' })
-    //     }
-    // }
 }

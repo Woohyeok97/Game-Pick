@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 export default function Admin() {
-    const { content, handleChangeContent, createContent } = useCreateContent()
+    const { content, handleContentChange, createContent, uploadS3 } = useCreateContent()
     const session = useSession()
 
     const handleCreateSubmit = async () => {
@@ -26,30 +26,31 @@ export default function Admin() {
         }
 
         if(confirm('컨텐츠를 업로드 할까요?')) {
-            await createContent()
+            const result = await uploadS3()
+            if(result) {
+                await createContent()
+            }
         }
     }
-    
+
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
             <Typography fontSize="2rem" sx={{ mb : '12px' }}>게임 컨텐츠 업로드</Typography>
-
             <Box sx={{ display : 'flex', flexDirection : 'column' }}>
                 <TextField label="타이틀" variant="standard" name="title" sx={{ mb: '36px' }}
-                onChange={ handleChangeContent }/>
+                onChange={ handleContentChange }/>
                 <TextField label="출시일" variant="standard" type="date" name="createDate" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
-                onChange={ handleChangeContent }/>
+                onChange={ handleContentChange }/>
                 <TextField label="이미지" variant="standard" type="file" name="image" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
-                onChange={ handleChangeContent }/>
+                onChange={ handleContentChange }/>
                 <TextField label="트레일러 url" variant="standard" name="trailerURL" sx={{ mb: '36px' }}
-                onChange={ handleChangeContent }/>
+                onChange={ handleContentChange }/>
             </Box>
 
             <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
                 <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
             </Box>
-            
         </Box>
     )
 }

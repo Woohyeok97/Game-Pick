@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { parseISO } from "date-fns"
 import axios from "axios"
+// 커스텀 훅
+import usePresignedURL from "../S3/usePresignedURL"
 
 export default function useCreateContent() {
     const [ content, setContent ] = useState({})
+    const { fetchPresignedURL, uploadS3 } = usePresignedURL()
 
-    const handleChangeContent = (e) => {
+    const handleContentChange = async (e) => {
         let name = e.target.name
         let value
 
@@ -14,7 +17,7 @@ export default function useCreateContent() {
                 value = e.target.value
                 break;
             case 'file' : 
-                value = e.target.files[0].name
+                value = await fetchPresignedURL(e.target.files[0])
                 break;
             case 'date' : 
                 value = parseISO(e.target.value) // 문자열 형식의 날짜를 date객체로 변환하여 value에 할당
@@ -41,5 +44,6 @@ export default function useCreateContent() {
         }
     }
 
-    return { content, setContent, handleChangeContent, createContent }
+
+    return { content, setContent, handleContentChange, createContent, uploadS3 }
 }

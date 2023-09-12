@@ -1,12 +1,19 @@
 import axios from "axios"
 import { format, parseISO } from "date-fns"
 import { useEffect, useState } from "react"
+// 커스텀 훅
+import usePresignedURL from "../S3/usePresignedURL"
 
 export default function useEditContent(contentId) {
     const [ prevContent, setPrevContent ] = useState({})
+    const { fetchPresignedURL, uploadS3 } = usePresignedURL()
+
+    useEffect(()=>{
+        fetchContent()
+    }, [])
 
     // 수정할 컨텐츠 요청 함수
-    const fetchContent = async () => {
+    async function fetchContent() {
         try {
             const uri = process.env.NEXT_PUBLIC_CONTENTS_API + `/${contentId}`
 
@@ -21,13 +28,8 @@ export default function useEditContent(contentId) {
         }
     }
 
-    useEffect(()=>{
-        fetchContent()
-        console.log('useEffect실행됨!')
-    }, [])
-
     // prevContent 수정 핸들러 함수
-    const handleChangeContent = (e) => {
+    const handleChangeContent = async (e) => {
         let name = e.target.name
         let value
 
@@ -36,7 +38,7 @@ export default function useEditContent(contentId) {
                 value = e.target.value
                 break;
             case 'file' : 
-                value = e.target.files[0].name
+                value = await fetchPresignedURL(e.target.files[0])
                 break;
             case 'date' : 
                 value = parseISO(e.target.value) // 문자열 형식의 날짜를 date객체로 변환하여 value에 할당
@@ -64,5 +66,5 @@ export default function useEditContent(contentId) {
         }
     }
 
-    return { prevContent, fetchContent, handleChangeContent, editContent }
+    return { prevContent, fetchContent, handleChangeContent, editContent, uploadS3 }
 }

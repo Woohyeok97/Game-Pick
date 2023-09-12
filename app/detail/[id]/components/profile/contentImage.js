@@ -11,11 +11,11 @@ export default function ContentImage({ content }) {
     const handleClick = () => {
         setOpenTrailer((prev) => !prev)
     }
-
+    
     return (
         <div className={ styles.content_image }>
             <div className={ styles.image_box } onClick={ handleClick }>
-                <img src={`/너굴맨배경.jpeg`}/>
+                <img src={ content.image }/>
                 <p className={ styles.trailer_click }>트레일러?</p>
             </div>
 
