@@ -10,6 +10,7 @@ export default function useSubmitFeedback(data, collection) {
 
             const response = await axios.get(uri, { params : submitData })
             return response.data.result
+            console.log(response.data)
 
         } catch(err) {
             console.log(err)
