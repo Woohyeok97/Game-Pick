@@ -16,7 +16,7 @@ export default function Profile({ content }) {
                     <p>{ formatDate(content.createDate) } 출시</p>
                     <h1>{ content.title }</h1>
                 </div>
-                <ContentFeedback content={ content }/>
+                {/* <ContentFeedback content={ content }/> */}
             </div>
         </div>
     )

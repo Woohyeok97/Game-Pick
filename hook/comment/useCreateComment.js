@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 // reducer
 import { addComment } from "@/redux/features/commentListSlice";
 
-export default function useCreateComment() {
+export default function useCreateComment({ contentId }) {
     const [ textValue, setTextValue ] = useState('')
     const dispatch = useDispatch()
     
     // 코멘트 업로드 요청 함수
-    const requestCreateComment = async (contentId) => {
+    const requestCreateComment = async () => {
         const uri = process.env.NEXT_PUBLIC_COMMENTS_API
         const submission = { contentId, textValue }
         
@@ -17,14 +17,16 @@ export default function useCreateComment() {
             const response = await axios.post(uri, submission)
             return response.data.result.insertedData
         } catch(err) {
-            console.error(err)
+            throw err
         }
     }
 
-    const addToCommentList = (insertedData) => {
+    const addToCommentList = async () => {
+        const insertedData = await requestCreateComment(contentId)
+        
         dispatch(addComment(insertedData))
         setTextValue('')
     } 
 
-    return { textValue, setTextValue, requestCreateComment, addToCommentList }
+    return { textValue, setTextValue, addToCommentList }
 }

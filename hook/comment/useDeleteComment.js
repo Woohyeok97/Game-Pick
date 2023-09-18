@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux"
 import { deleteComment } from "@/redux/features/commentListSlice"
 
 
-export default function useDeleteComment() {
+export default function useDeleteComment({ comment }) {
     const dispatch = useDispatch()
 
-    const requestDeleteComment = async (comment) => {
+    const requestDeleteComment = async () => {
         try {
             const uri = process.env.NEXT_PUBLIC_COMMENTS_API + `/${comment._id}`
             const submission = { userEmail : comment.userEmail }
@@ -16,12 +16,14 @@ export default function useDeleteComment() {
             return response.data.result
         } catch(err) {
             console.log(err)
+            throw err
         }
     }
 
-    const deleteToCommentList = (deletedCommentId) => {
+    const deleteToCommentList = async () => {
+        const deletedCommentId = await requestDeleteComment(comment)
         dispatch(deleteComment(deletedCommentId))
     }
 
-    return { requestDeleteComment, deleteToCommentList }
+    return { deleteToCommentList }
 }

@@ -9,7 +9,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 
 export default function CommentWrite({ contentId }) {
-    const { textValue, setTextValue, requestCreateComment, addToCommentList } = useCreateComment()
+    const { textValue, setTextValue, addToCommentList } = useCreateComment({ contentId : contentId })
     const session = useSession()
     
     const handleTextValueChange = (e) => {
@@ -25,12 +25,7 @@ export default function CommentWrite({ contentId }) {
             console.log('코멘트 내용을 확인해 주세요!')
             return
         }
-        
-        const insertedData = await requestCreateComment(contentId)
-
-        if(insertedData) {
-            addToCommentList(insertedData)
-        }
+        await addToCommentList()
     }
  
 

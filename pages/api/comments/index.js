@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 filter._id = { $nin : skipComment.map((item) => new ObjectId(item._id)) }
             }
 
-            const result = await db.collection('comments')
+            const commentList = await db.collection('comments')
             .find(filter)
             .sort({[sortOption] : -1, _id : 1}) // 기준이 같으면 먼저 생성된 코멘트를 기준으로 함
             .limit(limit + 1)  
@@ -31,12 +31,12 @@ export default async function handler(req, res) {
             //현재요청 이후 더 가져올수있는 코멘트가 존재하는지 확인 
             let hasNext = false
 
-            if(result.length > limit) {
+            if(commentList.length > limit) {
                 hasNext = true
-                result.pop() // 더 가져올수있는 코멘트 존재 확인후, limit 값에 맞게 result를 수정
+                commentList.pop() // 더 가져올수있는 코멘트 존재 확인후, limit 값에 맞게 result를 수정
             }
             
-            return res.status(200).json({ result, hasNext })
+            return res.status(200).json({ commentList, hasNext })
 
         } catch(err) {
             console.error(err)
