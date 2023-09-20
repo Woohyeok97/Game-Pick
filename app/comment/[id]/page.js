@@ -12,7 +12,6 @@ import CommentWrite from './components/commentWrite'
 import CommentItem from './components/commentItem'
 
 
-// 이컴포넌트는 ui만 신경써 코멘트를 어떻게 가져오고 나발이고는 훅이 담당할거야 컴포넌트는 렌더링만해
 export default function Comment({ params, searchParams }) {
     const contentId = params.id
     const contentTitle = searchParams.title
@@ -23,7 +22,6 @@ export default function Comment({ params, searchParams }) {
         limit : 2,
     })
     
-
     return (
         <div className={ styles.comment }>
             <CommentNav contentTitle={ contentTitle } setSortOption={ setSortOption }/> 
@@ -33,7 +31,6 @@ export default function Comment({ params, searchParams }) {
                 ? commentList.map((item)=> <CommentItem key={item._id} comment={ item } />)
                 : <div>아직 코멘트가 없어요~</div> }
             </List> 
-
             { hasNext && <Button onClick={ setToCommentList }>더보기</Button> }
         </div>
     )

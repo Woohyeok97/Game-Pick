@@ -1,7 +1,10 @@
 'use client'
+import { useDispatch } from "react-redux";
 import { useSession } from "next-auth/react";
 // 커스텀 훅
 import useFeedback from "@/hook/feedback/useFeedback";
+// reducer
+import { opneSnackbar } from "@/redux/features/snackbarStateSlice";
 // MUI
 import Box from "@mui/material/Box"
 import IconButton from '@mui/material/IconButton';
@@ -12,18 +15,24 @@ import Typography from "@mui/material/Typography";
 
 
 export default function FeedbackButton({ data }) {
-    const { feedbackCount, userFeedback, updateFeedback } = useFeedback(data, 'comments')
+    const dispatch = useDispatch()
     const session = useSession()
-
+    const { feedbackCount, userFeedback, updateFeedback } = useFeedback({
+        data : data,
+        collection : 'comments',
+        session : session,
+    })
+    
     // 피드백 핸들러
     const handleChangeFeedback = async (e) => {
-        const type = e.currentTarget.name  
-    
         if(!session.data) {
-            alert('로그인 이후 이용해주세요!')
+            dispatch(opneSnackbar({ severity : 'warning', message : '로그인 이후 이용해 주세요.' }))
             return
-        }    
-        await updateFeedback(type)
+        }
+        
+        const type = e.currentTarget.name          
+        const result = await updateFeedback(type)
+        dispatch(opneSnackbar(result))
     }
     
     return (

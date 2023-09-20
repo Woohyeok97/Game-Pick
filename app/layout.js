@@ -1,9 +1,10 @@
 import './globals.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
+import ReduxProvider from '@/redux/reduxProvider'
 // 컴포넌트
 import Header from '@/component/header/header'
-
+import SnackbarMessage from '@/component/snackbarMessage/snackbarMessage'
 // 폰트
 import { Noto_Sans_KR } from 'next/font/google'
 import FontProvider from './fontProvider'
@@ -21,8 +22,11 @@ export default async function RootLayout({ children }) {
         <html lang="ko">
             <body className={ notoSansKorean.className }>
                 <FontProvider>
-                    <Header session={ session }/>
-                    { children }
+                    <ReduxProvider>
+                        <Header session={ session }/>
+                        { children }
+                        <SnackbarMessage/>
+                    </ReduxProvider>
                 </FontProvider>
             </body>
         </html>

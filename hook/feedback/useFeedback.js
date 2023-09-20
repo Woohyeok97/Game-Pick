@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import useSubmitFeedback from "./useSubmitFeedback"
 
-export default function useFeedback(data, collection) {
-    const [ isLoading, setIsLoading ] = useState(false)
+
+export default function useFeedback({ data, collection, session }) {
     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
     const [ userFeedback, setUserFeedback ] = useState('')
     
@@ -14,8 +14,9 @@ export default function useFeedback(data, collection) {
     }
     
     useEffect(()=>{
-        getUserFeedback()
+        if(session.data) getUserFeedback()
     }, [])
+
 
     const optimisticallyUpdateFeedback = (type, increment, feedbackType = type) => {
         setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + increment }))
@@ -41,7 +42,7 @@ export default function useFeedback(data, collection) {
         getUserFeedback()
     }
        // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수
-    const rollbackedFeedback = (prevFeedbackCount, prevUserFeedback) => {
+    const rollbackFeedback = (prevFeedbackCount, prevUserFeedback) => {
         setFeedbackCount(prevFeedbackCount)
         setUserFeedback(prevUserFeedback)
     }
@@ -51,9 +52,6 @@ export default function useFeedback(data, collection) {
     const updateFeedback = async (type) => {
         const prevFeedbackCount = { ...feedbackCount }
         const prevUserFeedback = { ...userFeedback }
-        
-        if(isLoading) return
-        setIsLoading(true)
 
         try {
             if(!userFeedback) {
@@ -63,12 +61,13 @@ export default function useFeedback(data, collection) {
             } else {
                 await switchFeedback(type)
             }
+            return { severity : 'success', message : '피드백 완료!' }
         } catch(err) {
-            rollbackedFeedback(prevFeedbackCount, prevUserFeedback)
-        } finally {
-            setIsLoading(false)
-        }
+            rollbackFeedback(prevFeedbackCount, prevUserFeedback)
+            return { severity : 'error', message : '피드백 실패, 다시 한번 시도 해주세요.' }
+        } 
     }
+
 
  
     return { feedbackCount, userFeedback, updateFeedback }
