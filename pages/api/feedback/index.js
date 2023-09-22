@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if(!session) return res.status(400).json({ message : '유저정보를 찾을수 없습니다.' })
         try {
             const result = await db.collection('feedback').findOne({ parent : req.query.parent, userEmail : session.user.email })
-            return res.status(200).json({ result : result })
+            return res.status(200).json(result)
         } catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 await db.collection('feedback').deleteOne({ _id: feedbackResult.insertedId });
                 throw new Error('피드백 개수 업데이트 실패');
             }
-            return res.status(200).json({ message : '피드백 생성완료' })
+            return res.status(200).json({ message : '피드백 완료!' })
         } catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })

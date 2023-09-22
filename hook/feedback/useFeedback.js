@@ -1,158 +1,145 @@
 import { useState, useEffect } from "react"
-import useSubmitFeedback from "./useSubmitFeedback"
-
+// axios 인스턴스
+import { feedbackInstance } from "@/util/api"
 
 export default function useFeedback({ data, collection, session }) {
     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
     const [ userFeedback, setUserFeedback ] = useState('')
     
-    const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
+    // 개선하고싶은거
+    // 5. 옵티미스틱 업데이트 가능한지
 
-    const getUserFeedback = async () => {
-        const result = await fetchUserFeedback()
+    // 유저 피드백 여부 요청
+    const fetchUserFeedback = async () => {
+        const submission = { parent : data._id } 
+        const result = await feedbackInstance.get('/', { params : submission })
+        
         setUserFeedback(result)
     }
-    
-    useEffect(()=>{
-        if(session.data) getUserFeedback()
-    }, [])
 
+    // 피드백 생성
+    const createFeedback = async (type) => {
+        const submission = { parent : data._id, type, collection } 
+        await feedbackInstance.post('/', submission )
 
-    const optimisticallyUpdateFeedback = (type, increment, feedbackType = type) => {
-        setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + increment }))
-        setUserFeedback((prev) => ({ ...prev, type : feedbackType }))
+        setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + 1 }))
     }
-    const newFeedback = async (type) => {
-        optimisticallyUpdateFeedback(type, 1)
-        await createFeedback(type)
-        getUserFeedback()
-    }
-    const delFeedback = async (type) => {
-        optimisticallyUpdateFeedback(type, -1, null)
-        await deleteFeedback(userFeedback)
-        getUserFeedback()
-    }
-    const switchFeedback = async (type) => {
-        const prevUserFeedback = userFeedback
-        optimisticallyUpdateFeedback(prevUserFeedback.type, -1)
-        optimisticallyUpdateFeedback(type, 1)
+
+    // 피드백 삭제
+    const deleteFeedback = async () => {
+        const submission = { userFeedback : JSON.stringify(userFeedback), collection }
+        await feedbackInstance.delete(`/${userFeedback._id}`, { params : submission })
         
-        await deleteFeedback(prevUserFeedback)
-        await createFeedback(type)
-        getUserFeedback()
-    }
-       // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수
-    const rollbackFeedback = (prevFeedbackCount, prevUserFeedback) => {
-        setFeedbackCount(prevFeedbackCount)
-        setUserFeedback(prevUserFeedback)
+        setFeedbackCount((prev) => ({ ...prev, [userFeedback.type] : prev[userFeedback.type] - 1 }))
     }
 
+    // 피드백 바꾸기
+    const switchFeedback = async (type) => {
+        const submission = { userFeedback : JSON.stringify(userFeedback), type, collection }
+        await feedbackInstance.put(`/${userFeedback._id}`, submission)
 
-    // 피드백 옵티미스틱 업데이트
+        setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + 1, [userFeedback.type] : prev[userFeedback.type] - 1 }))
+    }
+    
+    // 경우에 따른 피드백 업데이트
     const updateFeedback = async (type) => {
-        const prevFeedbackCount = { ...feedbackCount }
-        const prevUserFeedback = { ...userFeedback }
-
         try {
             if(!userFeedback) {
-                await newFeedback(type)
-            } else if(userFeedback.type == type) {
-                await delFeedback(type)
-            } else {
+                await createFeedback(type)
+            } else if(userFeedback.type != type) {
                 await switchFeedback(type)
-            }
+            } else if(userFeedback.type == type) {
+                await deleteFeedback()
+                setUserFeedback('')
+                return { severity : 'success', message : '피드백 취소' }
+            }  
+            await fetchUserFeedback()
+
             return { severity : 'success', message : '피드백 완료!' }
-        } catch(err) {
-            rollbackFeedback(prevFeedbackCount, prevUserFeedback)
+        } catch {
             return { severity : 'error', message : '피드백 실패, 다시 한번 시도 해주세요.' }
-        } 
+        }
     }
 
+
+    useEffect(()=>{
+        if(session.data) fetchUserFeedback()
+    }, [])
 
  
     return { feedbackCount, userFeedback, updateFeedback }
 }
-// import { useSession } from "next-auth/react"
 // import { useState, useEffect } from "react"
 // import useSubmitFeedback from "./useSubmitFeedback"
 
-// export default function useFeedback(data, collection) {
-//     const [ feedbackCuont, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
+
+// export default function useFeedback({ data, collection, session }) {
+//     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
 //     const [ userFeedback, setUserFeedback ] = useState('')
-//     const [ isFeed, setIsFeed ] = useState(false)
-//     const session = useSession()
-
-//     const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
     
-//     // 컴포넌트 마운트시, 기존 유저피드백 정보 가져오기
-//     useEffect(()=>{
-//         const getUserFeedback = async () => {
-//             if(session.data) {
-//                 const result = await fetchUserFeedback()
-//                 setUserFeedback(result)
-//             }
-//         }
+//     const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
 
-//         getUserFeedback()
-//     }, [session])
-
-
-//     // 피드백 옵티미스틱 업데이트
-//     const updateFeedback = async (name) => {
-//         if(isFeed) return
-//         setIsFeed(true)
-//         // 1. 기존 피드백 없을때(피드백 생성)
-//         if(!userFeedback) {
-//             setFeedbackCount((prev) => {
-//                 return {...prev, [name] : prev[name] + 1}
-//             })
-//             setUserFeedback({ type : name })
-//             await createFeedback(name)
-
-//             const result = await fetchUserFeedback() 
-//             setUserFeedback(result)
-//             setIsFeed(false)
-//             return
-//             // 2. 기존 피드백과 같은 피드백일때(삭제)
-//         } else if(userFeedback.type == name){
-//             setFeedbackCount((prev) => {
-//                 return {...prev, [name] : prev[name] - 1}
-//             })
-//             setUserFeedback((prev) => {
-//                 return {...prev, type : null }
-//             })
-//             await deleteFeedback(userFeedback)
-
-//             const result = await fetchUserFeedback() 
-//             setUserFeedback(result)
-//             // 3. 기존 피드백과 다른 피드백일때(기존피드백 삭제후, 피드백 생성)
-//         } else {
-//             setFeedbackCount((prev) => {
-//                 return {...prev, [name] : prev[name] + 1, [userFeedback.type] : prev[userFeedback.type] - 1}
-//             })
-//             setUserFeedback((prev) => {
-//                 return {...prev, type : name }
-//             })
-//             await deleteFeedback(userFeedback)
-//             await createFeedback(name)
-            
-//             const result = await fetchUserFeedback() 
-//             setUserFeedback(result)
-//         }
-
-//         setIsFeed(false)
+//     const getUserFeedback = async () => {
+//         const result = await fetchUserFeedback()
+//         setUserFeedback(result)
 //     }
+    
+//     useEffect(()=>{
+//         if(session.data) getUserFeedback()
+//     }, [])
 
-//     // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수
-//     const rollbackedFeedback = () => {
-//         // 업데이트전 피드백 데이터 저장
-//         const prevFeedbackCount = { ...feedbackCuont }
-//         const prevUserFeedback = { ...userFeedback }
 
+//     const optimisticallyUpdateFeedback = (type, increment, feedbackType = type) => {
+//         setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + increment }))
+//         setUserFeedback((prev) => ({ ...prev, type : feedbackType }))
+//     }
+//     const newFeedback = async (type) => {
+//         optimisticallyUpdateFeedback(type, 1)
+//         await createFeedback(type)
+//         getUserFeedback()
+//     }
+//     const delFeedback = async (type) => {
+//         optimisticallyUpdateFeedback(type, -1, null)
+//         await deleteFeedback(userFeedback)
+//         getUserFeedback()
+//     }
+//     const switchFeedback = async (type) => {
+//         const prevUserFeedback = userFeedback
+//         optimisticallyUpdateFeedback(prevUserFeedback.type, -1)
+//         optimisticallyUpdateFeedback(type, 1)
+        
+//         await deleteFeedback(prevUserFeedback)
+//         await createFeedback(type)
+//         getUserFeedback()
+//     }
+//        // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수
+//     const rollbackFeedback = (prevFeedbackCount, prevUserFeedback) => {
 //         setFeedbackCount(prevFeedbackCount)
 //         setUserFeedback(prevUserFeedback)
 //     }
 
 
-//     return { feedbackCuont, userFeedback, updateFeedback, rollbackedFeedback }
+//     // 피드백 옵티미스틱 업데이트
+//     const updateFeedback = async (type) => {
+//         const prevFeedbackCount = { ...feedbackCount }
+//         const prevUserFeedback = { ...userFeedback }
+
+//         try {
+//             if(!userFeedback) {
+//                 await newFeedback(type)
+//             } else if(userFeedback.type == type) {
+//                 await delFeedback(type)
+//             } else {
+//                 await switchFeedback(type)
+//             }
+//             return { severity : 'success', message : '피드백 완료!' }
+//         } catch(err) {
+//             rollbackFeedback(prevFeedbackCount, prevUserFeedback)
+//             return { severity : 'error', message : '피드백 실패, 다시 한번 시도 해주세요.' }
+//         } 
+//     }
+
+
+ 
+//     return { feedbackCount, userFeedback, updateFeedback }
 // }

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 // 커스텀 훅
 import useFeedback from "@/hook/feedback/useFeedback";
 // reducer
-import { opneSnackbar } from "@/redux/features/snackbarStateSlice";
+import { openSnackbar } from "@/redux/features/snackbarStateSlice";
 // MUI
 import Box from "@mui/material/Box"
 import IconButton from '@mui/material/IconButton';
@@ -22,21 +22,22 @@ export default function FeedbackButton({ data }) {
         collection : 'comments',
         session : session,
     })
-    
+
     // 피드백 핸들러
     const handleChangeFeedback = async (e) => {
         if(!session.data) {
-            dispatch(opneSnackbar({ severity : 'warning', message : '로그인 이후 이용해 주세요.' }))
+            dispatch(openSnackbar({ severity : 'warning', message : '로그인 이후 이용해 주세요.' }))
             return
         }
         
         const type = e.currentTarget.name          
         const result = await updateFeedback(type)
-        dispatch(opneSnackbar(result))
+        dispatch(openSnackbar(result))
     }
-    
+
     return (
         <Box sx={{ display : 'flex' }}>
+            <button onClick={()=>{ console.log(userFeedback) }}>sad</button>
             {/* 좋아요 버튼 */}
             <IconButton size="small" name="like" onClick={ handleChangeFeedback }
              color={ userFeedback && userFeedback.type == "like" ? "primary" : "default" }>

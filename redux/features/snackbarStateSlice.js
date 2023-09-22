@@ -11,7 +11,7 @@ const snackbarState = createSlice({
     initialState,
 
     reducers : {
-        opneSnackbar : (state, action) => {
+        openSnackbar : (state, action) => {
             state.opne = true
             state.severity = action.payload.severity
             state.message = action.payload.message
@@ -23,4 +23,4 @@ const snackbarState = createSlice({
 })
 
 export default snackbarState
-export const { opneSnackbar, closeSnackbar } = snackbarState.actions
+export const { openSnackbar, closeSnackbar } = snackbarState.actions

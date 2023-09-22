@@ -20,7 +20,7 @@ export default function ContentModify({ params }) {
             await editContent()
         }
     }
-
+    console.log(prevContent)
     // 컨텐츠 삭제 핸들러 함수
     const handleDeleteSubmit = async () => {
         if(confirm('컨텐츠를 삭제하겠습니까?')) {
