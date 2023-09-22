@@ -1,7 +1,10 @@
 'use client'
+import { useDispatch } from 'react-redux';
 // 커스텀훅
 import useEditContent from '@/hook/content/useEditContent';
 import useDeleteContent from '@/hook/content/useDeleteContent';
+// reducer
+import { openSnackbar } from '@/redux/features/snackbarStateSlice';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
@@ -10,45 +13,46 @@ import Button from '@mui/material/Button'
 
 
 export default function ContentModify({ params }) {
-    const { prevContent, handleChangeContent, editContent, uploadS3 } = useEditContent(params.id)
-    const { deleteContent } = useDeleteContent()
+    const dispatch = useDispatch()
+    const { prevContent, editContent, updateContent } = useEditContent({ contentId : params.id })
+    const { deleteContent } = useDeleteContent({ contentId : params.id })
 
-    // 컨텐츠 수정 핸들러 함수
+    // 컨텐츠 수정 핸들러
     const handleEditSubmit = async () => {
-        const result = await uploadS3()
-        if(result) {
-            await editContent()
+        if(confirm('컨텐츠를 수정하겠습니까?')) {
+            const result = await updateContent()
+            dispatch(openSnackbar(result))
         }
     }
-    console.log(prevContent)
-    // 컨텐츠 삭제 핸들러 함수
+ 
+    // 컨텐츠 삭제 핸들러
     const handleDeleteSubmit = async () => {
         if(confirm('컨텐츠를 삭제하겠습니까?')) {
-            await deleteContent(params.id)
-            alert('컨텐츠 삭제완료!')
+            const result = await deleteContent()
+            alert(result)
         }
     }
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
+            <button onClick={()=>{ console.log(prevContent) }}>click</button>
             <Typography fontSize="2rem" sx={{ mb : '36px' }}>게임 컨텐츠 수정</Typography>
-
             <Box sx={{ display : 'flex', flexDirection : 'column' }}>
-                <TextField label="타이틀" variant="outlined" name="title" defaultValue={ prevContent.title } sx={{ mb: '36px' }}
+                <TextField label="타이틀" variant="outlined" name="title" value={ prevContent.title || '' } sx={{ mb: '36px' }}
                 InputLabelProps={{ shrink : true }}
-                onChange={ handleChangeContent } />
+                onChange={ editContent } />
 
-                <TextField label="출시일" variant="outlined" type="date" name="createDate" defaultValue={ prevContent.createDate }  sx={{ mb: '36px' }}
+                <TextField label="출시일" variant="outlined" type="date" name="createDate" defaultValue={ prevContent.createDate || '' }  sx={{ mb: '36px' }}
                 InputLabelProps={{ shrink : true }}
-                onChange={ handleChangeContent } />
+                onChange={ editContent } />
 
-                <TextField label="이미지" variant="outlined" type="file" name="image" defaultValue={ prevContent.image } sx={{ mb: '36px' }}
+                <TextField label="이미지" variant="outlined" type="file" name="image" defaultValue={ prevContent.image || '' } sx={{ mb: '36px' }}
                 InputLabelProps={{ shrink : true }}
-                onChange={ handleChangeContent } />
+                onChange={ editContent } />
 
-                <TextField label="트레일러 url" variant="outlined" name="trailerURL" defaultValue={ prevContent.trailerURL } sx={{ mb: '36px' }}
+                <TextField label="트레일러 url" variant="outlined" name="trailerURL" defaultValue={ prevContent.trailerURL || '' } sx={{ mb: '36px' }}
                 InputLabelProps={{ shrink : true }}
-                onChange={ handleChangeContent } />
+                onChange={ editContent } />
             </Box>
 
             <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>

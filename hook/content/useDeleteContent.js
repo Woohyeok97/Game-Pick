@@ -1,18 +1,17 @@
+import { contentInstance } from "@/util/api/instance/contentInstance"
 import axios from "axios"
 
 
-export default function useDeleteContent() {
+export default function useDeleteContent({ contentId }) {
 
-    // 컨텐츠 삭제 요청 함수
-    const deleteContent = async (contentId) => {
+    // 컨텐츠 삭제 요청
+    const deleteContent = async () => {
         try {
-            const uri = process.env.NEXT_PUBLIC_CONTENTS_API + `/${contentId}`
-
-            const response = await axios.delete(uri)
-            console.log(response.data)
+            const response = await contentInstance.delete(`/${contentId}`)
+            return response.message
         } catch(err) {
             console.error(err)
-            return
+            return err.message
         }
     }
 

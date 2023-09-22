@@ -16,7 +16,7 @@ export default async function handler(req, res) {
             const result = await db.collection('contents').findOne({ _id : new ObjectId(req.query) })
             if(!result) return res.status(400).json({ message : '해당 컨텐츠를 찾을수 없습니다.' })
 
-            return res.status(200).json({ result : result, message : '컨텐츠 요청성공' })
+            return res.status(200).json({ result, message : '컨텐츠 요청성공' })
         } catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             const { _id, ...editContent } = req.body.prevContent
             const result = await db.collection('contents').updateOne({ _id : new ObjectId(req.query) }, { $set : editContent })
 
-            return res.status(200).json({ result : result, message : '컨텐츠 수정완료' })
+            return res.status(200).json({ result, message : '컨텐츠 수정완료' })
         } catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
             // 4. 컨텐츠 삭제
             const result = await db.collection('contents').deleteOne({ _id : new ObjectId(req.query.id) })
 
-            return res.status(200).json({ result : result, message : '컨텐츠 삭제완료' })
+            return res.status(200).json({ result, message : '컨텐츠 삭제완료!' })
         }catch(err) {
             console.log(err)
             return res.status(500).json({ message : '서버에러 발생' })

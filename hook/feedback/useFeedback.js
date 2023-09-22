@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 // axios 인스턴스
-import { feedbackInstance } from "@/util/api"
+import { feedbackInstance } from "@/util/api/instance/feedbackInstance"
 
 export default function useFeedback({ data, collection, session }) {
     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
@@ -12,9 +12,9 @@ export default function useFeedback({ data, collection, session }) {
     // 유저 피드백 여부 요청
     const fetchUserFeedback = async () => {
         const submission = { parent : data._id } 
-        const result = await feedbackInstance.get('/', { params : submission })
+        const response = await feedbackInstance.get('/', { params : submission })
         
-        setUserFeedback(result)
+        setUserFeedback(response)
     }
 
     // 피드백 생성
@@ -56,7 +56,8 @@ export default function useFeedback({ data, collection, session }) {
             await fetchUserFeedback()
 
             return { severity : 'success', message : '피드백 완료!' }
-        } catch {
+        } catch(err) {
+            console.log(err)
             return { severity : 'error', message : '피드백 실패, 다시 한번 시도 해주세요.' }
         }
     }
@@ -69,77 +70,3 @@ export default function useFeedback({ data, collection, session }) {
  
     return { feedbackCount, userFeedback, updateFeedback }
 }
-// import { useState, useEffect } from "react"
-// import useSubmitFeedback from "./useSubmitFeedback"
-
-
-// export default function useFeedback({ data, collection, session }) {
-//     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
-//     const [ userFeedback, setUserFeedback ] = useState('')
-    
-//     const { fetchUserFeedback, createFeedback, deleteFeedback } = useSubmitFeedback(data, collection)
-
-//     const getUserFeedback = async () => {
-//         const result = await fetchUserFeedback()
-//         setUserFeedback(result)
-//     }
-    
-//     useEffect(()=>{
-//         if(session.data) getUserFeedback()
-//     }, [])
-
-
-//     const optimisticallyUpdateFeedback = (type, increment, feedbackType = type) => {
-//         setFeedbackCount((prev) => ({ ...prev, [type] : prev[type] + increment }))
-//         setUserFeedback((prev) => ({ ...prev, type : feedbackType }))
-//     }
-//     const newFeedback = async (type) => {
-//         optimisticallyUpdateFeedback(type, 1)
-//         await createFeedback(type)
-//         getUserFeedback()
-//     }
-//     const delFeedback = async (type) => {
-//         optimisticallyUpdateFeedback(type, -1, null)
-//         await deleteFeedback(userFeedback)
-//         getUserFeedback()
-//     }
-//     const switchFeedback = async (type) => {
-//         const prevUserFeedback = userFeedback
-//         optimisticallyUpdateFeedback(prevUserFeedback.type, -1)
-//         optimisticallyUpdateFeedback(type, 1)
-        
-//         await deleteFeedback(prevUserFeedback)
-//         await createFeedback(type)
-//         getUserFeedback()
-//     }
-//        // 옵티미스틱 업데이트 실패시, 피드백 롤백 함수
-//     const rollbackFeedback = (prevFeedbackCount, prevUserFeedback) => {
-//         setFeedbackCount(prevFeedbackCount)
-//         setUserFeedback(prevUserFeedback)
-//     }
-
-
-//     // 피드백 옵티미스틱 업데이트
-//     const updateFeedback = async (type) => {
-//         const prevFeedbackCount = { ...feedbackCount }
-//         const prevUserFeedback = { ...userFeedback }
-
-//         try {
-//             if(!userFeedback) {
-//                 await newFeedback(type)
-//             } else if(userFeedback.type == type) {
-//                 await delFeedback(type)
-//             } else {
-//                 await switchFeedback(type)
-//             }
-//             return { severity : 'success', message : '피드백 완료!' }
-//         } catch(err) {
-//             rollbackFeedback(prevFeedbackCount, prevUserFeedback)
-//             return { severity : 'error', message : '피드백 실패, 다시 한번 시도 해주세요.' }
-//         } 
-//     }
-
-
- 
-//     return { feedbackCount, userFeedback, updateFeedback }
-// }

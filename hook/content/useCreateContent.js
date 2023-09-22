@@ -1,8 +1,11 @@
 import { useState } from "react"
 import { parseISO } from "date-fns"
-import axios from "axios"
-// 커스텀 훅
-import usePresignedURL from "../S3/usePresignedURL"
+// axios 인스턴스
+import { contentInstance } from "@/util/api/instance/contentInstance"
+// 유틸함수
+import uploadS3 from "@/util/api/uploadS3"
+import verifyContent from "@/util/verifyData"
+
 
 export default function useCreateContent() {
     const [ content, setContent ] = useState({
@@ -12,10 +15,8 @@ export default function useCreateContent() {
         trailerURL : '',
     })
     
-    const { fetchPresignedURL, uploadS3 } = usePresignedURL()
-
     const handleContentChange = async (e) => {
-        let name = e.target.name
+        const name = e.target.name
         let value
 
         switch(e.target.type) {
@@ -23,7 +24,7 @@ export default function useCreateContent() {
                 value = e.target.value
                 break;
             case 'file' : 
-                value = await fetchPresignedURL(e.target.files[0])
+                value = await uploadS3(e.target.files[0])
                 break;
             case 'date' : 
                 value = parseISO(e.target.value) // 문자열 형식의 날짜를 date객체로 변환하여 value에 할당
@@ -38,19 +39,18 @@ export default function useCreateContent() {
     }
 
     const createContent = async () => {
+        if(!verifyContent(content)) return { severity : 'warning', message : '컨텐츠 내용을 확인해 해주세요.' }
         try {
-            const uri = process.env.NEXT_PUBLIC_CONTENTS_API
             const submission = { content }
-
-            const response = await axios.post(uri, submission)
-            console.log(response)
-            return response.data
-
+            const response = await contentInstance.post('/', submission)
+            
+            return response.message
         } catch(err) {
             console.error(err)
+            return err.message
         }
     }
 
 
-    return { content, setContent, handleContentChange, createContent, uploadS3 }
+    return { content, setContent, handleContentChange, createContent }
 }
