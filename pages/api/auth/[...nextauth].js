@@ -6,12 +6,12 @@ export const authOptions = {
     // 프로바이더 배열
   providers: [
     GithubProvider({
-        clientId: '908221489c50b65390f5',
-        clientSecret: '41321eb27d5b2703ea83a0f3f6c9ac0cfebdccb6',
+        clientId : process.env.GITHUB_CLIENT_ID,
+        clientSecret : process.env.GITHUB_CLIENT_SECRET,
     }),
     GoogleProvider({
-        clientId:'228392099530-2be3sp8d2ds8l75kqjt0fmmrvup08t1s.apps.googleusercontent.com',
-        clientSecret: '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'
+        clientId : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
     // 유저 로그인시, 세션을 jwt형식으로 저장
@@ -30,7 +30,12 @@ export const authOptions = {
                 token.user.email = user.email
                 token.user.image = user.image
                 token.user.role = 'nomal'
-                if(user.email == 'qordngur156@gmail.com') {
+
+                // admin 유저 이메일 배열로 변환
+                const adminEmails = process.env.ADMIN_EMAILS.split(',')
+
+                // 토큰에 admin 유저 관리자 역할 설정
+                if(adminEmails.includes(user.email)) {
                     token.user.role = 'admin'
                 }
             }
@@ -43,6 +48,7 @@ export const authOptions = {
         },
     },
     // jwt 시크릿키
-    secret : 'asdwkkjadwkiofe'
+    secret : process.env.JWT_SECRET_KEY
 };
+
 export default NextAuth(authOptions); 
