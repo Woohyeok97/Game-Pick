@@ -17,17 +17,15 @@ export default function Admin() {
 
     // 컨텐츠 업로드 핸들러
     const handleCreateSubmit = async () => {        
-        if(confirm('컨텐츠를 업로드 할까요?')) {
-            const result = await createContent()
+        if(!confirm('컨텐츠를 업로드 할까요?')) return
+        const result = await createContent()
 
-            if(result.severity != 'success') {
-                dispatch(openSnackbar(result))
-                return
-            }
-            alert(result.message)
+        if(result.severity != 'success') {
+            dispatch(openSnackbar(result))
+            return
         }
+        alert(result.message)
     }
-
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>

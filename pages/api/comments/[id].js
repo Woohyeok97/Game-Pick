@@ -20,7 +20,7 @@ export default async function handler(req, res) {
             // 2. 코멘트 삭제
             await db.collection('comments').deleteOne({ _id : new ObjectId(req.query.id) })
             
-            return res.status(200).json({ result : req.query.id, message : '코멘트 삭제완료' })
+            return res.status(200).json({ result : req.query.id, message : '코멘트 삭제완료!' })
 
         } catch(err) {
             console.log(err)

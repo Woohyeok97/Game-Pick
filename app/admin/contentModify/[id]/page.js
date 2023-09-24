@@ -19,28 +19,26 @@ export default function ContentModify({ params }) {
 
     // 컨텐츠 수정 핸들러
     const handleEditSubmit = async () => {
-        if(confirm('컨텐츠를 수정하겠습니까?')) {
-            const result = await updateContent()
+        if(!confirm('컨텐츠를 수정하겠습니까?')) return
+        const result = await updateContent()
 
-            if(result.severity != 'success') {
-                dispatch(openSnackbar(result))
-                return
-            }
-            alert(result)
+        if(result.severity != 'success') {
+            dispatch(openSnackbar(result)) 
+            return
         }
+        alert(result.message)
     }
  
     // 컨텐츠 삭제 핸들러
     const handleDeleteSubmit = async () => {
-        if(confirm('컨텐츠를 삭제하겠습니까?')) {
-            const result = await deleteContent()
+        if(!confirm('컨텐츠를 삭제하겠습니까?')) return
+        const result = await deleteContent()
             
-            if(result.severity != 'success') {
-                dispatch(openSnackbar(result))
-                return
-            }
-            alert(result)
+        if(result.severity != 'success') {
+            dispatch(openSnackbar(result))
+            return
         }
+        alert(result.message)  
     }
 
     return (
