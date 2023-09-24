@@ -21,7 +21,12 @@ export default function ContentModify({ params }) {
     const handleEditSubmit = async () => {
         if(confirm('컨텐츠를 수정하겠습니까?')) {
             const result = await updateContent()
-            dispatch(openSnackbar(result))
+
+            if(result.severity != 'success') {
+                dispatch(openSnackbar(result))
+                return
+            }
+            alert(result)
         }
     }
  
@@ -29,6 +34,11 @@ export default function ContentModify({ params }) {
     const handleDeleteSubmit = async () => {
         if(confirm('컨텐츠를 삭제하겠습니까?')) {
             const result = await deleteContent()
+            
+            if(result.severity != 'success') {
+                dispatch(openSnackbar(result))
+                return
+            }
             alert(result)
         }
     }

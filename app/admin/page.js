@@ -1,7 +1,9 @@
 'use client'
-import { useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
 // 커스텀 훅
 import useCreateContent from '@/hook/content/useCreateContent';
+// reducer
+import { openSnackbar } from '@/redux/features/snackbarStateSlice';
 // MUI
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
@@ -11,14 +13,21 @@ import Button from '@mui/material/Button'
 
 export default function Admin() {
     const { handleContentChange, createContent } = useCreateContent()
-    const session = useSession()
+    const dispatch = useDispatch()
 
+    // 컨텐츠 업로드 핸들러
     const handleCreateSubmit = async () => {        
         if(confirm('컨텐츠를 업로드 할까요?')) {
             const result = await createContent()
-            alert(result)
+
+            if(result.severity != 'success') {
+                dispatch(openSnackbar(result))
+                return
+            }
+            alert(result.message)
         }
     }
+
 
     return (
         <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>

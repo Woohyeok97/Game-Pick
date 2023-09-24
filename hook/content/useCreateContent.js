@@ -40,14 +40,15 @@ export default function useCreateContent() {
 
     const createContent = async () => {
         if(!verifyContent(content)) return { severity : 'warning', message : '컨텐츠 내용을 확인해 해주세요.' }
+        
         try {
             const submission = { content }
             const response = await contentInstance.post('/', submission)
             
-            return response.message
+            return { severity : 'success', message : response.message }
         } catch(err) {
             console.error(err)
-            return err.message
+            return { severity : 'error', message : '컨텐츠 업로드 실패, 다시 한번 시도 해주세요.' }
         }
     }
 

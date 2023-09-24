@@ -8,10 +8,10 @@ export default function useDeleteContent({ contentId }) {
     const deleteContent = async () => {
         try {
             const response = await contentInstance.delete(`/${contentId}`)
-            return response.message
+            return { severity : 'success', message : response.message }
         } catch(err) {
             console.error(err)
-            return err.message
+            return { severity : 'error', message : '컨텐츠 삭제 실패, 다시 한번 시도 해주세요.' }
         }
     }
 
