@@ -1,5 +1,4 @@
 'use client'
-import styles from './comment.module.scss'
 import { useSelector } from 'react-redux'
 // 커스텀 훅
 import useFetchComment from '@/hook/comment/useFetchComment'
@@ -23,15 +22,15 @@ export default function Comment({ params, searchParams }) {
     })
     
     return (
-        <div className={ styles.comment }>
+        <section className='page_static'>
             <CommentNav contentTitle={ contentTitle } setSortOption={ setSortOption }/> 
             <CommentWrite contentId={ contentId }/>
             <List>
                 { commentList.length
-                ? commentList.map((item)=> <CommentItem key={item._id} comment={ item }/>)
+                ? commentList.map((item) => <CommentItem key={item._id} comment={ item }/>)
                 : <div>아직 코멘트가 없어요~</div> }
             </List> 
             { hasNext && <Button onClick={ setToCommentList }>더보기</Button> }
-        </div>
+        </section>
     )
 }

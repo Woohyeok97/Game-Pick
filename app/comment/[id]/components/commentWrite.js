@@ -12,7 +12,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 
 export default function CommentWrite({ contentId }) {
-    const { textValue, setTextValue, createComment} = useCreateComment({ contentId : contentId })
+    const { textValue, setTextValue, createComment } = useCreateComment({ contentId : contentId })
     const dispatch = useDispatch()
     const session = useSession()
 

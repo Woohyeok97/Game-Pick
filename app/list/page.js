@@ -1,28 +1,24 @@
+import { getServerSession } from 'next-auth';
+import ListItem from './components/listMain/listItem';
+import styles from './list.module.scss'
 import { connectDB } from "@/util/database";
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 // 컴포넌트
-import ListNav from "@/app/list/components/listNav";
-import ListMain from "./components/listMain";
+
 
 export default async function List() {
     const db = (await connectDB).db('project')
-    const contents = await db.collection('contents').find().toArray()
-    
-    // // contents에 좋아요 / 싫어요 카운트 추가
-    // const gameContent = await Promise.all(contents.map( async (item, i) => {
-    //     const likeCount = await db.collection('game_content_feedback').countDocuments({ parent : item._id.toString(), feedback : 'like' })
-    //     const dislikeCount = await db.collection('game_content_feedback').countDocuments({ parent : item._id.toString(), feedback : 'dislike' })
-
-    //     return { ...item, like : likeCount, dislike : dislikeCount }
-    // }))
-
-    // // 좋아요 순으로 정렬하기
-    // gameContent.sort((a, b) => b.like - a.like)
-
+    const contentList = await db.collection('contents').find().toArray()
+    const session = await getServerSession(authOptions)
 
     return (
         <section className="page_static">
-            <ListNav/>
-            <ListMain contents={ contents }/>
+            <div className={ styles.list_header }>
+                <p>지금 골라보세요!</p>
+            </div>
+            <div className={ styles.list_container }>
+            { contentList.map((item) => <ListItem key={item._id} content={ item } session={ session }/>) }
+            </div>
         </section>
     )
 }

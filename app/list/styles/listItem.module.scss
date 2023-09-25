@@ -1,38 +1,72 @@
 .list_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    background-color: gray;
-    border: 1px solid transparent;
-    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
-
-    .feedback {
-        
-    }
-
-    .image_box {
-        position: relative;
-        width: 100%;
-        padding-top: 100%; 
     
-        img {
-            position: absolute; // 이미지가 부모의 크기에 맞춰지도록 하기 위해 추가
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; // 이미지가 비율을 유지하며 부모 요소를 꽉 채우도록 수정
-        }   
-    }
-    p {
-        text-align: center;
+    &:hover {
+        transform: scale(1.05);
     }
 
-    &:hover {
-        transform: scale(1.1);
+    p { margin: 0; }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2rem;
+    }
+
+    .content_info {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: absolute;
+        top : 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #FFFFFF;
+        width: 100%;
+        height: 100%;
+        padding: 8%;
+        box-sizing: border-box;
+        border-radius: 2rem;
+
+        &:hover { opacity: 1; }
+
+        .info_box {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 40%;
+
+            .title {
+                flex-basis: 10%;
+                margin: 0;
+            }
+            .description {
+                flex-basis: 85%;
+                color: #999999;
+            }
+            .attribute {
+                flex-basis: 5%;
+                color: #999999;
+                display: flex;
+            } 
+        } 
+    }
+
+    .edit {
+        color: #2e7d32;
+        position: absolute;
+        top: 3%;
+        right: 8%;
     }
 }
-
-
-

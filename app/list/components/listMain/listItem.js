@@ -1,27 +1,26 @@
 import Link from 'next/link'
 import styles from '../../styles/listItem.module.scss'
 // 컴포넌트
-import EditBtn from './editBtn'
-import FeedbackViewer from '@/component/feedback/feedbackViewer'
+
 
 export default function ListItem({ content, session }) {
-    //content._id를 문자열로 변환
-    content._id = content._id.toString()
 
     return (
             <div className={ styles.list_item }>
+                <img src={ content.image }/>
                 <Link href={`/detail/${content._id}`}>
-                    <div className={ styles.feedback }>
-                        <FeedbackViewer data={ content }/>
+                <div className={ styles.content_info }>
+                    <div className={ styles.info_box }>
+                        <h2 className={ styles.title }>{ content.title }</h2>
+                        <p className={ styles.description }>어쩌구 저쩌구</p>
+                        <div className={ styles.attribute }>
+                            <p>따봉 { content.like }</p>
+                        </div>
                     </div>
-                    <div className={ styles.image_box }>
-                        <img src={ content.image }/>
-                    </div>
-                    <p>{ content.title }</p>        
+                </div>
                 </Link>
-
-                { session && session.user.role == 'admin' && <EditBtn contentId={ content._id }/> }
-            </div>
-        
+                { session && session.user.role == 'admin' 
+                &&  <Link href={`admin/contentModify/${content._id}`} className={ styles.edit }>컨텐츠 수정</Link> }
+            </div>   
     )
 }
