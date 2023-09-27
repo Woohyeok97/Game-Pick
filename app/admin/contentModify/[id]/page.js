@@ -61,6 +61,9 @@ export default function ContentModify({ params }) {
                 <TextField label="트레일러 url" variant="outlined" name="trailerURL" defaultValue={ prevContent.trailerURL || '' } sx={{ mb: '36px' }}
                 InputLabelProps={{ shrink : true }}
                 onChange={ editContent } />
+
+                <TextField label="게임소개" name="description" defaultValue={ prevContent.description || '' } fullWidth multiline margin="normal" minRows={4} 
+                onChange={ editContent }/>
             </Box>
 
             <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>

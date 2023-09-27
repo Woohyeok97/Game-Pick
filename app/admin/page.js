@@ -39,12 +39,13 @@ export default function Admin() {
                 onChange={ handleContentChange }/>
                 <TextField label="트레일러 url" variant="standard" name="trailerURL" sx={{ mb: '36px' }}
                 onChange={ handleContentChange }/>
+                <TextField label="게임소개" name="description" fullWidth multiline margin="normal" minRows={4} 
+                onChange={ handleContentChange }/>
             </Box>
 
             <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
                 <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
             </Box>
         </Box>
-        
     )
 }

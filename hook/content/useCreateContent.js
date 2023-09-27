@@ -13,6 +13,7 @@ export default function useCreateContent() {
         createDate : '',
         image : '',
         trailerURL : '',
+        description : '',
     })
     
     const handleContentChange = async (e) => {
