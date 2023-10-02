@@ -7,10 +7,11 @@ import Header from '@/component/header/header'
 import SnackbarMessage from '@/component/snackbarMessage/snackbarMessage'
 // 폰트
 import { Noto_Sans_KR } from 'next/font/google'
+// redux Provider
 import FontProvider from './fontProvider'
 
 const notoSansKorean = Noto_Sans_KR({
-    weight : ['500'],
+    weight : ['400'],
     subsets: ['latin'],
 })
 

@@ -1,0 +1,42 @@
+.feedback_count {
+    display: flex;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    font-size: calc(18px + 4px);
+    background-color: rgb(38, 39, 43);
+    gap: 15px;
+    margin-bottom: 15px;
+
+    p {
+        display: flex;
+        align-items: center;
+        gap : 7px;
+        margin: 0;
+    }
+}
+
+.feedback_btn_box {
+    display: flex;
+    justify-content: space-between;
+    min-height: 60px;
+    gap: 15px;
+
+    button {
+        width: 100%;
+        font-size: calc(16px + 4px);
+        border-radius: 15px;
+        background-color: rgb(61, 106, 255);
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(76, 118, 255);
+        }
+    }
+
+    .isFeedback {
+        box-sizing :border-box;
+        border: 3px solid orangered;
+    }
+}

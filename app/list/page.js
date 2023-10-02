@@ -1,9 +1,9 @@
-import { getServerSession } from 'next-auth';
-import ListItem from './components/listMain/listItem';
 import styles from './list.module.scss'
-import { connectDB } from "@/util/database";
+import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { connectDB } from "@/util/database";
 // 컴포넌트
+import ListItem from './components/listItem';
 
 
 export default async function List() {
@@ -13,9 +13,7 @@ export default async function List() {
 
     return (
         <section className="page_static">
-            <div className={ styles.list_header }>
-                <p>지금 골라보세요!</p>
-            </div>
+            <h1 className={ styles.list_header }>둘러보기!</h1>
             <div className={ styles.list_container }>
             { contentList.map((item) => <ListItem key={item._id} content={ item } session={ session }/>) }
             </div>

@@ -6,9 +6,6 @@ export default function useFeedback({ data, collection, session }) {
     const [ feedbackCount, setFeedbackCount ] = useState({ like : data.like, dislike : data.dislike })
     const [ userFeedback, setUserFeedback ] = useState('')
     
-    // 개선하고싶은거
-    // 5. 옵티미스틱 업데이트 가능한지
-
     // 유저 피드백 여부 요청
     const fetchUserFeedback = async () => {
         const submission = { parent : data._id } 
@@ -62,11 +59,14 @@ export default function useFeedback({ data, collection, session }) {
         }
     }
 
-
+    
     useEffect(()=>{
         if(session.data) fetchUserFeedback()
-    }, [])
+    }, [session])
 
  
     return { feedbackCount, userFeedback, updateFeedback }
 }
+
+  // 개선하고싶은거
+    // 5. 옵티미스틱 업데이트 가능한지

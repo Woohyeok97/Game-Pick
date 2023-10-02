@@ -26,7 +26,7 @@ export default function Header({ session }) {
 
             <div className={ styles.header_menu }>
                 { session &&  <Avatar src={ session.user.image } sx={{ width: '36px', height: '36px' }}/> }
-                <MenuIcon onClick={ handleOpenDrawer } sx={{ fontSize : 40, ml : '24px', color : '#000000' }}/>
+                <MenuIcon onClick={ handleOpenDrawer } sx={{ fontSize : 40, ml : '24px', color : 'rgb(245, 245, 245)' }}/>
             </div>
 
             <Drawer anchor='right' open={ openDrawer } onClose={ handleOpenDrawer }>

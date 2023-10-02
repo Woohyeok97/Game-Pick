@@ -10,10 +10,28 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
+    background-color: rgb(18, 18, 18);
+    color: rgb(245, 245, 245);
 }
 a {
   text-decoration: none;
 }
+button {
+  background-color: transparent;
+  color: inherit; 
+  border: none;
+  outline: none; 
+  padding: 0;
+  margin: 0;
+}
+ul {
+  
+}
+
+li {
+
+}
+
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
   display: none;
