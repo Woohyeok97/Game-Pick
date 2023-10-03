@@ -1,15 +1,11 @@
 'use client'
+import styles from '../../admin.module.scss'
 import { useDispatch } from 'react-redux';
 // 커스텀훅
 import useEditContent from '@/hook/content/useEditContent';
 import useDeleteContent from '@/hook/content/useDeleteContent';
 // reducer
 import { openSnackbar } from '@/redux/features/snackbarStateSlice';
-// MUI
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 
 
 export default function ContentModify({ params }) {
@@ -42,38 +38,43 @@ export default function ContentModify({ params }) {
     }
 
     return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
-            <button onClick={()=>{ console.log(prevContent) }}>click</button>
-            <Typography fontSize="2rem" sx={{ mb : '36px' }}>게임 컨텐츠 수정</Typography>
-            <Box sx={{ display : 'flex', flexDirection : 'column' }}>
-                <TextField label="타이틀" variant="outlined" name="title" value={ prevContent.title || '' } sx={{ mb: '36px' }}
-                InputLabelProps={{ shrink : true }}
-                onChange={ editContent } />
+        <section className={ styles.admin }>
+            <div className={ styles.grid_container }>
+                <h1 className={ styles.admin_header }>컨텐츠 수정</h1>
 
-                <TextField label="출시일" variant="outlined" type="date" name="createDate" defaultValue={ prevContent.createDate || '' }  sx={{ mb: '36px' }}
-                InputLabelProps={{ shrink : true }}
-                onChange={ editContent } />
+                <div className={ styles.admin_body }>
+                    <div className={ styles.input_box }>
+                        <p>게임 타이틀</p>
+                        <input name='title' type='text' spellCheck="false" value={ prevContent.title || ''}  
+                        onChange={ editContent }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>발매일</p>
+                        <input name='createDate' type='date' defaultValue={ prevContent.createDate || '' }
+                        onChange={ editContent }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>이미지</p>
+                        <input name='image' type='file' defaultValue={ prevContent.image || '' }
+                        onChange={ editContent }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>트레일러 url</p>
+                        <input name='trailerURL' type='text' spellCheck="false" defaultValue={ prevContent.trailerURL || '' }
+                        onChange={ editContent }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>게임 소개</p>
+                        <textarea name='description' rows={4} cols={40} spellCheck="false" defaultValue={ prevContent.description || '' }
+                        onChange={ editContent }/>
+                    </div>
 
-                <TextField label="이미지" variant="outlined" type="file" name="image" defaultValue={ prevContent.image || '' } sx={{ mb: '36px' }}
-                InputLabelProps={{ shrink : true }}
-                onChange={ editContent } />
-
-                <TextField label="트레일러 url" variant="outlined" name="trailerURL" defaultValue={ prevContent.trailerURL || '' } sx={{ mb: '36px' }}
-                InputLabelProps={{ shrink : true }}
-                onChange={ editContent } />
-
-                <TextField label="게임소개" name="description" defaultValue={ prevContent.description || '' } fullWidth multiline margin="normal" minRows={4} 
-                onChange={ editContent }/>
-            </Box>
-
-            <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
-                <Button onClick={ handleEditSubmit }>
-                컨텐츠 수정
-                </Button>
-                <Button  onClick={ handleDeleteSubmit } color="error" sx={{ ml : '12px' }}>
-                    컨텐츠 삭제
-                </Button>
-            </Box>
-        </Box>
+                    <div className={ styles.btn_box }>
+                        <button onClick={ handleEditSubmit }>컨텐츠 수정</button>
+                        <button className={ styles.delete_btn } onClick={ handleDeleteSubmit }>컨텐츠 삭제</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }

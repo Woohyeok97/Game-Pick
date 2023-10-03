@@ -1,14 +1,10 @@
 'use client'
+import styles from './admin.module.scss'
 import { useDispatch } from 'react-redux';
 // 커스텀 훅
 import useCreateContent from '@/hook/content/useCreateContent';
 // reducer
 import { openSnackbar } from '@/redux/features/snackbarStateSlice';
-// MUI
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 
 
 export default function Admin() {
@@ -27,25 +23,39 @@ export default function Admin() {
         alert(result.message)
     }
 
-    return (
-        <Box sx={{ display : 'flex', flexDirection : 'column', padding : '0 30%', margin : 'auto 0'}}>
-            <Typography fontSize="2rem" sx={{ mb : '12px' }}>게임 컨텐츠 업로드</Typography>
-            <Box sx={{ display : 'flex', flexDirection : 'column' }}>
-                <TextField label="타이틀" variant="standard" name="title" sx={{ mb: '36px' }}
-                onChange={ handleContentChange }/>
-                <TextField label="출시일" variant="standard" type="date" name="createDate" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
-                onChange={ handleContentChange }/>
-                <TextField label="이미지" variant="standard" type="file" name="image" sx={{ mb: '36px' }} InputLabelProps={{ shrink: true }}
-                onChange={ handleContentChange }/>
-                <TextField label="트레일러 url" variant="standard" name="trailerURL" sx={{ mb: '36px' }}
-                onChange={ handleContentChange }/>
-                <TextField label="게임소개" name="description" fullWidth multiline margin="normal" minRows={4} 
-                onChange={ handleContentChange }/>
-            </Box>
 
-            <Box sx={{ display : 'flex', justifyContent : 'flex-end' }}>
-                <Button onClick={ handleCreateSubmit }>컨텐츠 생성</Button>
-            </Box>
-        </Box>
+    return (
+        <section className={ styles.admin }>
+            <div className={ styles.grid_container }>
+                <h1 className={ styles.admin_header }>컨텐츠 업로드</h1>
+
+                <div className={ styles.admin_body }>
+                    <div className={ styles.input_box }>
+                        <p>게임 타이틀</p>
+                        <input name='title' type='text' spellCheck="false" onChange={ handleContentChange }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>발매일</p>
+                        <input name='createDate' type='date' onChange={ handleContentChange }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>이미지</p>
+                        <input name='image' type='file' onChange={ handleContentChange }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>트레일러 url</p>
+                        <input name='trailerURL' type='text' spellCheck="false" onChange={ handleContentChange }/>
+                    </div>
+                    <div className={ styles.input_box }>
+                        <p>게임 소개</p>
+                        <textarea name='description' rows={4} cols={40} spellCheck="false" onChange={ handleContentChange }/>
+                    </div>
+
+                    <div className={ styles.btn_box }>
+                        <button onClick={ handleCreateSubmit }>컨텐츠 업로드</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }

@@ -1,0 +1,95 @@
+.admin {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    box-sizing: border-box;
+
+    p { margin: 0; }
+
+    .grid_container {
+        display: grid;
+        grid-template-columns: repeat(10, 150px);
+        column-gap: 30px;
+        row-gap: 30px;
+    }
+    
+    .admin_header {
+        grid-column: 3 / 9;
+        font-size: calc(40px + 4px);
+        margin: 0;
+    }
+
+    .admin_body {
+        grid-column: 3 / 9;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: rgb(38, 39, 43);
+        border-radius: 15px;
+        padding: 60px;
+
+        .input_box {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            
+
+            p {
+                font-size: calc(16px + 4px);
+                color: rgb(122, 124, 133);
+            }
+
+            input {
+                width: 80%;
+                min-height: 60px;
+                padding: 15px 20px;
+                box-sizing: border-box;
+                border-radius: 15px;
+                font-size: calc(16px + 4px);
+                color: rgb(228, 229, 231);
+                background-color: rgb(50, 51, 57);
+            }
+
+            textarea {
+                width: 80%;
+                padding: 15px 20px;
+                box-sizing: border-box;
+                border-radius: 15px;
+                font-size: calc(16px + 4px);
+                color: rgb(122, 124, 133);
+                background-color: rgb(50, 51, 57);
+            }
+        }
+
+        .btn_box {
+            display: flex;
+            gap: 15px;
+
+            button {
+                font-size: calc(16px + 4px);
+                border-radius: 15px;
+                min-width: 180px;
+                min-height: 60px;
+                background-color: rgb(61, 106, 255);
+                transition: background-color 0.2s ease;
+                cursor: pointer;
+        
+                &:hover {
+                    background-color: rgb(76, 118, 255);
+                }
+            }
+
+            .delete_btn {
+                background-color: orangered;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: tomato;
+                }
+            }
+        }
+        
+    }
+}

@@ -30,6 +30,10 @@ textarea {
   border: none;
   resize: none;
 }
+input {
+  border: none;
+  resize: none;
+}
 
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
