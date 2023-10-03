@@ -24,12 +24,9 @@ button {
   padding: 0;
   margin: 0;
 }
-ul {
-  
-}
-
-li {
-
+textarea {
+  border: none;
+  resize: none;
 }
 
 /* 스크롤바 제거 */

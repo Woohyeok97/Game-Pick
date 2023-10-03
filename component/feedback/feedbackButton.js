@@ -1,17 +1,14 @@
 'use client'
+import styles from './feedbackButton.module.scss'
 import { useDispatch } from "react-redux";
 import { useSession } from "next-auth/react";
 // 커스텀 훅
 import useFeedback from "@/hook/feedback/useFeedback";
 // reducer
 import { openSnackbar } from "@/redux/features/snackbarStateSlice";
-// MUI
-import Box from "@mui/material/Box"
-import IconButton from '@mui/material/IconButton';
 // MUI icons
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import Typography from "@mui/material/Typography";
 
 
 export default function FeedbackButton({ data }) {
@@ -30,27 +27,27 @@ export default function FeedbackButton({ data }) {
             return
         }
         
-        const type = e.currentTarget.name          
+        const type = e.currentTarget.name     
         const result = await updateFeedback(type)
         dispatch(openSnackbar(result))
     }
 
     return (
-        <Box sx={{ display : 'flex' }}>
-            {/* 좋아요 버튼 */}
-            <IconButton size="small" name="like" onClick={ handleUpdateFeedback}
-             color={ userFeedback && userFeedback.type == "like" ? "primary" : "default" }>
-                <ThumbUpIcon fontSize="inherit" sx={{ mr : '4px' }}/>
-                <Typography>{ feedbackCount.like }</Typography>
-            </IconButton>
+        <div className={ styles.feedback_button }>
 
-            {/* 싫어요 버튼 */}
-            <IconButton size="small" name="dislike" onClick={ handleUpdateFeedback }
-            color={ userFeedback && userFeedback.type == "dislike" ? "primary" : "default" }> 
-                <ThumbDownIcon fontSize="inherit" sx={{ mr : '4px' }}/>
-                <Typography>{ feedbackCount.dislike }</Typography>
-            </IconButton>
-        </Box>
+            <button name="like" className={ userFeedback?.type == 'like' ? styles.isFeedback : '' }
+            onClick={ handleUpdateFeedback }>
+                <ThumbUpIcon fontSize='inherit'/>
+                { feedbackCount.like }
+            </button>
+
+            <button name="dislike" className={ userFeedback?.type == 'dislike' ? styles.isFeedback : '' }
+            onClick={ handleUpdateFeedback }>
+                <ThumbDownIcon fontSize='inherit'/>
+                { feedbackCount.dislike }
+            </button>
+
+        </div>
     )
 }
 

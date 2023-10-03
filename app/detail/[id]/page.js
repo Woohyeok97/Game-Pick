@@ -5,9 +5,6 @@ import { ObjectId } from 'mongodb'
 import formatDate from '@/util/formatDate';
 // 컴포넌트
 import DetailImage from './components/detailImage';
-
-
-
 import ContentFeedback from './components/contentFeedback';
 import Comment from './components/comment';
 

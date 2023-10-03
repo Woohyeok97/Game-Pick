@@ -46,10 +46,11 @@ export default function ContentFeedback({ content }) {
                 </p>
             </div>
             <div className={ styles.feedback_btn_box }>
-                <button name='like' onClick={ handleUpdateFeedback }
-                className={ userFeedback?.type == 'like' ? styles.isFeedback : '' }>재밌어요</button>
-                <button name='dislike' onClick={ handleUpdateFeedback }
-                className={ userFeedback?.type == 'dislike' ? styles.isFeedback : '' }>재미없어요</button>
+                <button name='like' className={ userFeedback?.type == 'like' ? styles.isFeedback : '' }
+                onClick={ handleUpdateFeedback }>재밌어요</button>
+
+                <button name='dislike' className={ userFeedback?.type == 'dislike' ? styles.isFeedback : '' }
+                onClick={ handleUpdateFeedback }>재미없어요</button>
             </div>
         </div>
     )

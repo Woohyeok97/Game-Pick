@@ -1,0 +1,25 @@
+.feedback_button {
+    display: flex;
+    color: rgb(122, 124, 133);
+    gap: 10px;
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.2s ease;
+        font-size: calc(12px + 4px);
+        cursor: pointer;
+
+        &:hover {
+            color: rgb(152, 154, 163); 
+        }
+    }
+
+    .isFeedback {
+        color: orangered;
+        &:hover {
+            color: tomato;
+        }
+    }
+}
