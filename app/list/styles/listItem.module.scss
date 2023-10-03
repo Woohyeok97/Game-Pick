@@ -1,75 +1,49 @@
 .list_item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-column: span 3 / auto;
     position: relative;
-    width: 100%;
-    height: 100%;
     transition: all 0.3s ease;
-    cursor: pointer;
-    border-radius: 2rem;
-    overflow: hidden;
-    
+
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
-
-    p { margin: 0; }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .content_card {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        position: absolute;
-        top : 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        
-        &:hover { opacity: 1; }
-    }
-
-    .content_info {
+    
+    .item_card {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        color: #FFFFFF;
         width: 100%;
         height: 100%;
-        padding: 8%;
-        box-sizing: border-box;
-
-        .info_box {
-            display: flex;
-            flex-direction: column;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        
+        img {
             width: 100%;
-            height: 40%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-            .title {
-                flex-basis: 10%;
+        .item_profile {
+            padding: 15px 30px;
+            background-color: rgb(38, 39, 43);
+    
+            h2 {
+                font-size: calc(24px + 4px);
                 margin: 0;
+                margin-bottom: 10px;
             }
-            .description {
-                flex-basis: 85%;
-                color: #999999;
-            }
-            .attribute {
-                flex-basis: 5%;
-                color: #999999;
-                display: flex;
-            } 
-        } 
+        }
     }
-
-    .edit {
-        color: #888888;
+    
+    .edit_btn {
+        z-index: 1;
         position: absolute;
-        top: 2%;
-        right: 5%;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(40px + 4px);
     }
 }

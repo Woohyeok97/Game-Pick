@@ -11,10 +11,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(18, 18, 18);
-    color: rgb(245, 245, 245);
+    color: #ccc;
+    /* color: rgb(245, 245, 245); */
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
 button {
   background-color: transparent;

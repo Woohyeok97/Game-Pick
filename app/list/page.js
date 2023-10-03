@@ -12,10 +12,14 @@ export default async function List() {
     const session = await getServerSession(authOptions)
 
     return (
-        <section className="page_static">
-            <h1 className={ styles.list_header }>둘러보기!</h1>
-            <div className={ styles.list_container }>
-            { contentList.map((item) => <ListItem key={item._id} content={ item } session={ session }/>) }
+        <section className={ styles.list }>
+            <div className={ styles.list_banner }>저는 배너 입니다</div>
+
+            <div className={ styles.grid_container }>
+                <h1 className={ styles.list_header }>게임 둘러보기</h1>
+                <div className={ styles.list_box }>
+                { contentList.map((item) => <ListItem key={item._id} content={ item } session={ session }/>) }
+                </div>
             </div>
         </section>
     )
