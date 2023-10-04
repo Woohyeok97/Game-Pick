@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-// 훅 역할 : carousel로 사용할수있는 carouselIndex와 조작 핸들러를 제공
+
 export default function useCarousel(list, time) {
     const [ caroselIndex, setCarouselIndex ] = useState(0)
 
@@ -8,13 +8,15 @@ export default function useCarousel(list, time) {
     const intervalRef = useRef(null)
 
     useEffect(()=>{
+        if(!list.length) return
+        
         intervalRef.current = setInterval(()=>{
             setCarouselIndex((prev) => (prev + 1) % list.length)
         }, time)
-
+        
         return () => clearInterval(intervalRef.current)
 
-    }, [caroselIndex, list])
+    }, [list])
     // 의존성 배열에 list를 넣어서 초기에 준비가 안되있어도 업데이트 되면서 기능이 실행되게 함 
 
     return { caroselIndex }
