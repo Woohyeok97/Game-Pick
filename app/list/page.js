@@ -13,7 +13,13 @@ export default async function List() {
 
     return (
         <section className={ styles.list }>
-            <div className={ styles.list_banner }>저는 배너 입니다</div>
+            <div className={ styles.list_banner }>
+                <div>
+                    <h2>할만한 게임을 찾고 계신가요?</h2>
+                    <p>Game<span className='pick'>Pick</span>에서 찾아보세요!</p>
+                </div>
+                <img src='/배너_아이콘.png' title="홈 오피스 아이콘 제작자: Eucalyp - Flaticon https://www.flaticon.com/kr/free-icons/"/>
+            </div>
 
             <div className={ styles.grid_container }>
                 <h1 className={ styles.list_header }>게임 둘러보기</h1>

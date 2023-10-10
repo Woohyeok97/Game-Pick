@@ -25,8 +25,8 @@ export default function HomeCarousel() {
             </div>
 
             <div className={ styles.home_carousel_content }>
-                <h1>Game <p>Pick</p>에서 찾아보기</h1>
-                <p className={ styles.info }>유저들이 직접 추천하고 의견을 남긴 게임들을 지금 직접 확인하세요!</p>
+                <h1>Game<span className='pick'>Pick</span> 시작하기</h1>
+                <p className={ styles.info }>할 게임 찾느라 돌아다니는건 이제 끝! 이곳에서 찾아보세요.</p>
                 <Link href="/list">
                     <button>게임 둘러보기</button>
                 </Link>

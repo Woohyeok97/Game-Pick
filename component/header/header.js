@@ -21,7 +21,7 @@ export default function Header({ session }) {
         <header className={ styles.header }>
             <Link href="/" className={ styles.header_icon }>
                 <SportsEsportsIcon sx={{ mr : '6px', fontSize : '2rem' }}/>
-                <h1>Game Pick</h1>
+                <h1>Game<span className='pick'>Pick</span></h1>
             </Link>
 
             <div className={ styles.header_menu }>

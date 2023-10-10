@@ -67,6 +67,3 @@ export default function useFeedback({ data, collection, session }) {
  
     return { feedbackCount, userFeedback, updateFeedback }
 }
-
-  // 개선하고싶은거
-    // 5. 옵티미스틱 업데이트 가능한지

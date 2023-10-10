@@ -10,84 +10,87 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    background-color: rgb(18, 18, 18);
+    background-color: rgb(26, 27, 30);
     color: #ccc;
-    /* color: rgb(245, 245, 245); */
 }
 a {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 button {
-  background-color: transparent;
-  color: inherit; 
-  border: none;
-  outline: none; 
-  padding: 0;
-  margin: 0;
+    background-color: transparent;
+    color: inherit; 
+    border: none;
+    outline: none; 
+    padding: 0;
+    margin: 0;
 }
 textarea {
-  border: none;
-  resize: none;
+    border: none;
+    resize: none;
 }
 input {
-  border: none;
-  resize: none;
+    border: none;
+    resize: none;
 }
 
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 .page_static {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  padding: 5% 20%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 5% 20%;
 }
 .page_fixed {
-  width: 100%;
-  height: 100%;
-  position: fixed;
+    width: 100%;
+    height: 100%;
+    position: fixed;
 }
+.pick {
+    color: orangered;
+}
+
 
 
 .down-enter {
-  transform: translateY(100%);
+    transform: translateY(100%);
 }
 
 .down-enter-active {
-  transform: translateY(0%);
-  transition: transform 1s;
+    transform: translateY(0%);
+    transition: transform 1s;
 }
 
 .down-exit {
-  transform: translateY(0%);
+    transform: translateY(0%);
 }
 
 .down-exit-active {
-  transform: translateY(-100%);
-  transition: transform 1s;
+    transform: translateY(-100%);
+    transition: transform 1s;
 }
 
 .up-enter {
-  transform: translateY(-100%);
+    transform: translateY(-100%);
 }
 
 .up-enter-active {
-  transform: translateY(0%);
-  transition: transform 1s;
+    transform: translateY(0%);
+    transition: transform 1s;
 }
 
 .up-exit {
-  transform: translateY(0%);
+    transform: translateY(0%);
 }
 
 .up-exit-active {
-  transform: translateY(100%);
-  transition: transform 1s;
+    transform: translateY(100%);
+    transition: transform 1s;
 }
 
 
@@ -95,24 +98,24 @@ input {
 
 /* 슬라이드 애니메이션 */
 .slide-enter {
-  opacity: 0;
+    opacity: 0;
 }
 .slide-enter-active {
-  opacity: 1;
-  transition: opacity 4000ms;
+    opacity: 1;
+    transition: opacity 4000ms;
 }
 .slide-exit {
-  opacity: 1;
+    opacity: 1;
 }
 .slide-exit-active {
-  opacity: 0;
-  transition: opacity 4000ms;
+    opacity: 0;
+    transition: opacity 4000ms;
 }
 .slide-enter, .slide-enter-active, .slide-exit, .slide-exit-active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 
