@@ -1,3 +1,26 @@
+.warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(40px + 4px);
+    text-align: center;
+
+    button {
+        font-size: calc(18px + 4px);
+        border-radius: 15px;
+        min-width: 180px;
+        min-height: 60px;
+        background-color: rgb(61, 106, 255);
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(76, 118, 255);
+        }
+    }
+}
+
 .admin {
     display: flex;
     justify-content: center;

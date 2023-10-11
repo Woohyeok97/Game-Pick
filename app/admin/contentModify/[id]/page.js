@@ -9,9 +9,9 @@ import { openSnackbar } from '@/redux/features/snackbarStateSlice';
 
 
 export default function ContentModify({ params }) {
-    const dispatch = useDispatch()
     const { prevContent, editContent, updateContent } = useEditContent({ contentId : params.id })
     const { deleteContent } = useDeleteContent({ contentId : params.id })
+    const dispatch = useDispatch()
 
     // 컨텐츠 수정 핸들러
     const handleEditSubmit = async () => {
@@ -36,6 +36,7 @@ export default function ContentModify({ params }) {
         }
         alert(result.message)  
     }
+
 
     return (
         <section className={ styles.admin }>

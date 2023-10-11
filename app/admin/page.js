@@ -23,7 +23,7 @@ export default function Admin() {
         alert(result.message)
     }
 
-
+    
     return (
         <section className={ styles.admin }>
             <div className={ styles.grid_container }>

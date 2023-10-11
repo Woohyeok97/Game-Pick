@@ -3,6 +3,11 @@ html {
     padding: 0;
     margin: 0;
 }
+/* 스크롤바 제거 */
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -13,10 +18,12 @@ body {
     background-color: rgb(26, 27, 30);
     color: #ccc;
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
+
 button {
     background-color: transparent;
     color: inherit; 
@@ -25,19 +32,26 @@ button {
     padding: 0;
     margin: 0;
 }
+
 textarea {
     border: none;
     resize: none;
 }
+
 input {
     border: none;
     resize: none;
 }
 
-/* 스크롤바 제거 */
-::-webkit-scrollbar {
-    display: none;
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(40px + 4px);
+    text-align: center;
 }
+
 .page_static {
     display: flex;
     flex-direction: column;

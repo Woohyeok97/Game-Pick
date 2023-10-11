@@ -27,7 +27,7 @@ export default function Comment({ content }) {
             <ul className={ styles.comment_list }>
                 { commentList.length 
                 ? commentList.map((item) => <CommentItem key={item._id} comment={ item }/>)
-                : <div>아직 코멘트가 없습니다.</div> }
+                : <div>아직 코멘트가 없습니다.</div> }  
             </ul>
             
             { hasNext && <button onClick={ setToCommentList } className={ styles.comment_more }>코멘트 더보기</button> }

@@ -39,8 +39,6 @@ export default function useCreateContent() {
         })
     }
 
-    console.log(content)
-
     const createContent = async () => {
         if(!verifyContent(content)) return { severity : 'warning', message : '컨텐츠 내용을 확인해 해주세요.' }
         
