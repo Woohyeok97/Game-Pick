@@ -16,7 +16,7 @@ export default function Comment({ content }) {
         contentId : content._id,
         limit : 2,
     })
-   
+
     return (
         <div className={ styles.comment }>
             <div className={ styles.comment_header }>

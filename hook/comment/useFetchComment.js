@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 // axios 인스턴스
 import { commentInstance } from "@/util/api/instance/commentInstance";
 // reducer
-import { setCommentList } from "@/redux/features/commentListSlice";
+import { clearCommentList, setCommentList } from "@/redux/features/commentListSlice";
 
 
 export default function useFetchComment({ contentId, limit }) {
@@ -14,6 +14,8 @@ export default function useFetchComment({ contentId, limit }) {
 
     useEffect(()=>{
         setToCommentList()
+        
+        return () => dispatch(clearCommentList()) // 페이지 이동시, CommentList 초기화
     }, [sortOption])
 
     // 코멘트 요청
