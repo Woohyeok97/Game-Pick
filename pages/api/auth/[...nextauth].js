@@ -3,7 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions = {
-    // 프로바이더 배열
+    // 프로바이더
   providers: [
     GithubProvider({
         clientId : process.env.GITHUB_CLIENT_ID,
@@ -21,9 +21,9 @@ export const authOptions = {
     },
   
     callbacks: {
-      // jwt 생성시 실행되는 코드 
-      // 소셜 플랫폼에서 받아온 정보(user)를 jwt(token)에 저장
-      jwt: async ({ token, user }) => {
+        // jwt 생성시 실행되는 코드 
+        // 소셜 플랫폼에서 받아온 정보(user)를 jwt(token)에 저장
+        jwt: async ({ token, user }) => {
             if (user) {
                 token.user = {};
                 token.user.name = user.name
@@ -41,7 +41,7 @@ export const authOptions = {
             }
             return token;
       },
-      // getServerSession() 함수가 호출될때 실행되는 코드
+        // getServerSession() 함수가 호출될때 실행되는 코드
         session: async ({ session, token }) => {
             session.user = token.user;  
             return session;

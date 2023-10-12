@@ -1,6 +1,5 @@
+// axios 인스턴스
 import { contentInstance } from "@/util/api/instance/contentInstance"
-import axios from "axios"
-
 
 export default function useDeleteContent({ contentId }) {
 

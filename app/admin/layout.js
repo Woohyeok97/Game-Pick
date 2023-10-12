@@ -16,7 +16,7 @@ export default function Layout({ children }) {
 
 function AdminChecker({ children }) {
     const session = useSession()
-    
+   
     if(session.status == 'loading') return
 
     if(session.data?.user.role != 'admin') return (
