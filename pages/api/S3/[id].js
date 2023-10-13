@@ -23,7 +23,7 @@ export default async function handler(req, res) {
             Fields: { key : req.query.id },
             Expires: 300, // presignedURL 유효시간(초)
             Conditions: [
-                    ['content-length-range', 0, 1048576], //파일용량 1MB 까지 제한
+                    ['content-length-range', 0, 2097152], //파일용량 2MB 까지 제한
                 ],
             })
           
