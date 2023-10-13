@@ -3,8 +3,10 @@
 당신도 그렇다면 **GamePick** 에서 다른 유저들이 추천하고 의견을 남긴 게임들을 둘러 보세요.<br>
 
 <br>
-서비스 링크 : <a herf="https://game-pick.vercel.app">GamePick</a>
 
+서비스 링크 : [GamePick](https://game-pick.vercel.app)
+
+<br>
 <br>
 
 # 주요 서비스
@@ -149,6 +151,9 @@ UI 로직은 컴포넌트 내부에서 관리하였습니다.<br/>
 사용자 상호작용시 커스텀 훅에서 제공하는 함수를 통해 상태를 변경할수 있도록 하였습니다.<br/>
 이 과정에서 비지니스 로직에 간섭하지 않고 오로지 UI에만 집중하도록 설계하였습니다.<br/>
 <br/>
+
+---
+
 </div>
 </details>
 
@@ -202,10 +207,6 @@ export default function useDeleteComment({ comment }) {
 특정 도큐먼트가 아닌, 콜렉션에 delete, put 메소드로 접근하면 의도치 않게 대량의 데이터가 날라갈수있고<br/>
 콜렉션 전체가 대상이 되기때문에 서버부하 문제도 발생하기 때문입니다.<br/>
 그래서 DELETE, UPDATE 요청의 엔드포인트는 항상 도큐먼트Id로 설정했습니다.<br/>
-
----
-
-<br/>
 
 ### **API 모듈화**<br/>
 axios를 사용하다보니 instance와 interceptor에 대해서 알게되어 모듈화를 진행하였습니다.<br/>
@@ -437,7 +438,7 @@ JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하�
 <br>
 
 # 시행착오 기록
-<a herf="https://github.com/Woohyeok97/Game-Pick/wiki">프로젝트 WIKI</a>
+[프로젝트 WIKI](https://github.com/Woohyeok97/Game-Pick/wiki)
 
 <br>
 <br>
