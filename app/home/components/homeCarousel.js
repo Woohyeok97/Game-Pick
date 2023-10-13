@@ -1,26 +1,24 @@
-'use client'
 import styles from '../styles/homeCarousel.module.scss'
 import Link from 'next/link';
-import { CSSTransition } from 'react-transition-group';
-// 커스텀 훅
-import useFetchContent from '@/hook/content/useFetchContent'
-import useCarousel from '@/hook/UI/useCarousel';
+import { connectDB } from '@/util/database';
+// 컴포넌트
+import Carousel from '../../../component/carousel/carousel';
 
 
-export default function HomeCarousel() {
-    const { contentList } = useFetchContent('like', 3)
-    const { caroselIndex } = useCarousel(contentList, 4000)
-    
+export default async function HomeCarousel() {
+    const db = (await connectDB).db('project')
+    const contentList = await db.collection('contents').find().sort({ 'like' : -1 }).limit(3).toArray() 
+
     return (
         <section className={ styles.home_carousel }>
             <div className={ styles.carousel }>
             { contentList.map((content, i) => (
-                <CSSTransition in={ caroselIndex == i } timeout={4000} classNames="slide" key={content._id} unmountOnExit>
+                <Carousel itemList={ contentList } currentIndex={i} key={content._id}>
                     <div className={ styles.carousel_item }>
                         <img src={ content.image }/>
                         <div className={ styles.blur }></div>
                     </div>
-                </CSSTransition>
+                </Carousel>
             ))}
             </div>
 

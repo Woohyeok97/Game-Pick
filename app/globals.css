@@ -114,14 +114,14 @@ input {
 }
 .slide-enter-active {
     opacity: 1;
-    transition: opacity 4000ms;
+    transition: opacity 2000ms;
 }
 .slide-exit {
     opacity: 1;
 }
 .slide-exit-active {
     opacity: 0;
-    transition: opacity 4000ms;
+    transition: opacity 2000ms;
 }
 .slide-enter, .slide-enter-active, .slide-exit, .slide-exit-active {
     position: absolute;
