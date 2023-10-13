@@ -3,6 +3,7 @@
 당신도 그렇다면 **GamePick** 에서 다른 유저들이 추천하고 의견을 남긴 게임들을 둘러 보세요.<br>
 
 <br>
+
 서비스 링크 : [GamePick](https://game-pick.vercel.app)
 
 <br>
@@ -437,7 +438,7 @@ JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하�
 <br>
 
 # 시행착오 기록
-[프로젝트 WIKI]([https://game-pick.vercel.app](https://github.com/Woohyeok97/Game-Pick/wiki)https://github.com/Woohyeok97/Game-Pick/wiki)
+[프로젝트 WIKI](https://github.com/Woohyeok97/Game-Pick/wiki)
 
 <br>
 <br>
