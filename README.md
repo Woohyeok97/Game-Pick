@@ -1,16 +1,18 @@
-# Game<span style="color:orangered">**Pick**</span>
-저만 그런가요? 요즘 따라 할 게임이 없습니다.<br>
-당신도 그렇다면 **GamePick** 에서 다른 유저들이 추천하고 의견을 남긴 게임들을 둘러 보세요.<br>
+# GamePick
+
 
 <br>
 
-서비스 링크 : [GamePick](https://game-pick.vercel.app)
+**서비스 링크** : [GamePick](https://game-pick.vercel.app)
 
 <br>
+
+# 서비스 소개
+요즘 따라 할 게임이 없으신가요?<br>
+그렇다면 **GamePick** 에서 다른 유저들이 추천하고 의견을 남긴 게임들을 둘러 보세요.<br>
 <br>
 
-# 주요 서비스
-**유저이신가요?**
+### GamePick을 처음 이용한다면..
 - 관심있는 게임에 좋아요, 싫어요 피드백을 남길수 있습니다.
 - 구글, 깃허브 계정으로 소셜 로그인이 가능합니다.
 - 유튜브 이동 없이 트레일러 감상이 가능합니다.
@@ -18,17 +20,15 @@
 - 재밌는 코멘트를 발견 하셨나요? 코멘트에 좋아요를 남겨보세요.
 - 좋아요, 최근순 으로 코멘트를 정렬할수 있습니다.
 
-<br>
 
-**관리자 권한이 있으신가요?**
+### 관리자 권한이 있다면..
 - 게임 업로드가 가능합니다.
 - 변경이 필요한 게임을 수정하거나 삭제할수 있습니다.
 - 불경스러운 코멘트를 발견 하셨나요? 관리자 권한으로 과감하게 삭제할수 있습니다.
 
 <br>
-<br>
 
-# Game<span style="color:orangered">**Pick**</span> 미리보기
+# GamePick 미리보기
 <details>
 <summary><b>Home 화면</b></summary>
 <div markdown="1">
@@ -108,44 +108,39 @@
 </details>
 
 <br>
-<br>
-
-# 기술스택
-**개발**<br> 
-![Next badge](https://img.shields.io/badge/Next-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![Axios](https://img.shields.io/badge/axios-6236FF?style=for-the-badge&logo=axios&logoColor=white)
-![Redux Toolkit](https://img.shields.io/badge/redux_toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
-![Sass](https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
-
-**DB & 저장소**<br>
-![MongoDB badge](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongoDB&logoColor=white)
-![Amazon S3](https://img.shields.io/badge/amazons3-232F3E?style=for-the-badge&logo=amazons3&logoColor=white)
-
-**배포 & 관리**<br>
-![Vercel](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Git](https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white)
-
-<br>
-<br>
 
 # 개발 포인트
+프로젝트를 진행하면서 여러가지 고민을 거쳤습니다.<br>
+아래는 그 과정에서 세운 주요 개발 방향에 대한 간략한 소개입니다.<br>
+<br>
 <details>
 <summary><b>비지니스 & UI 로직분리</b></summary>
 <div markdown="1">
 <br/>
-개발 과정에서 비지니스 & UI 로직 분리에 중점을 두었습니다.<br/>
-이유는 다음과 같습니다.<br/>
+
+프로젝트를 개발하면서 확장성과 유지보수성의 중요함을 크게 체감했습니다.<br/>
+그래서 비지니스, UI 로직 분리에 중점을 두었습니다.<br/>
+
+제가 개발과정에서 느꼈던 비지니스 & UI 로직 분리의 장점들 입니다.<br/>
 
 - 서로간에 의존성을 최소화하여 유연성을 높일수있다.
 - 디버깅과 테스트가 간편하고 추적이 쉽다.
 - 코드 변경시, 다른 부분에 미치는 영향이 줄어든다.
+  
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/a1f18579-30b6-4fe2-96a7-defdcccfbe59"/><br>
 
-<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/a1f18579-30b6-4fe2-96a7-defdcccfbe59"/>
-<br/>
+확실한 분리를 위해 그림과 같은 구조가 필요하다고 생각되었습니다.<br>
+단순히 파일로 비지니스 로직과 UI 로직을 분리하는 단계를 넘어서, 각각의 로직이 자신의 역할에 집중하고<br>
+서로한테 미치는 영향을 최소화 하도록 설계하였습니다.<br>
+<br>
+또한, 이를 구현하기 위해 비지니스 로직과 UI 로직의 구체적인 기준을 설정하였습니다.<br>
+
+### 비지니스 로직
 비지니스 로직은 커스텀 훅으로 관리하였습니다.<br/>
-커스텀 훅에서는 컴포넌트에 필요한 상태와 해당 상태를 조작 할수있는 함수만을 제공합니다.<br/>
+커스텀 훅에서는 컴포넌트에 필요한 상태와 해당 상태를 조작 할수있는 함수만을 제공하도록 하였습니다.<br/>
 이런 방식으로 비지니스 로직이 UI 로직에 불필요하게 간섭하는 것을 방지하였습니다.<br/>
-<br/>
+
+### UI 로직
 UI 로직은 컴포넌트 내부에서 관리하였습니다.<br/>
 커스텀 훅에서 제공된 데이터를 바탕으로 UI를 구성하며,<br/>
 사용자 상호작용시 커스텀 훅에서 제공하는 함수를 통해 상태를 변경할수 있도록 하였습니다.<br/>
@@ -161,13 +156,13 @@ UI 로직은 컴포넌트 내부에서 관리하였습니다.<br/>
 <summary><b>API 설계</b></summary>
 <div markdown="1">
 <br/>
-요청 라이브러리로 axios를 사용하였습니다.<br/>
+요청 라이브러리로 axios를 선택하였습니다.<br/>
 브라우저 호환성도 좋고, json()없이 데이터 변환이 가능하다는 장점 때문입니다.<br/>
-<br/>
 
-### **RESTful API**<br/>
+### RESTful API
+
 직관적인 HTTP 요청과 클라이언트, 서버의 독립적인 진화를 위해<br/>
-가능한 RESTful한 API를 작성하려고 했습니다.<br/>
+최대한 RESTful한 API를 작성하려고 했습니다.<br/>
 <br/>
 
 1\. URI를 통해, 어떤 리소스에 접근하는지 파악이 가능하도록 하였습니다.<br/>
@@ -204,12 +199,13 @@ export default function useDeleteComment({ comment }) {
 <br/>
 
 3\. delete, put 메소드로 콜렉션에 접근하는것을 지양했습니다.<br/>
-특정 도큐먼트가 아닌, 콜렉션에 delete, put 메소드로 접근하면 의도치 않게 대량의 데이터가 날라갈수있고<br/>
+특정 도큐먼트가 아닌, 콜렉션에 delete, put 메소드로 접근하면 의도치 않게 대량의 데이터가 손실될수있고<br/>
 콜렉션 전체가 대상이 되기때문에 서버부하 문제도 발생하기 때문입니다.<br/>
 그래서 DELETE, UPDATE 요청의 엔드포인트는 항상 도큐먼트Id로 설정했습니다.<br/>
+<br/>
 
-### **API 모듈화**<br/>
-axios를 사용하다보니 instance와 interceptor에 대해서 알게되어 모듈화를 진행하였습니다.<br/>
+### API 모듈화
+axios를 사용하는 과정에서 instance와 interceptor에 대해 알게되어 모듈화를 진행하였습니다.<br/>
 접근하는 콜렉션에 따라 instance를 생성하였고, util/api/intance 디렉토리에서 관리하였습니다.<br/>
 ```js
 // util/api/intance/contentInstance.js
@@ -241,27 +237,31 @@ interceptor에 에러처리를 추가하여 불필요한 코드중복을 줄였�
 <summary><b>DB & 백엔드 로직</b></summary>
 <div markdown="1">
 <br/>
-아래와 같은 이유로 프로젝트 DB로 MongoDB를 선택했습니다.<br/>
+ 
+다음과 같은 장점들 때문에 프로젝트 DB로 MongoDB를 선택했습니다.<br/>
 
-1. 자바스크립트와 어울리는 JSON형식의 도큐먼트
-2. 데이터 구조 변경에 유연함
-3. 대량의 데이터 처리에 뛰어난 성능
-<br/>
+- 자바스크립트와 어울리는 JSON형식의 도큐먼트
+- 데이터 구조 변경의 유연함
+- 대량의 데이터 처리에 뛰어난 성능
+
 <br>
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/64bf860902bd1c4a5ea593f9'></iframe><br/>
-개발과정에서 여러 수정이 있었지만,<br/>
+
+![DB Diagram](https://dbdiagram.io/d/64bf860902bd1c4a5ea593f9)
+
+개발과정에서 여러 수정이 있었지만 프로젝트의 DB는<br/>
 API 요청의 직관성, 데이터관리 최적화, 일관성의 이유로 3개의 콜렉션으로 구성하였습니다.<br/>
-<br/>
-Game Pick의 콜렉션은 다음과 같이 구성 되어있습니다.<br/>
 
-- contents : 게임데이터를 저장합니다.
-- comments : contents에 대한 코멘트를 저장합니다.
-- feedback : contents, comments에 대한 피드백을 저장합니다.
+- **contents** : 게임데이터를 저장합니다.
+- **comments** : contents에 대한 코멘트를 저장합니다.
+- **feedback** : contents, comments에 대한 피드백을 저장합니다.
 <br>
 
-comments,feedback 콜렉션은 'parent' 필드에 부모 도큐먼트ID를 저장하여 데이터간의 부모-자식 관계를 명확하게 해주었습니다.<br/>
+전체적인 DB구조는 콜렉션 서로가 부모-자식 관계를 갖는 구조로 설계했습니다.<br>
+예를들어 comments,feedback 콜렉션은 'parent' 필드에 부모 도큐먼트ID를 저장하여<br>
+도큐먼트 간의 부모-자식 관계를 나타냅니다.<br/>
+<br>
 이러한 구조로 인해, 부모 도큐먼트 삭제시 연관된 자식 도큐먼트도 함께 삭제하는 로직이 필요했습니다.<br/>
-만약 부모 도큐먼트만 삭제하게 되면, 해당 자식 도큐먼트들이 고아상태로 남아있기 때문에 데이터의 일관성이 저하되고 DB도 낭비되기 때문입니다.<br/>
+만약 부모 도큐먼트만 삭제하게 되면, 해당 자식 도큐먼트들이 부모잃은 상태로 남아있기 때문에 데이터의 일관성이 저하되고 DB도 낭비되기 때문입니다.<br/>
 ```js
 export default async function handler(req, res) {
     const session = await getServerSession(req, res, authOptions)
@@ -295,11 +295,12 @@ export default async function handler(req, res) {
     }
 }
 ```
-contents 삭제 로직을 보면, <br/>
-우선 연관된 모든 하위 도큐먼트들을 삭제한 후에 마지막으로 상위 도큐먼트를 삭제하는 방식으로 진행됩니다.<br/>
-이로써, 문제발생시 잉여 도큐먼트가 생기는 것을 최소화 하였습니다.<br/>
-<br/>
-또한, contents,comments의 like,dislike 필드에 피드백 개수가 직접 저장되는 비정규화 방식을 사용했습니다.<br/>
+예시로 게임(content)삭제 로직 입니다.<br/>
+상위 도큐부터 삭제하게되면 잉여 도큐먼트가 생기는 문제가 있을수있다고 생각되어,
+먼저 연관된 모든 하위 도큐먼트들을 삭제한 후에 마지막으로 상위 도큐먼트를 삭제하는 방식으로 작성하였습니다.<br/>
+<br>
+
+또한 contents,comments의 like,dislike 필드에 피드백 개수가 직접 저장되는 비정규화 방식을 사용했습니다.<br/>
 그 이유는 클라이언트에서 contents나 comments의 피드백 개수를 조회할때 추가적인 쿼리없이 바로 접근할수있어<br/>
 성능 최적화와 코드복잡성을 낮추는 효과가 있기 때문입니다.<br/>
 
@@ -353,10 +354,10 @@ export default async function handler(req, res) {
 <summary><b>소셜 로그인</b></summary>
 <div markdown="1">
 <br/>
+ 
+로그인 기능을 구현함에 있어서<br>
 사용자의 아이디와 비밀번호 같은 개인정보를 직접 DB에 저장하는것은 부담스럽기도하고 위험하다고 생각되었습니다.<br/>
 그래서 next-auth 라이브러리를 이용해 소셜 로그인을 구현하였습니다.<br/>
-<br/>
-
 ```js
 export const authOptions = {
     // 프로바이더
@@ -377,7 +378,7 @@ export const authOptions = {
 export default NextAuth(authOptions); 
 ```
 Provider의 ID와 Secret Key는 env 파일로 관리하고 있습니다.<br/>
-현재는 깃허브, 구글을 이용한 로그인이 가능하지만, 추후에 더 늘려갈 계획입니다.<br/>
+현재는 깃허브, 구글을 이용한 로그인이 가능하지만 추후에 더 늘려갈 계획입니다.<br/>
 <br/>
 
 ```js
@@ -423,9 +424,8 @@ export const authOptions = {
 
 export default NextAuth(authOptions); 
 ```
-JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하도록 하였습니다.<br/>
-또한, role이라는 프로퍼티를 추가하여 '일반 사용자'와 '관리자'를 구분하였습니다.<br/>
-<br/>
+JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하고, role 프로퍼티를 추가하여<br/>
+'일반 사용자'와 '관리자'를 구분하였습니다.<br/>
 애플리케이션에서 관리자 권한이 필요한 페이지나, API 요청시 session.role을 확인하여 관리자를 확인하게 됩니다.<br/>
 
 ---
@@ -435,6 +435,20 @@ JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하�
 </details>
 
 <br>
+
+# 기술스택
+### 개발
+![Next badge](https://img.shields.io/badge/Next-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![Axios](https://img.shields.io/badge/axios-6236FF?style=for-the-badge&logo=axios&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/redux_toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![Sass](https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+### DB & 저장소
+![MongoDB badge](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongoDB&logoColor=white)
+![Amazon S3](https://img.shields.io/badge/amazons3-232F3E?style=for-the-badge&logo=amazons3&logoColor=white)
+### 배포 & 프로젝트 관리
+![Vercel](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Git](https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white)
+
 <br>
 
 # 시행착오 기록
