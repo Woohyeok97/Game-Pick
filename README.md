@@ -1,7 +1,5 @@
 # GamePick
-
-
-<br>
+추천게임을 둘러보며 유저들과 의견을 나눌수 있는 커뮤니티 서비스<br>
 
 **서비스 링크** : [GamePick](https://game-pick.vercel.app)
 
@@ -32,8 +30,10 @@
 <details>
 <summary><b>Home 화면</b></summary>
 <div markdown="1">
+ 
+<br>
 
-
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/c06b636b-1286-4310-aed1-de6030544c80"/>
 
 </div>
 </details>
@@ -43,7 +43,9 @@
 <summary><b>GamePick 시작하기</b></summary>
 <div markdown="1">
 
- 
+<br>
+
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/d10ab1b6-e7a0-4d7d-8ee0-d1a86c3f7cce"/>
 
 </div>
 </details>
@@ -53,7 +55,9 @@
 <summary><b>소셜 로그인</b></summary>
 <div markdown="1">
 
+<br>
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/fd7647c3-e173-4fe4-8499-aec659018181"/>
  
 </div>
 </details>
@@ -62,7 +66,9 @@
 <summary><b>트레일러</b></summary>
 <div markdown="1">
 
+<br>
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/c7ad1c3b-f596-465a-b6f9-0a87f2396bcb"/>
  
 </div>
 </details>
@@ -71,7 +77,9 @@
 <summary><b>게임 추천하기</b></summary>
 <div markdown="1">
 
+<br>
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/89016234-b9ee-410e-9957-0864ece53ab5"/>
  
 </div>
 </details>
@@ -83,7 +91,16 @@
 
 ### 코멘트 작성
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/4f4830f7-5d73-4bff-aff5-3d42acea0254"/>
+
 ### 코멘트 피드백
+
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/17cb2d2d-eb6a-4aee-8a1b-d65484789b32"/>
+
+### 코멘트 삭제하기
+- 작성자 및 관리자만 가능합니다.<br>
+
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/024109d6-893d-4837-9918-363fabb20559"/>
  
 </div>
 </details>
@@ -92,17 +109,22 @@
 <details>
 <summary><b>게임 관리(관리자 전용)</b></summary>
 <div markdown="1">
-
+ 
 ### 게임 업로드
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/e499ba3d-a0f7-4b07-b9e4-c11547f40d44"/><br>
 
+<br>
+
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/86efb933-212b-414e-a9f9-61e6f8402726"/>
  
 ### 게임 수정
 
-
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/1b6e4096-0482-437b-8acd-a2081a09739f"/>
 
 ### 게임 삭제 
 
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/3804ec15-d991-45eb-bfa5-da83a86be20e"/>
  
 </div>
 </details>
@@ -111,7 +133,7 @@
 
 # 개발 포인트
 프로젝트를 진행하면서 여러가지 고민을 거쳤습니다.<br>
-아래는 그 과정에서 세운 주요 개발 방향에 대한 간략한 소개입니다.<br>
+아래는 그 과정에서 세운 개발 방향에 대한 간략한 소개입니다.<br>
 <br>
 <details>
 <summary><b>비지니스 & UI 로직분리</b></summary>
@@ -244,17 +266,16 @@ interceptor에 에러처리를 추가하여 불필요한 코드중복을 줄였�
 - 데이터 구조 변경의 유연함
 - 대량의 데이터 처리에 뛰어난 성능
 
-<br>
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/63d17874-9997-4c0c-9f15-0fe91ce79d38"/>
 
-![DB Diagram](https://dbdiagram.io/d/64bf860902bd1c4a5ea593f9)
+**프로젝트 스키마** : [DB Schema](https://dbdiagram.io/d/64bf860902bd1c4a5ea593f9)
 
 개발과정에서 여러 수정이 있었지만 프로젝트의 DB는<br/>
-API 요청의 직관성, 데이터관리 최적화, 일관성의 이유로 3개의 콜렉션으로 구성하였습니다.<br/>
+API 요청의 직관성, 데이터관리 최적화, 일관성의 이유로 3개의 콜렉션으로 구성하였습니다.
 
 - **contents** : 게임데이터를 저장합니다.
 - **comments** : contents에 대한 코멘트를 저장합니다.
 - **feedback** : contents, comments에 대한 피드백을 저장합니다.
-<br>
 
 전체적인 DB구조는 콜렉션 서로가 부모-자식 관계를 갖는 구조로 설계했습니다.<br>
 예를들어 comments,feedback 콜렉션은 'parent' 필드에 부모 도큐먼트ID를 저장하여<br>
@@ -452,7 +473,10 @@ JWT토큰 생성시, 소셜 플랫폼에서 받아온 유저정보를 저장하�
 <br>
 
 # 시행착오 기록
-[프로젝트 WIKI](https://github.com/Woohyeok97/Game-Pick/wiki)
+
+프로젝트를 진행하면서 겪었던 시행착오를 기록 해보았습니다.<br>
+
+**시행착오 링크** : [프로젝트 WIKI](https://github.com/Woohyeok97/Game-Pick/wiki)
 
 <br>
 <br>
