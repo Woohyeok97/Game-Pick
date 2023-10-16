@@ -1,7 +1,12 @@
 # GamePick
 추천게임을 둘러보며 유저들과 의견을 나눌수 있는 커뮤니티 서비스<br>
+<br>
 
-**서비스 링크** : [GamePick](https://game-pick.vercel.app)
+**서비스 링크** : [GamePick](https://game-pick.vercel.app)<br>
+
+<img width="100%" src="https://github.com/Woohyeok97/Game-Pick/assets/75671909/e93c4509-ad67-422d-85b3-4823fd75cf7b">
+
+
 
 <br>
 
